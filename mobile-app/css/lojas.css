@@ -12,7 +12,7 @@
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
-  background-image: url('/coupzon/mobile-app/assets/Coupzon_sombra_640.png');
+  background-image: url('../assets/Coupzon_sombra_640.png');
 }
 
 .container .container-view .body-container-2 .view-menu-container .view-menu{
@@ -32,6 +32,8 @@
 .container .container-view .body-container-2 .search-container{
   height: 5%;
   width: 100%;
+  -moz-border: .1rem solid black;
+  -webkit-border: .1rem solid black;
   border: .1rem solid black;
   display: none;
   position: absolute;
@@ -60,13 +62,18 @@
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
-  background-image: url('/coupzon/mobile-app/assets/Coupzon_sombra_640.png');
+  background-image: url('../assets/Coupzon_sombra_640.png');
+}
+
+.container .container-view .body-container-2 .lists-container .list-selected{
+  height: 6%;
+  width: 100%;
 }
 
 .container .container-view .body-container-2 .stores-container,
 .container .container-view .body-container-2 .categories-container,
-.container .container-view .body-container-2 .localidade-container{
-  height: 100%;
+.container .container-view .body-container-2 .locations-container{
+  height: 94%;
   width: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -75,21 +82,20 @@
   -webkit-overflow-scrolling: touch;
   -ms-scroll-chaining: none;
   display: none;
-  padding-top: 1rem;
 }
 
 .container .container-view .body-container-2 .stores-container.selected,
-.container .container-view .body-container-2 .categories-container.selected{
+.container .container-view .body-container-2 .categories-container.selected,
+.container .container-view .body-container-2 .locations-container.selected{
   display: block;
 }
 
 .container .container-view .body-container-2 .stores-container .store-container{
   float: left;
   width: 100%;
-  height: 6rem;
-  margin-top: .5rem;
+  height: 8rem;
   border-bottom: solid .1rem #F2F2F2;
-  padding: .2rem 0;
+  padding: .4rem 0;
 }
 
 .container .container-view .body-container-2 .stores-container .store-container .image{
@@ -118,7 +124,8 @@
 .container .container-view .body-container-2 .stores-container .store-container .body .description{
   color: #0089C7;
   font-size: 1.1rem;
-  overflow-x
+  overflow-x: hidden;
+  white-space: nowrap;
 }
 
 .container .container-view .body-container-2 .stores-container .store-container .body .categorie{
@@ -132,19 +139,122 @@
   float: left;
 }
 
-.container .container-view .body-container-2 .awards-container{
-  height: 95%;
+.container .container-view .body-container-2 .categories-container .categorie-container,
+.container .container-view .body-container-2 .locations-container .location-container{
   width: 100%;
-}
-
-.container .container-view .body-container-2 .categories-container .categorie-container{
-  width: 100%;
-  height: 4rem;
+  height: 5rem;
   display: table;
-  border: .1rem solid orange;
+  -moz-border-bottom: solid .1rem #F2F2F2;
+  -webkit-border-bottom: solid .1rem #F2F2F2;
+  border-bottom: solid .1rem #F2F2F2;
 }
 
-.container .container-view .body-container-2 .categories-container .categorie-container span{
-  display: table-cell;
-  vertical-align: middle;
+.container .container-view .body-container-2 .categories-container .categorie-container .name,
+.container .container-view .body-container-2 .locations-container .location-container .name{
+  width: 80%;
+  height: 100%;
+  float: left;
+  font-size: 1.5rem;
+  color: #00436A;
+  display: table;
+  padding-left: 1.5rem;
+}
+
+.container .container-view .body-container-2 .categories-container .categorie-container .check-cat,
+.container .container-view .body-container-2 .locations-container .location-container .check-loc{
+  width: 20%;
+  height: 100%;
+  float: left;
+  color: #BEDEE8;
+  display: table;
+  text-align: center;
+}
+.container .container-view .body-container-2 .categories-container .categorie-container .check-cat .not-check,
+.container .container-view .body-container-2 .locations-container .location-container .check-loc .not-check{
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  -moz-border: .1rem solid #BEDEE8;
+  -webkit-border: .1rem solid #BEDEE8;
+  border: .1rem solid #BEDEE8;
+  height: 2rem;
+  width: 2rem;
+  margin: 0 auto;
+}
+
+.container .container-view .body-container-2 .categories-container .categorie-container .check-cat .check,
+.container .container-view .body-container-2 .locations-container .location-container .check-loc .check{
+  display: none;
+}
+
+.container .container-view .body-container-2 .categories-container .categorie-container.selected .name,
+.container .container-view .body-container-2 .locations-container .location-container.selected .name{
+  color: #E99638;
+}
+
+.container .container-view .body-container-2 .categories-container .categorie-container.selected .check-cat,
+.container .container-view .body-container-2 .locations-container .location-container.selected .check-loc{
+  color: #E99638;
+}
+
+.container .container-view .body-container-2.body-awards{
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-image: url('../assets/Coupzon_sombra_640.png');
+  padding-top: 7%;
+}
+
+.container .container-view .body-container-2 .awards-container{
+  height: 92%;
+  width: 100%;
+}
+
+.container .container-view .body-container-2 .awards-container .award-container{
+  float: left;
+  width: 100%;
+  height: 7rem;
+  border-bottom: solid .1rem #F2F2F2;
+  padding: .4rem 0;
+}
+
+.container .container-view .body-container-2 .awards-container .award-container .image{
+  height: 100%;
+  width: 25%;
+  float: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  overflow: hidden;
+}
+
+.container .container-view .body-container-2 .awards-container .award-container .body{
+  height: 100%;
+  width: 55%;
+  float: left;
+  display: table;
+  padding-left: .8rem;
+}
+
+.container .container-view .body-container-2 .awards-container .award-container .body .name{
+  color: #00436A;
+  font-size: 1.5rem;
+}
+
+.container .container-view .body-container-2 .awards-container .award-container .body .description{
+  color: #0089C7;
+  font-size: 1.1rem;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+.container .container-view .body-container-2 .awards-container .award-container .body .categorie{
+  color: #B3B3B3;
+  font-size: 1rem;
+}
+
+.container .container-view .body-container-2 .awards-container .award-container .arrow{
+  height: 100%;
+  width: 20%;
+  float: left;
 }

@@ -11,13 +11,30 @@
   width: 100%;
   background-color: #007FB1;
   display: none;
+  z-index: 5;
 }
 
 .container .footer-menu.selected{
   display: block;
 }
 
-.container .footer-menu .menu-container{
+.container .footer-menu .menus-container{
+  height: 95%;
+  width: 100%;
+}
+
+.container .footer-menu .selected-tab{
+  width: 100%;
+  height: 5%;
+}
+
+.container .footer-menu .selected-tab #tab{
+  background-color: #FFD731;
+  width: 20%;
+  height: 100%;
+}
+
+.container .footer-menu .menus-container .menu-container{
   width: 20%;
   float: left;
   height: 100%;
@@ -25,23 +42,26 @@
   color: white;
   text-align: center;
   display: table;
-  z-index: 5;
 }
 
-.container .footer-menu .menu-container .menu-name{
-  color: #FFD731;
+.container .footer-menu .menus-container .menu-container .menu-name{
+  color: white;
   width: 100%;
   height: 40%;
   display: table;
 }
 
-.container .footer-menu .menu-container.selected .menu-name span{
+.container .footer-menu .menus-container .menu-container .menu-name span{
   display: table-cell;
   vertical-align: middle;
   font-size: 1rem;
 }
 
-.container .footer-menu .menu-container .menu-icon{
+.container .footer-menu .menus-container .menu-container.selected .menu-name span{
+  color: #FFD731;
+}
+
+.container .footer-menu .menus-container .menu-container .menu-icon{
   width: 100%;
   height: 60%;
 }

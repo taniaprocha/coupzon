@@ -9,7 +9,7 @@
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
-  background-image: url('/coupzon/mobile-app/assets/Coupzon_sombra_640.png');
+  background-image: url('../assets/Coupzon_sombra_640.png');
 }
 
 .container .container-view .qrcode-body .qrcode-text-1{
@@ -47,6 +47,6 @@
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-  background-image: url('/coupzon/mobile-app/assets/qr-code.png');
+  background-image: url('../assets/qr-code.png');
 }
 

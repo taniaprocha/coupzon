@@ -82,7 +82,7 @@
         <div class="view-menu all-menu selected" id="stores-all">
           <span class="table-cell">TODOS</span>
         </div>
-        <div class="view-menu categories-menu" id="stores-localidade">
+        <div class="view-menu locations-menu" id="stores-locations">
           <span class="table-cell">LOCALIDADE</span>
         </div>
       </div>
@@ -91,9 +91,10 @@
         <div class="search-input-container"><input type="text" placeholder="Search" name="search" value=""></div>
       </div>
       <div class="lists-container">
+        <div class="list-selected"></div>
         <div class="categories-container"></div>
         <div class="stores-container selected"></div>
-        <div class="localidade-container"></div>
+        <div class="locations-container"></div>
       </div>
     </div>
   </div>
@@ -102,7 +103,6 @@
         <div></div>
     </div>
     <div class="body-container-2 body-awards">
-      <div class="view-menu-container"><span>Prémios</span></div>
       <div class="awards-container"></div>
     </div>
   </div>
@@ -129,25 +129,28 @@
     </div>
   </div>
   <div class="footer-menu">
-    <div class="menu-container" id="menu-qrcode">
-      <div class="menu-name" id="qrcode-m"><span>ID</span></div>
-      <div class="menu-icon"><span></span></div>
-    </div>
-    <div class="menu-container" id="menu-awards">
-      <div class="menu-name" id="awards-m"><span>PRÉMIOS</span></div>
-      <div class="menu-icon"><span></span></div>
-    </div>
-    <div class="menu-container" id="menu-stores">
-      <div class="menu-name" id="stores-m"><span>LOJAS</span></div>
-      <div class="menu-icon"><span></span></div>
-    </div>
-    <div class="menu-container" id="menu-favorites">
-      <div class="menu-name" id="favorites-m"><span>FAVORITOS</span></div>
-      <div class="menu-icon"><span></span></div>
-    </div>
-    <div class="menu-container" id="menu-settings">
-      <div class="menu-name" id="settings-m"><span>GERIR</span></div>
-      <div class="menu-icon"><span></span></div>
+    <div class="selected-tab"><div id="tab"></div></div>
+    <div class="menus-container">
+      <div class="menu-container" id="menu-qrcode">
+        <div class="menu-name" id="qrcode-m"><span>ID</span></div>
+        <div class="menu-icon"><span></span></div>
+      </div>
+      <div class="menu-container" id="menu-awards">
+        <div class="menu-name" id="awards-m"><span>PRÉMIOS</span></div>
+        <div class="menu-icon"><span></span></div>
+      </div>
+      <div class="menu-container" id="menu-stores">
+        <div class="menu-name" id="stores-m"><span>LOJAS</span></div>
+        <div class="menu-icon"><span></span></div>
+      </div>
+      <div class="menu-container" id="menu-favorites">
+        <div class="menu-name" id="favorites-m"><span>FAVORITOS</span></div>
+        <div class="menu-icon"><span></span></div>
+      </div>
+      <div class="menu-container" id="menu-settings">
+        <div class="menu-name" id="settings-m"><span>GERIR</span></div>
+        <div class="menu-icon"><span></span></div>
+      </div>
     </div>
   </div>
 </div>

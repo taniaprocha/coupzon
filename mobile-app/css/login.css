@@ -125,7 +125,7 @@ body {
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
-  background-image: url('/coupzon/mobile-app/assets/Coupzon_sombra_640.png');
+  background-image: url('../assets/Coupzon_sombra_640.png');
 }
 
 .container .container-view .body-container .insert-number-container,
