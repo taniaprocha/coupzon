@@ -1,0 +1,52 @@
+.container .container-view .header-container-little{
+  height: 12%;
+  width: 100%;
+  text-align: center;
+}
+
+.container .container-view .qrcode-body{
+  height: 88%;
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-image: url('/coupzon/mobile-app/assets/Coupzon_sombra_640.png');
+}
+
+.container .container-view .qrcode-body .qrcode-text-1{
+  height: 30%;
+  text-align: center;
+  width: 100%;
+  display: table;
+  color: #0089C7;
+  font-size: 1.5rem;
+}
+
+.container .container-view .qrcode-body .qrcode-text-2{
+  height: 30%;
+  text-align: center;
+  width: 100%;
+  display: table;
+  color: #0089C7;
+  font-size: 1.3rem;
+}
+
+.container .container-view .qrcode-body .arrow-containe{
+  height: 10%;
+}
+
+.container .container-view .qrcode-body .qrcode-text-1 span,
+.container .container-view .qrcode-body .qrcode-text-2 span{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.container .container-view .qrcode-body .qrcode{
+  height: 30%;
+  width: 90%;
+  margin: 0 auto;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url('/coupzon/mobile-app/assets/qr-code.png');
+}
+

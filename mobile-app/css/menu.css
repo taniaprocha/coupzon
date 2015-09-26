@@ -1,0 +1,47 @@
+.container .container-view .footer-container{
+  height: 10%;
+  width: 100%;
+  text-align: center;
+}
+
+.container .footer-menu{
+  position: absolute;
+  bottom: 0; 
+  height: 7rem;
+  width: 100%;
+  background-color: #007FB1;
+  display: none;
+}
+
+.container .footer-menu.selected{
+  display: block;
+}
+
+.container .footer-menu .menu-container{
+  width: 20%;
+  float: left;
+  height: 100%;
+  font-size: 1rem;
+  color: white;
+  text-align: center;
+  display: table;
+  z-index: 5;
+}
+
+.container .footer-menu .menu-container .menu-name{
+  color: #FFD731;
+  width: 100%;
+  height: 40%;
+  display: table;
+}
+
+.container .footer-menu .menu-container.selected .menu-name span{
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 1rem;
+}
+
+.container .footer-menu .menu-container .menu-icon{
+  width: 100%;
+  height: 60%;
+}

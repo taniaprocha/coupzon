@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="css/login.css" rel="stylesheet">
+<link rel="stylesheet" href="css/menu.css" rel="stylesheet">
+<link rel="stylesheet" href="css/lojas.css" rel="stylesheet">
+<link rel="stylesheet" href="css/qrcode.css" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css' media="screen">
+
+<body>
+
+<div class="container" id="container">
+  <div class="container-view" id="login-phone">
+    <div class="header-container-big">
+        <div class="app-icon-container"></div>
+        <div class="open-message"><span>BEM-VINDO!</span></div>
+    </div>
+    <div class="body-container" id="container-number">
+      <div class="insert-number-container">
+        <div class="table-cell">
+          <div class="insert-number-title">PARA COMEÇAR A COLECIONAR DESCONTOS</div>
+          <div class="insert-number-title">INSIRA O SEU NÚMERO DE TELEFONE</div>
+          <div class="number-box">
+            <div class="insert-number-icon"><span></span></div>
+            <div class="insert-number-input"><input type="text" placeholder="Number" name="number" value=""/></div>
+          </div>
+          <div class="terms-container">
+            <div class="check-terms"><span></span></div><div class="check-title">ACEITO OS TERMOS E CONDIÇÕES</div>
+          </div>
+        </div>
+      </div>
+      <div class="login-container" id="login-number">
+        <div class="login-box"><span>ENVIAR</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="container-view" id="login-password">
+    <div class="header-container-big">
+        <div class="app-icon-container"></div>
+        <div class="services-message"><span>Todos os serviços de fidelização<br>no seu telemóvel, totalmente grátis!</span></div>
+    </div>
+    <div class="body-container" id="container-password">
+      <div class="insert-password-container">
+        <div class="table-cell">
+          <div class="insert-password-title">INSIRA A PASSWORD QUE RECEBEU POR SMS</div>
+          <div class="password-box">
+            <div class="insert-password-icon"><span></span></div>
+            <div class="insert-password-input"><input type="text" placeholder="Password" name="password" value=""></div>
+          </div>
+        </div>
+      </div>
+      <div class="login-container" id="login-password">
+        <div class="login-box"><span>ENVIAR</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-view" id="view-qrcode">
+    <div class="header-container-little">
+        <div></div>
+    </div>
+    <div class="qrcode-body">
+      <div class="qrcode-text-1"><span>ESTE É O SEU CÓDIGO,<br>PASSE-O NAS LOJAS ADERENTES.</span></div>
+      <div class="qrcode"></div>
+      <div class="qrcode-text-2"><span>DESCUBRA EM “LOJAS” TODOS OS<br>DESCONTOS QUE ESTÃO À SUA ESPERA.</span></div>
+      <div class="arrow-container"><span></span></div>
+    </div>
+  </div>
+  <div class="container-view" id="view-stores">
+    <div class="header-container-little">
+        <div></div>
+    </div>
+    <div class="body-container-2 body-stores">
+      <div class="view-menu-container">
+        <div class="view-menu categories-menu" id="stores-categories">
+          <span class="table-cell">CATEGORIAS</span>
+        </div>
+        <div class="view-menu all-menu selected" id="stores-all">
+          <span class="table-cell">TODOS</span>
+        </div>
+        <div class="view-menu categories-menu" id="stores-localidade">
+          <span class="table-cell">LOCALIDADE</span>
+        </div>
+      </div>
+      <div class="search-container">
+        <div class="search-icon"></div>
+        <div class="search-input-container"><input type="text" placeholder="Search" name="search" value=""></div>
+      </div>
+      <div class="lists-container">
+        <div class="categories-container"></div>
+        <div class="stores-container selected"></div>
+        <div class="localidade-container"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container-view" id="view-awards">
+    <div class="header-container-little">
+        <div></div>
+    </div>
+    <div class="body-container-2 body-awards">
+      <div class="view-menu-container"><span>Prémios</span></div>
+      <div class="awards-container"></div>
+    </div>
+  </div>
+  <div class="container-view" id="view-favorites">
+    <div class="header-container-little">
+        <div></div>
+    </div>
+    <div class="body-container-2 body-favorites">
+      <div class="view-menu-container"><span>Favoritos</span></div>
+      <div class="search-container">
+        <div class="search-icon"></div>
+        <div class="search-input-container"><input type="text" placeholder="Search" name="search" value=""></div>
+      </div>
+      <div class="favorites-container"></div>
+    </div>
+  </div>
+  <div class="container-view" id="view-settings">
+    <div class="header-container-little">
+        <div></div>
+    </div>
+    <div class="body-container-2 body-settings">
+      <div class="view-menu-container"><span>Defenições</span></div>
+      <div class="settings-container"></div>
+    </div>
+  </div>
+  <div class="footer-menu">
+    <div class="menu-container" id="menu-qrcode">
+      <div class="menu-name" id="qrcode-m"><span>ID</span></div>
+      <div class="menu-icon"><span></span></div>
+    </div>
+    <div class="menu-container" id="menu-awards">
+      <div class="menu-name" id="awards-m"><span>PRÉMIOS</span></div>
+      <div class="menu-icon"><span></span></div>
+    </div>
+    <div class="menu-container" id="menu-stores">
+      <div class="menu-name" id="stores-m"><span>LOJAS</span></div>
+      <div class="menu-icon"><span></span></div>
+    </div>
+    <div class="menu-container" id="menu-favorites">
+      <div class="menu-name" id="favorites-m"><span>FAVORITOS</span></div>
+      <div class="menu-icon"><span></span></div>
+    </div>
+    <div class="menu-container" id="menu-settings">
+      <div class="menu-name" id="settings-m"><span>GERIR</span></div>
+      <div class="menu-icon"><span></span></div>
+    </div>
+  </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="js/index.js"></script>
+<script src="js/storesMethods.js"></script>
+</body>
+</html>
