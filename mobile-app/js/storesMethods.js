@@ -2,47 +2,137 @@ function storesMethods(){
 
 }
 
-storesMethods.prototype.showAllStores = function(data, container, categoriesData, awardsData){
-  container.empty();
-  data.forEach(function(store){
-    var categoria = getCategorieNameById(store.categorie, categoriesData).toUpperCase();
-    var premio = getAwardByStore(store.id, awardsData);
-    var storeDiv = $('<div class="store-container" id="store-'+store.id+'">'
-      +'<div class="image" style="background-image: url('+store.image+')"></div>'
-      +'<div class="body">'
-        +'<div class="table-cell">'
-          +'<div class="name">'+store.name.toUpperCase()+'</div>'
-          +'<div class="description">'+premio+'</div>'
-          +'<div class="categorie">'+categoria+'</div>'
-        +'</div>'
-      +'</div>'
-      +'<div class="arrow"><span></span></div>'
-    +'</div>');
+storesMethods.prototype.showAllStores = function(container){
+  $('.store-container').off(); container.empty();
+  storesData.forEach(function(store){
+    var categoria = getCategorieNameById(store.categorie).toUpperCase();
+    var premio = getAwardByStore(store.id);
+    var storeDiv = setStoreDiv(store.name, store.id, store.image, premio, categoria);
     container.append(storeDiv);
   });
+  addStoreListeners();
 };
 
-storesMethods.prototype.showAllAwards = function(data, stores, container){
-  container.empty();
-  data.forEach(function(award){
-    var store = getStoreById(award.store, stores);
+storesMethods.prototype.showAllAwards = function(container){
+  $('.award-container').off(); container.empty();
+  awardsData.forEach(function(award){
+    var store = getStoreById(award.store);
     var awardDiv = $('<div class="award-container" id="award-'+award.id+'">'
       +'<div class="image" style="background-image: url('+store.image+')"></div>'
       +'<div class="body">'
-        +'<div class="table-cell">'
-          +'<div class="store">'+store.name.toUpperCase()+'</div>'
-          +'<div class="description">'+award.title+'</div>'
-        +'</div>'
+        +'<section  class="store">'+store.name.toUpperCase()+'</section >'
+        +'<section  class="description">'+award.title+'</section >'
       +'</div>'
-      +'<div class="arrow"><span></span></div>'
+      +'<div class="arrow"><span class="coup-seta-drt"></span></div>'
     +'</div>');
     container.append(awardDiv);
   });
 }
 
-function getStoreById(storeId, data){
+
+storesMethods.prototype.showCategories = function(container){
+  $('.categorie-container').off(); container.empty();
+  categoriesData.forEach(function(categorie){
+    var categorieDiv = $('<div class="categorie-container" id="categorie-'+categorie.id+'">'
+        +'<div class="name"><div class="table-cell">'+categorie.name.toUpperCase()+'</div></div>'
+        +'<div class="check-cat">'
+          +'<div class="table-cell">'
+            +'<span class="coup-radio-redondo-null notchecked"></span>'
+            +'<span class="coup-radio-redondo-check checked"></span>'
+          +'</div>'
+        +'</div>'
+      +'</div>');
+    container.append(categorieDiv);
+  });
+  $('.categorie-container').on('click', function(){
+    if($(this).hasClass('selected') === true){
+      $(this).removeClass('selected');
+    }else{
+      $(this).addClass('selected');
+    }
+  });
+};
+
+storesMethods.prototype.showLocations = function(container){
+  $('.location-container').off(); container.empty();
+  locationsData.forEach(function(location){
+    var locationDiv = $('<div class="location-container" id="location-'+location.id+'">'
+        +'<div class="name"><div class="table-cell">'+location.name.toUpperCase()+'</div></div>'
+        +'<div class="check-loc">'
+          +'<div class="table-cell">'
+            +'<span class="coup-radio-redondo-null notchecked"></span>'
+            +'<span class="coup-radio-redondo-check checked"></span>'
+          +'</div>'
+        +'</div>'
+      +'</div>');
+    container.append(locationDiv);
+  });
+  $('.location-container').on('click', function(){
+    $('.location-container').removeClass('selected');
+    $(this).addClass('selected');
+  });
+};
+
+storesMethods.prototype.showSelectedStores = function(selectedCategories, selectedLocation, container, selectedPlace, selectedCat){
+  $('.store-container').off(); container.empty();
+  if(selectedCategories.length > 0){
+    if(selectedCategories.length == 1){
+      selectedCat.text(getCategorieNameById(selectedCategories[0]).toUpperCase());
+    }else{
+      selectedCat.text(selectedCategories.length +' CATEGORIAS');
+    }
+  }else{
+    selectedCat.text('--');
+  }
+  if(selectedLocation.length > 0){
+    selectedPlace.text(getLocationNameById(selectedLocation[0]).toUpperCase());
+  }else{
+    selectedPlace.text('--');
+  }
+  var results = 0;
+  storesData.forEach(function(store){
+    if( ((selectedLocation.length <= 0) || selectedLocation.indexOf(store.location)) !== -1 && ( (selectedCategories.length <= 0) || selectedCategories.indexOf(store.categorie) !== -1) ){
+        console.log(store.categorie, store.location, store);
+        var categoria = getCategorieNameById(store.categorie).toUpperCase();
+        var premio = getAwardByStore(store.id);
+        var storeDiv = setStoreDiv(store.name, store.id, store.image, premio, categoria);
+        container.append(storeDiv); results ++;
+    }
+  });
+  addStoreListeners();
+  if(results === 0){
+    container.append('<div class="no-stores-filtered">Não existem lojas para essa Categoria ou Localidade seleccionada.</div>');
+  }
+}
+
+function addStoreListeners(){
+  $('.store-container').on('click', function(){
+    $('.container-view').removeClass('selected');
+    $('#view-store').addClass('selected');
+    showStoreDetails($(this).attr('id'));
+  });
+}
+
+function showStoreDetails(storeId){
+
+}
+
+function setStoreDiv(name, id, image, premio, categorie){
+  var storeDiv = $('<div class="store-container" id="store-'+id+'">'
+      +'<div class="image" style="background-image: url('+image+')"></div>'
+      +'<div class="body">'
+        +'<div class="name">'+name.toUpperCase()+'</div>'
+        +'<div class="description">'+premio+'</div>'
+        +'<div class="categorie">'+categorie+'</div>'
+      +'</div>'
+      +'<div class="arrow"><span class="coup-seta-drt"></span></div>'
+    +'</div>');
+  return storeDiv;
+}
+
+function getStoreById(storeId){
   var storeInfo = null;
-  data.forEach(function(store){
+  storesData.forEach(function(store){
     if(store.id === storeId){
       storeInfo = store; return storeInfo;
     }
@@ -50,7 +140,7 @@ function getStoreById(storeId, data){
   return storeInfo;
 }
 
-function getAwardByStore(id, awardsData){
+function getAwardByStore(id){
   var title="";
   awardsData.forEach(function(award){
     if(id === award.store){
@@ -60,7 +150,7 @@ function getAwardByStore(id, awardsData){
   return title;
 }
 
-function getCategorieNameById(id, categoriesData){
+function getCategorieNameById(id){
   var returnedCat = "";
   categoriesData.forEach(function(categorie){
     if(categorie.id === id){
@@ -70,35 +160,12 @@ function getCategorieNameById(id, categoriesData){
   return returnedCat;
 }
 
-storesMethods.prototype.showCategories = function(data, container){
-  container.empty();
-  data.forEach(function(categorie){
-    var categorieDiv = $('<div class="categorie-container" id="categorie-'+categorie.id+'">'
-        +'<div class="name"><div class="table-cell">'+categorie.name.toUpperCase()+'</div></div>'
-        +'<div class="check-cat">'
-          +'<div class="table-cell">'
-            +'<div class="not-check"></div>'
-            +'<div class="check"></div>'
-          +'</div>'
-        +'</div>'
-      +'</div>');
-    container.append(categorieDiv);
+function getLocationNameById(id){
+  var returnedLoc = "";
+  locationsData.forEach(function(location){
+    if(location.id === id){
+      returnedLoc = location.name; return returnedLoc;
+    }
   });
-};
-
-storesMethods.prototype.showLocations = function(data, container){
-  container.empty();
-  data.forEach(function(location){
-    var locationDiv = $('<div class="location-container" id="location-'+location.id+'">'
-        +'<div class="name"><div class="table-cell">'+location.name.toUpperCase()+'</div></div>'
-        +'<div class="check-loc">'
-          +'<div class="table-cell">'
-            +'<div class="not-check"></div>'
-            +'<div class="check"></div>'
-          +'</div>'
-        +'</div>'
-      +'</div>');
-    console.log(locationDiv);
-    container.append(locationDiv);
-  });
-};
+  return returnedLoc;
+}

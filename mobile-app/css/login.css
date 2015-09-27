@@ -95,6 +95,40 @@ body {
 .container .container-view .header-container-big .app-icon-container{
   height: 70%;
   width: 100%;
+  display: table;
+}
+
+.container .container-view .header-container-big .app-icon-container .table-cell{
+  vertical-align: bottom;
+}
+
+.container .container-view .header-container-big .app-icon-container .logo{
+  background-size: contain;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  height: 4.5rem;
+  width: auto;
+}
+
+@media (max-width: 356px) {
+  .container .container-view .header-container-big .app-icon-container .logo{
+    background-image: url('../assets/app/logo_loading@320.png');
+  }
+}
+@media (min-width: 360px) {
+  .container .container-view .header-container-big .app-icon-container .logo{
+    background-image: url('../assets/app/logo_loading@360.png');
+  }
+}
+@media (min-width: 720px) {
+  .container .container-view .header-container-big .app-icon-container .logo{
+    background-image: url('../assets/app/logo_loading@720.png');
+  }
+}
+@media (min-width: 1000px) {
+  .container .container-view .header-container-big .app-icon-container .logo{
+    background-image: url('../assets/app/logo_loading@1080.png');
+  }
 }
 
 .container .container-view .header-container-big .open-message,
@@ -107,14 +141,18 @@ body {
 .container .container-view .header-container-big .open-message span{
   display: table-cell;
   vertical-align: middle;
-  font-size: 2.3rem;
+  font-size: 2rem;
   color: #00436A;
   text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }
 
 .container .container-view .header-container-big .services-message span{
   font-size: 1.6rem;
   color: #00436A;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }
 
 .container .container-view .body-container{
@@ -125,7 +163,47 @@ body {
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
-  background-image: url('../assets/Coupzon_sombra_640.png');
+}
+
+@media (max-width: 356px) {
+  .container .container-view .body-container,
+  .container .container-view .body-container-2 .lists-container,
+  .container .container-view .qrcode-body,
+  .container .container-view .body-container-2 .view-menu-container,
+  .container .container-view .body-container-2.body-awards,
+  .container .container-view .body-store{
+    background-image: url('../assets/app/sombra@320.png');
+  }
+}
+@media (min-width: 360px) {
+  .container .container-view .body-container,
+  .container .container-view .body-container-2 .lists-container,
+  .container .container-view .qrcode-body,
+  .container .container-view .body-container-2 .view-menu-container,
+  .container .container-view .body-container-2.body-awards,
+  .container .container-view .body-store{
+    background-image: url('../assets/app/sombra@360.png');
+  }
+}
+@media (min-width: 720px) {
+  .container .container-view .body-container,
+  .container .container-view .body-container-2 .lists-container,
+  .container .container-view .qrcode-body,
+  .container .container-view .body-container-2 .view-menu-container,
+  .container .container-view .body-container-2.body-awards,
+  .container .container-view .body-store{
+    background-image: url('../assets/app/sombra@720.png');
+  }
+}
+@media (min-width: 1000px) {
+  .container .container-view .body-container,
+  .container .container-view .body-container-2 .lists-container,
+  .container .container-view .qrcode-body,
+  .container .container-view .body-container-2 .view-menu-container,
+  .container .container-view .body-container-2.body-awards,
+  .container .container-view .body-store{
+    background-image: url('../assets/app/sombra@1080.png');
+  }
 }
 
 .container .container-view .body-container .insert-number-container,
@@ -138,6 +216,8 @@ body {
 .container .container-view .body-container .insert-number-container .insert-number-title,
 .container .container-view .body-container .insert-password-container .insert-password-title{
   font-size: 1.1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }
 
 .container .container-view .body-container .insert-number-container .number-box,
@@ -156,6 +236,15 @@ body {
   width: 15%;
   height: 100%;
   float: left;
+  font-size: 3rem;
+  color: #00436A;
+  display: table;
+}
+
+.container .container-view .body-container .insert-number-container .number-box .insert-number-icon span,
+.container .container-view .body-container .insert-password-container .password-box .insert-password-icon span{
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .container .container-view .body-container .insert-number-container .number-box .insert-number-input,
@@ -180,20 +269,37 @@ body {
   margin: 0 auto;
 }
 
+.container .container-view .body-container .insert-number-container .terms-container span{
+  display: none;
+  font-size: 2rem;
+  color: white;
+}
+
+.container .container-view .body-container .insert-number-container .terms-container .checked{
+  background-color: #FEC134;
+  color: #00436A;
+}
+
+.container .container-view .body-container .insert-number-container .terms-container .notchecked{
+  background-color: #FEC134;
+  color: white;
+}
+
+.container .container-view .body-container .insert-number-container .terms-container span.selected{
+  display: block;
+}
+
 .container .container-view .body-container .insert-number-container .terms-container .check-terms{
   background-color: white;
-  -moz-border-radius: .5rem;
-  -webkit-border-radius: .5rem;
-  border-radius: .5rem;
-  height: 1.6rem;
-  width: 1.6rem;
   float: left;
 }
 
 .container .container-view .body-container .insert-number-container .terms-container .check-title{
   text-align: left;
-  margin-left: 2.3rem;
+  margin-left: 3rem;
   font-size: 1.3rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }
 
 .container .container-view .body-container .login-container{
@@ -217,4 +323,6 @@ body {
   display: table-cell;
   vertical-align: middle;
   font-size: 2rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }

@@ -2,6 +2,56 @@
   height: 12%;
   width: 100%;
   text-align: center;
+  display: table;
+  position: relative;
+}
+
+.container .container-view .header-container-little .logo{
+  background-size: contain;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  height: 3.5rem;
+}
+
+.container .container-view .header-container-little .back-from-selection{
+  position: absolute;
+  top: 0;
+  height: 100%;
+  font-size: 2rem;
+  z-index: 2;
+  width: 20%;
+  display: table;
+  color: #00436A;
+}
+
+.container .container-view .header-container-little .back-from-selection span{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.container .container-view .header-container-little .back-from-selection.disable{
+  display: none;
+}
+
+@media (max-width: 356px) {
+  .container .container-view .header-container-little .logo{
+    background-image: url('../assets/app/logo-header@320.png');
+  }
+}
+@media (min-width: 360px) {
+  .container .container-view .header-container-little .logo{
+    background-image: url('../assets/app/logo-header@360.png');
+  }
+}
+@media (min-width: 720px) {
+  .container .container-view .header-container-little .logo{
+    background-image: url('../assets/app/logo-header@720.png');
+  }
+}
+@media (min-width: 1000px) {
+  .container .container-view .header-container-little .logo{
+    background-image: url('../assets/app/logo-header@1080.png');
+  }
 }
 
 .container .container-view .qrcode-body{
@@ -9,7 +59,8 @@
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
-  background-image: url('../assets/Coupzon_sombra_640.png');
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }
 
 .container .container-view .qrcode-body .qrcode-text-1{
@@ -22,7 +73,7 @@
 }
 
 .container .container-view .qrcode-body .qrcode-text-2{
-  height: 30%;
+  height: 40%;
   text-align: center;
   width: 100%;
   display: table;
@@ -30,12 +81,14 @@
   font-size: 1.3rem;
 }
 
-.container .container-view .qrcode-body .arrow-containe{
-  height: 10%;
+.container .container-view .qrcode-body .arrow-container{
+  text-align: center;
+  font-size: 2.7rem;
+  color: #EFBD3B;
+  padding-top: 1.5rem;
 }
 
-.container .container-view .qrcode-body .qrcode-text-1 span,
-.container .container-view .qrcode-body .qrcode-text-2 span{
+.container .container-view .qrcode-body .qrcode-text-1 span{
   display: table-cell;
   vertical-align: middle;
 }
