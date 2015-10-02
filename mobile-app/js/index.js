@@ -5,7 +5,7 @@ $(document).ready(function() {
   var partialH = window.innerHeight;
   $('body').css('height', partialH+'px');
   methods = new storesMethods();
-  $('#login-phone').addClass('selected');
+  
   var footerH = $('.footer-menu').height();
   $('#view-qrcode').css({height: (partialH - footerH)+'px' });
   $('#view-stores').css({height: (partialH - footerH)+'px' });
@@ -13,9 +13,14 @@ $(document).ready(function() {
   $('#view-favorites').css({height: (partialH - footerH)+'px' });
   $('#view-settings').css({height: (partialH - footerH)+'px' });
   $('#view-store').css({height: (partialH - footerH)+'px' });
+  $('#loading-view').addClass('selected');
   setTimeout(function(){
-    window.scrollTo(0,1);
+    $('#loading-view').removeClass('selected');
+    $('#login-phone').addClass('selected');
   }, 1000);
+  /*setTimeout(function(){
+    window.scrollTo(0,1);
+  }, 1000);*/
 });
 
 window.onload = function () {
@@ -115,47 +120,4 @@ $('.back-from-selection').on('click', function(){
   $('.stores-container').addClass('selected');
 });
 
-var awardsData = [
-  {id: 1, title: "Vale uma sandes á escolha", description: "Na compra de qualquer salada, o Vitaminas ofereçe uma sandes á sua companhia.", store: 1},
-  {id: 2, title: "50% na segunda compra", description: "50% a partir do segundo artigo comprado", store: 2},
-  {id: 3, title: "5% de desconto nas suas proximas 5 compras", description: "Queremos voltar a vê-lo em breve, para isso oferecemos-lhe 5% de desconto nas suas proximas 5 compras.", store: 5},
-  {id: 4, title: "2 dias de 50% de desconto", description: "Você escolhe os 2 dias em que vai usufruir do seu desconto.", store: 3},
-  {id: 5, title: "Vale uma refeição para duas pessoas", description: "Traga a sua companhia e usufrua desta refeição que lhe estamos a oferecer.", store: 1},
-  {id: 6, title: "Desconto de 30€", description: "Desconto de 30€ em qualquer compra superior a 50€. Dispõe de 10 dias para usufruir do seu prémio", store: 2},
-  {id: 7, title: "Vale 10€", description: "Desconto de 10€ em qualquer compra superior a 30€. Dispõe de 10 dias para usufruir do seu prémio", store: 10},
-  {id: 8, title: "Desconto de 20€", description: "Desconto de 20€ em qualquer compra superior a 50€. Dispõe de 10 dias para usufruir do seu prémio", store: 7}
-];
 
-var storesData = [
-  {id : 1, name: "Vitaminas", categorie: 1, favorite: false, location: 1, image: "assets/1000345.jpg"},
-  {id : 2, name: "Gardenia", categorie: 5, favorite: false, location: 5, image: "assets/logo.png"},  
-  {id : 3, name: "Primark", categorie: 1, favorite: false, location: 2, image: "assets/primark-emprego.jpeg"},
-  {id : 4, name: "Berska", categorie: 2, favorite: false, location: 5, image: "assets/bershka-logo.jpg"},
-  {id : 5, name: "H3", categorie: 1, favorite: false, location: 4, image: "assets/p2_h3_s.jpg"},
-  {id : 6, name: "Urban Beach", categorie: 2, favorite: false, location: 6, image: "assets/k-urban-beach-lisboa.jpg"},
-  {id : 7, name: "Mr. Blue", categorie: 2, favorite: false, location: 7, image: "assets/mr_blue_porto_airport_may2011_1.jpg"},
-  {id : 8, name: "Pizza Hut", categorie: 1, favorite: false, location: 8, image: "assets/pizza-hut.jpg"},
-  {id : 9, name: "Pinkie", categorie: 2, favorite: false, location: 9, image: "assets/pimkie-logo.jpg"},
-  {id : 10, name: "Perfumes & Companhia", categorie: 3, favorite: false, location: 9, image: "assets/logo_perfumes.jpg"}
-];
-
-
-var categoriesData = [
-  {id: 1, name: 'Restauração'},
-  {id: 2, name: 'Vestuário'},
-  {id: 3, name: 'Perfumaria'},
-  {id: 4, name: 'Acessórios'},
-  {id: 5, name: 'Sapatarias'}
-];
-
-var locationsData = [
-  {id: 1, name: 'Lisboa'},
-  {id: 2, name: 'Oeiras'},
-  {id: 3, name: 'Cascais'},
-  {id: 4, name: 'Setúbal'},
-  {id: 5, name: 'Leiria'},
-  {id: 6, name: 'Viana do Castelo'},
-  {id: 7, name: 'Porto'},
-  {id: 8, name: 'Vila do Conde'},
-  {id: 9, name: 'Régua'}
-];

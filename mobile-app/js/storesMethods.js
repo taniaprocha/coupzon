@@ -4,13 +4,19 @@ function storesMethods(){
 
 storesMethods.prototype.showAllStores = function(container){
   $('.store-container').off(); container.empty();
-  storesData.forEach(function(store){
+  brandsData.forEach(function(brand){
+    var categoria = getCategorieNameById(brand.categorie).toUpperCase();
+
+    var brandDiv = setStoreDiv(store.name, store.id, store.image, premio, categoria);
+    container.append(brandDiv);
+  });
+  /*storesData.forEach(function(store){
     var categoria = getCategorieNameById(store.categorie).toUpperCase();
     var premio = getAwardByStore(store.id);
     var storeDiv = setStoreDiv(store.name, store.id, store.image, premio, categoria);
     container.append(storeDiv);
   });
-  addStoreListeners();
+  addStoreListeners();*/
 };
 
 storesMethods.prototype.showAllAwards = function(container){
@@ -55,7 +61,7 @@ storesMethods.prototype.showCategories = function(container){
 
 storesMethods.prototype.showLocations = function(container){
   $('.location-container').off(); container.empty();
-  locationsData.forEach(function(location){
+  citiesData.forEach(function(location){
     var locationDiv = $('<div class="location-container" id="location-'+location.id+'">'
         +'<div class="name"><div class="table-cell">'+location.name.toUpperCase()+'</div></div>'
         +'<div class="check-loc">'
@@ -91,8 +97,8 @@ storesMethods.prototype.showSelectedStores = function(selectedCategories, select
   }
   var results = 0;
   storesData.forEach(function(store){
-    if( ((selectedLocation.length <= 0) || selectedLocation.indexOf(store.location)) !== -1 && ( (selectedCategories.length <= 0) || selectedCategories.indexOf(store.categorie) !== -1) ){
-        console.log(store.categorie, store.location, store);
+    if( ((selectedLocation.length <= 0) || selectedLocation.indexOf(store.city)) !== -1 && ( (selectedCategories.length <= 0) || selectedCategories.indexOf(store.categorie) !== -1) ){
+        console.log(store.categorie, store.city, store);
         var categoria = getCategorieNameById(store.categorie).toUpperCase();
         var premio = getAwardByStore(store.id);
         var storeDiv = setStoreDiv(store.name, store.id, store.image, premio, categoria);
@@ -114,7 +120,26 @@ function addStoreListeners(){
 }
 
 function showStoreDetails(storeId){
+  console.log(storeId);
+  var id = storeId; id = id.substring(id.indexOf('-')+1, id.length);
+  var store = getStoreById(parseInt(id));
+  console.log(id.toString(), store);
+  if(!store){ return; }
+  
+  $('#store-name').text(store.name.toUpperCase());
+}
 
+function setBrandDiv(name, id, image, categorie){
+  var brandDiv = $('<div class="store-container" id="store-'+id+'">'
+      +'<div class="image" style="background-image: url('+image+')"></div>'
+      +'<div class="body">'
+        +'<div class="name">'+name.toUpperCase()+'</div>'
+        +'<div class="description">'+premio+'</div>'
+        +'<div class="categorie">'+categorie+'</div>'
+      +'</div>'
+      +'<div class="arrow"><span class="coup-seta-drt"></span></div>'
+    +'</div>');
+  return brandDiv;
 }
 
 function setStoreDiv(name, id, image, premio, categorie){
@@ -162,7 +187,7 @@ function getCategorieNameById(id){
 
 function getLocationNameById(id){
   var returnedLoc = "";
-  locationsData.forEach(function(location){
+  citiesData.forEach(function(location){
     if(location.id === id){
       returnedLoc = location.name; return returnedLoc;
     }

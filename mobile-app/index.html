@@ -6,6 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="stylesheet" href="font/style.css" rel="stylesheet">
+<link rel="stylesheet" href="css/loading.css" rel="stylesheet">
 <link rel="stylesheet" href="css/login.css" rel="stylesheet">
 <link rel="stylesheet" href="css/menu.css" rel="stylesheet">
 <link rel="stylesheet" href="css/lojas.css" rel="stylesheet">
@@ -15,201 +16,210 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 
 <body>
-
-<div class="container" id="container">
-  <div class="container-view" id="login-phone">
-    <div class="header-container-big">
-        <div class="app-icon-container">
-          <div class="table-cell">
-            <div class="logo"></div>
-          </div>
+  <div class="container" id="container">
+    <div class="container-view" id="loading-view">
+      <div class="table-cell">
+        <div class="loading">
+          <div class="icon-loading"></div>
+          <div class="message-loading">Vamos poupar?</div>
         </div>
-        <div class="open-message"><span>BEM-VINDO!</span></div>
+      </div>
     </div>
-    <div class="body-container" id="container-number">
-      <div class="insert-number-container">
-        <div class="table-cell">
-          <div class="insert-number-title">PARA COMEÇAR A COLECIONAR DESCONTOS</div>
-          <div class="insert-number-title">INSIRA O SEU NÚMERO DE TELEFONE</div>
-          <div class="number-box">
-            <div class="insert-number-icon"><span class="coup-telefone"></span></div>
-            <div class="insert-number-input"><input type="text" placeholder="Number" name="number" value=""/></div>
-          </div>
-          <div class="terms-container">
-            <div class="check-terms">
-              <span class="coup-radio-null notchecked selected"></span>
-              <span class="coup-radio-check checked"></span>
+    <div class="container-view" id="login-phone">
+      <div class="header-container-big">
+          <div class="app-icon-container">
+            <div class="table-cell">
+              <div class="logo"></div>
             </div>
-            <div class="check-title">ACEITO OS TERMOS E CONDIÇÕES</div>
           </div>
-        </div>
+          <div class="open-message"><span>BEM-VINDO!</span></div>
       </div>
-      <div class="login-container" id="login-number">
-        <div class="login-box"><span>ENVIAR</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="container-view" id="login-password">
-    <div class="header-container-big">
-        <div class="app-icon-container"></div>
-        <div class="services-message"><span>Todos os serviços de fidelização<br>no seu telemóvel, totalmente grátis!</span></div>
-    </div>
-    <div class="body-container" id="container-password">
-      <div class="insert-password-container">
-        <div class="table-cell">
-          <div class="insert-password-title">INSIRA A PASSWORD QUE RECEBEU POR SMS</div>
-          <div class="password-box">
-            <div class="insert-password-icon"><span class="coup-password"></span></div>
-            <div class="insert-password-input"><input type="text" placeholder="Password" name="password" value=""></div>
-          </div>
-        </div>
-      </div>
-      <div class="login-container" id="login-password">
-        <div class="login-box"><span>ENVIAR</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="container-view" id="view-qrcode">
-    <div class="header-container-little">
-      <div class="table-cell">
-          <div class="logo"></div>
-      </div>
-    </div>
-    <div class="qrcode-body">
-      <div class="qrcode-text-1"><span>ESTE É O SEU CÓDIGO,<br>PASSE-O NAS LOJAS ADERENTES.</span></div>
-      <div class="qrcode"></div>
-      <div class="qrcode-text-2">
-        <div class="table-cell">
-          <div class="title">DESCUBRA EM “LOJAS” TODOS OS<br>DESCONTOS QUE ESTÃO À SUA ESPERA.</div>
-          <div class="arrow-container coup-seta-redondo-bx"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container-view" id="view-stores">
-    <div class="header-container-little">
-      <div class="table-cell">
-        <div class="logo"></div>
-        <div class="back-from-selection disable"><span class="coup-seta-esq"></span></div>
-      </div>
-    </div>
-    <div class="body-stores">
-      <div class="view-menu-container">
-        <div class="view-menu categories-menu" id="stores-categories">
-          <span class="table-cell">CATEGORIA</span>
-        </div>
-        <div class="view-menu all-menu selected" id="stores-all">
-          <span class="table-cell">TODOS</span>
-        </div>
-        <div class="view-menu locations-menu" id="stores-locations">
-          <span class="table-cell">LOCALIDADE</span>
-        </div>
-      </div>
-      <div class="search-container">
-        <div class="search-icon"></div>
-        <div class="search-input-container"><input type="text" placeholder="Search" name="search" value=""></div>
-      </div>
-      <div class="lists-container">
-        <div class="list-selected">
+      <div class="body-container-yellow" id="container-number">
+        <div class="insert-number-container">
           <div class="table-cell">
-            <div class="selected-type" id="selected-categories"></div>
-            <div class="selected-type"></div>
-            <div class="selected-type" id="selected-place"></div>
+            <div class="insert-number-title">PARA COMEÇAR A COLECIONAR DESCONTOS</div>
+            <div class="insert-number-title">INSIRA O SEU NÚMERO DE TELEFONE</div>
+            <div class="number-box">
+              <div class="insert-number-icon"><span class="coup-telefone"></span></div>
+              <div class="insert-number-input"><input type="text" placeholder="Number" name="number" value=""/></div>
+            </div>
+            <div class="terms-container">
+              <div class="check-terms">
+                <span class="coup-radio-null notchecked selected"></span>
+                <span class="coup-radio-check checked"></span>
+              </div>
+              <div class="check-title">ACEITO OS TERMOS E CONDIÇÕES</div>
+            </div>
           </div>
         </div>
-        <div class="categories-container"></div>
-        <div class="stores-container selected"></div>
-        <div class="locations-container"></div>
+        <div class="login-container" id="login-number">
+          <div class="login-box"><span>ENVIAR</span></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="container-view" id="view-awards">
-    <div class="header-container-little">
-      <div class="table-cell">
+    <div class="container-view" id="login-password">
+      <div class="header-container-big">
+          <div class="app-icon-container"></div>
+          <div class="services-message"><span>Todos os serviços de fidelização<br>no seu telemóvel, totalmente grátis!</span></div>
+      </div>
+      <div class="body-container-yellow" id="container-password">
+        <div class="insert-password-container">
+          <div class="table-cell">
+            <div class="insert-password-title">INSIRA A PASSWORD QUE RECEBEU POR SMS</div>
+            <div class="password-box">
+              <div class="insert-password-icon"><span class="coup-password"></span></div>
+              <div class="insert-password-input"><input type="text" placeholder="Password" name="password" value=""></div>
+            </div>
+          </div>
+        </div>
+        <div class="login-container" id="login-password">
+          <div class="login-box"><span>ENVIAR</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="container-view" id="view-qrcode">
+      <div class="header-container-little">
+        <div class="table-cell">
+            <div class="logo"></div>
+        </div>
+      </div>
+      <div class="qrcode-body">
+        <div class="qrcode-text-1"><span>ESTE É O SEU CÓDIGO,<br>PASSE-O NAS LOJAS ADERENTES.</span></div>
+        <div class="qrcode"></div>
+        <div class="qrcode-text-2">
+          <div class="table-cell">
+            <div class="title">DESCUBRA EM “LOJAS” TODOS OS<br>DESCONTOS QUE ESTÃO À SUA ESPERA.</div>
+            <div class="arrow-container coup-seta-redondo-bx"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-view" id="view-stores">
+      <div class="header-container-little">
+        <div class="table-cell">
+          <div class="logo"></div>
+          <div class="back-from-selection disable"><span class="coup-seta-esq"></span></div>
+        </div>
+      </div>
+      <div class="body-container-big">
+        <div class="view-menu-container">
+          <div class="view-menu categories-menu" id="stores-categories">
+            <span class="table-cell">CATEGORIA</span>
+          </div>
+          <div class="view-menu all-menu selected" id="stores-all">
+            <span class="table-cell">TODOS</span>
+          </div>
+          <div class="view-menu locations-menu" id="stores-locations">
+            <span class="table-cell">LOCALIDADE</span>
+          </div>
+        </div>
+        <div class="search-container">
+          <div class="search-icon"></div>
+          <div class="search-input-container"><input type="text" placeholder="Search" name="search" value=""></div>
+        </div>
+        <div class="lists-container">
+          <div class="list-selected">
+            <div class="table-cell">
+              <div class="selected-type" id="selected-categories"></div>
+              <div class="selected-type"></div>
+              <div class="selected-type" id="selected-place"></div>
+            </div>
+          </div>
+          <div class="categories-container"></div>
+          <div class="stores-container selected"></div>
+          <div class="locations-container"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container-view" id="view-awards">
+      <div class="header-container-little">
+        <div class="table-cell">
+            <div class="logo"></div>
+        </div>
+      </div>
+      <div class="body-container-big body-awards">
+        <div class="awards-container"></div>
+      </div>
+    </div>
+    <div class="container-view" id="view-favorites">
+      <div class="header-container-little">
           <div class="logo"></div>
       </div>
-    </div>
-    <div class="body-container-2 body-awards">
-      <div class="awards-container"></div>
-    </div>
-  </div>
-  <div class="container-view" id="view-favorites">
-    <div class="header-container-little">
-        <div class="logo"></div>
-    </div>
-    <div class="body-container-2 body-favorites">
-      <div class="search-container">
-        <div class="search-icon"></div>
-        <div class="search-input-container"><input type="text" placeholder="Search" name="search" value=""></div>
-      </div>
-      <div class="favorites-container"></div>
-    </div>
-  </div>
-  <div class="container-view" id="view-settings">
-    <div class="header-container-little">
-      <div class="table-cell">
-          <div class="logo"></div>
+      <div class="body-container-big body-favorites">
+        <div class="search-container">
+          <div class="search-icon"></div>
+          <div class="search-input-container"><input type="text" placeholder="Search" name="search" value=""></div>
+        </div>
+        <div class="favorites-container"></div>
       </div>
     </div>
-    <div class="body-container-2 body-settings">
-      <div class="settings-container"></div>
-    </div>
-  </div>
-  <div class="container-view" id="view-store">
-    <div class="header-container-little">
-      <div class="table-cell">
-          <div class="logo"></div>
+    <div class="container-view" id="view-settings">
+      <div class="header-container-little">
+        <div class="table-cell">
+            <div class="logo"></div>
+        </div>
+      </div>
+      <div class="body-container-big body-settings">
+        <div class="settings-container"></div>
       </div>
     </div>
-    <div class="body-store">
-      <div class="store-title"><div class="table-cell"><span></span></div></div>
-      <div class="store-image"></div>
-      <div class="award-description"><div class="table-cell"><span></span></div></div>
-      <div class="check-ins"></div>
-      <div class="store-description"></div>
-      <div class="favorite-area">
-        <div class="title">FAVORITO</div>
-        <div class="icon"><span class="coup-favorito"></span></div>
+    <div class="container-view" id="view-store">
+      <div class="header-container-little">
+        <div class="table-cell">
+            <div class="logo"></div>
+        </div>
       </div>
-      <div class="share-checkin-area">
-        <div class="title">PARTILHAS CHECK-INS</div>
-        <div class="icon"><span class="coup-partilhar"></span></div>
-      </div>
-      <div class="contacts-area">
-        <div class="title">LOJAS E CONTACTOS</div>
-        <div class="icon"><span class="coup-seta-drt"></span></div>
+      <div class="body-container-store">
+        <div class="store-title"><div class="table-cell"><span id="store-name"></span></div></div>
+        <div class="store-image" id="store-image"></div>
+        <div class="award-description"><div class="table-cell"><span id="store-award-description"></span></div></div>
+        <div class="check-ins"></div>
+        <div class="store-description"></div>
+        <div class="favorite-area">
+          <div class="title">FAVORITO</div>
+          <div class="icon"><span class="coup-favorito"></span></div>
+        </div>
+        <div class="share-checkin-area">
+          <div class="title">PARTILHAS CHECK-INS</div>
+          <div class="icon"><span class="coup-partilhar"></span></div>
+        </div>
+        <div class="contacts-area">
+          <div class="title">LOJAS E CONTACTOS</div>
+          <div class="icon"><span class="coup-seta-drt"></span></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="footer-menu">
-    <div class="selected-tab"><div id="tab"></div></div>
-    <div class="menus-container">
-      <div class="menu-container" id="menu-qrcode">
-        <div class="menu-name" id="qrcode-m"><span>ID</span></div>
-        <div class="menu-icon"><span class="coup-id-38"></span></div>
-      </div>
-      <div class="menu-container" id="menu-awards">
-        <div class="menu-name" id="awards-m"><span>PRÉMIOS</span></div>
-        <div class="menu-icon"><span class="coup-premio"></span></div>
-      </div>
-      <div class="menu-container" id="menu-stores">
-        <div class="menu-name" id="stores-m"><span>LOJAS</span></div>
-        <div class="menu-icon"><span class="coup-loja"></span></div>
-      </div>
-      <div class="menu-container" id="menu-favorites">
-        <div class="menu-name" id="favorites-m"><span>FAVORITOS</span></div>
-        <div class="menu-icon"><span class="coup-favorito"></span></div>
-      </div>
-      <div class="menu-container" id="menu-settings">
-        <div class="menu-name" id="settings-m"><span>GERIR</span></div>
-        <div class="menu-icon"><span class="coup-gerir"></span></div>
+    <div class="footer-menu">
+      <div class="selected-tab"><div id="tab"></div></div>
+      <div class="menus-container">
+        <div class="menu-container" id="menu-qrcode">
+          <div class="menu-name" id="qrcode-m"><span>ID</span></div>
+          <div class="menu-icon"><span class="coup-id-38"></span></div>
+        </div>
+        <div class="menu-container" id="menu-awards">
+          <div class="menu-name" id="awards-m"><span>PRÉMIOS</span></div>
+          <div class="menu-icon"><span class="coup-premio"></span></div>
+        </div>
+        <div class="menu-container" id="menu-stores">
+          <div class="menu-name" id="stores-m"><span>LOJAS</span></div>
+          <div class="menu-icon"><span class="coup-loja"></span></div>
+        </div>
+        <div class="menu-container" id="menu-favorites">
+          <div class="menu-name" id="favorites-m"><span>FAVORITOS</span></div>
+          <div class="menu-icon"><span class="coup-favorito"></span></div>
+        </div>
+        <div class="menu-container" id="menu-settings">
+          <div class="menu-name" id="settings-m"><span>GERIR</span></div>
+          <div class="menu-icon"><span class="coup-gerir"></span></div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="js/index.js"></script>
-<script src="js/storesMethods.js"></script>
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/storesMethods.js"></script>
+
 </body>
 </html>

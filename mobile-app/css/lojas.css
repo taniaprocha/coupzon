@@ -1,10 +1,10 @@
 
-.container .container-view .body-container-2{
+.container .container-view .body-container-big{
   height: 88%;
   width: 100%;
 }
 
-.container .container-view .body-container-2 .view-menu-container{
+.container .container-view .body-container-big .view-menu-container{
   height: 12%;
   width: 100%;
   background-color: #F1F3F6;
@@ -14,7 +14,7 @@
   background-repeat: no-repeat;
 }
 
-.container .container-view .body-container-2 .view-menu-container .view-menu{
+.container .container-view .body-container-big .view-menu-container .view-menu{
   float: left;
   width: 33.33333333333%;
   text-align: center;
@@ -26,11 +26,11 @@
   font-weight: 400;
 }
 
-.container .container-view .body-container-2 .view-menu-container .view-menu.selected{
+.container .container-view .body-container-big .view-menu-container .view-menu.selected{
   color: #E99638;
 }
 
-.container .container-view .body-container-2 .search-container{
+.container .container-view .body-container-big .search-container{
   height: 5%;
   width: 100%;
   -moz-border: .1rem solid black;
@@ -40,24 +40,24 @@
   position: absolute;
 }
 
-.container .container-view .body-container-2 .search-container .search-icon{
+.container .container-view .body-container-big .search-container .search-icon{
   width: 10%;
   float: left;
   height: 100%;
 }
 
-.container .container-view .body-container-2 .search-container .search-input-container{
+.container .container-view .body-container-big .search-container .search-input-container{
   width: 90%;
   float: left;
   height: 100%;
 }
 
-.container .container-view .body-container-2 .search-container .search-input-container input{
+.container .container-view .body-container-big .search-container .search-input-container input{
   width: 100%;
   border: none;
 }
 
-.container .container-view .body-container-2 .lists-container{
+.container .container-view .body-container-big .lists-container{
   height: 100%;
   width: 100%;
   background-size: contain;
@@ -65,13 +65,13 @@
   background-repeat: no-repeat;
 }
 
-.container .container-view .body-container-2 .lists-container .list-selected{
+.container .container-view .body-container-big .lists-container .list-selected{
   height: 10%;
   width: 100%;
   display: table;
 }
 
-.container .container-view .body-container-2 .lists-container .list-selected .selected-type{
+.container .container-view .body-container-big .lists-container .list-selected .selected-type{
   float: left;
   width: 33.333333333333%;
   color: #E99638;
@@ -82,9 +82,9 @@
   text-align: center;
 }
 
-.container .container-view .body-container-2 .stores-container,
-.container .container-view .body-container-2 .categories-container,
-.container .container-view .body-container-2 .locations-container{
+.container .container-view .body-container-big .stores-container,
+.container .container-view .body-container-big .categories-container,
+.container .container-view .body-container-big .locations-container{
   height: 90%;
   width: 100%;
   overflow-x: hidden;
@@ -96,20 +96,20 @@
   display: none;
 }
 
-.container .container-view .body-container-2 .stores-container .no-stores-filtered{
+.container .container-view .body-container-big .stores-container .no-stores-filtered{
   color: #00436A;
   font-size: 1.1rem;
   padding-top: 2rem; 
   text-align: center;
 }
 
-.container .container-view .body-container-2 .stores-container.selected,
-.container .container-view .body-container-2 .categories-container.selected,
-.container .container-view .body-container-2 .locations-container.selected{
+.container .container-view .body-container-big .stores-container.selected,
+.container .container-view .body-container-big .categories-container.selected,
+.container .container-view .body-container-big .locations-container.selected{
   display: block;
 }
 
-.container .container-view .body-container-2 .stores-container .store-container{
+.container .container-view .body-container-big .stores-container .store-container{
   float: left;
   width: 100%;
   height: 8rem;
@@ -117,7 +117,7 @@
   padding: .4rem 0;
 }
 
-.container .container-view .body-container-2 .stores-container .store-container .image{
+.container .container-view .body-container-big .stores-container .store-container .image{
   height: 100%;
   width: 25%;
   float: left;
@@ -127,14 +127,14 @@
   overflow: hidden;
 }
 
-.container .container-view .body-container-2 .stores-container .store-container .body{
+.container .container-view .body-container-big .stores-container .store-container .body{
   height: 100%;
   width: 55%;
   float: left;
   padding-left: .8rem;
 }
 
-.container .container-view .body-container-2 .stores-container .store-container .body .name{
+.container .container-view .body-container-big .stores-container .store-container .body .name{
   color: #00436A;
   font-size: 1.5rem;
   text-overflow: ellipsis;
@@ -144,7 +144,7 @@
   font-weight: 600;
 }
 
-.container .container-view .body-container-2 .stores-container .store-container .body .description{
+.container .container-view .body-container-big .stores-container .store-container .body .description{
   color: #0089C7;
   font-size: 1.1rem;
   text-overflow: ellipsis;
@@ -154,14 +154,14 @@
   font-weight: 300;
 }
 
-.container .container-view .body-container-2 .stores-container .store-container .body .categorie{
+.container .container-view .body-container-big .stores-container .store-container .body .categorie{
   color: #B3B3B3;
   font-size: 1rem;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
 }
 
-.container .container-view .body-container-2 .stores-container .store-container .arrow{
+.container .container-view .body-container-big .stores-container .store-container .arrow{
   height: 100%;
   width: 20%;
   float: left;
@@ -169,15 +169,15 @@
   text-align: center;
 }
 
-.container .container-view .body-container-2 .stores-container .store-container .arrow span{
+.container .container-view .body-container-big .stores-container .store-container .arrow span{
   display: table-cell;
   vertical-align: middle;
   font-size: 2.5rem;
   color: #BEDEE8;
 }
 
-.container .container-view .body-container-2 .categories-container .categorie-container,
-.container .container-view .body-container-2 .locations-container .location-container{
+.container .container-view .body-container-big .categories-container .categorie-container,
+.container .container-view .body-container-big .locations-container .location-container{
   width: 100%;
   height: 5rem;
   display: table;
@@ -186,8 +186,8 @@
   border-bottom: solid .1rem #F2F2F2;
 }
 
-.container .container-view .body-container-2 .categories-container .categorie-container .name,
-.container .container-view .body-container-2 .locations-container .location-container .name{
+.container .container-view .body-container-big .categories-container .categorie-container .name,
+.container .container-view .body-container-big .locations-container .location-container .name{
   width: 80%;
   height: 100%;
   float: left;
@@ -197,8 +197,8 @@
   padding-left: 1.5rem;
 }
 
-.container .container-view .body-container-2 .categories-container .categorie-container .check-cat,
-.container .container-view .body-container-2 .locations-container .location-container .check-loc{
+.container .container-view .body-container-big .categories-container .categorie-container .check-cat,
+.container .container-view .body-container-big .locations-container .location-container .check-loc{
   width: 20%;
   height: 100%;
   float: left;
@@ -207,29 +207,29 @@
   font-size: 2.5rem;
 }
 
-.container .container-view .body-container-2 .categories-container .categorie-container .check-cat .notchecked,
-.container .container-view .body-container-2 .locations-container .location-container .check-loc .notchecked{
+.container .container-view .body-container-big .categories-container .categorie-container .check-cat .notchecked,
+.container .container-view .body-container-big .locations-container .location-container .check-loc .notchecked{
   color: #BEDEE8;
 }
 
-.container .container-view .body-container-2 .categories-container .categorie-container .check-cat .checked,
-.container .container-view .body-container-2 .locations-container .location-container .check-loc .checked{
+.container .container-view .body-container-big .categories-container .categorie-container .check-cat .checked,
+.container .container-view .body-container-big .locations-container .location-container .check-loc .checked{
   color: #E99638;
   display: none;
 }
 
-.container .container-view .body-container-2 .categories-container .categorie-container.selected .check-cat .notchecked,
-.container .container-view .body-container-2 .locations-container .location-container.selected .check-loc .notchecked{
+.container .container-view .body-container-big .categories-container .categorie-container.selected .check-cat .notchecked,
+.container .container-view .body-container-big .locations-container .location-container.selected .check-loc .notchecked{
   display: none;
 }
 
-.container .container-view .body-container-2 .categories-container .categorie-container.selected .check-cat .checked,
-.container .container-view .body-container-2 .locations-container .location-container.selected .check-loc .checked{
+.container .container-view .body-container-big .categories-container .categorie-container.selected .check-cat .checked,
+.container .container-view .body-container-big .locations-container .location-container.selected .check-loc .checked{
   display: block;
 }
 
-.container .container-view .body-container-2 .categories-container .categorie-container.selected .name,
-.container .container-view .body-container-2 .locations-container .location-container.selected .name{
+.container .container-view .body-container-big .categories-container .categorie-container.selected .name,
+.container .container-view .body-container-big .locations-container .location-container.selected .name{
   color: #E99638;
 }
 
