@@ -14,6 +14,7 @@ $(document).ready(function() {
   $('#view-settings').css({height: (partialH - footerH)+'px' });
   $('#view-store').css({height: (partialH - footerH)+'px' });
   $('#loading-view').addClass('selected');
+
   setTimeout(function(){
     $('#loading-view').removeClass('selected');
     $('#login-phone').addClass('selected');
@@ -57,14 +58,14 @@ $('.menu-container').on('click', function(){
   switch(id){
     case 'menu-stores':
       $('#view-stores').addClass('selected'); $('#tab').animate({marginLeft: '40%'}, 100);
-      methods.showAllStores($('.stores-container'));
+      methods.showAllBrands($('.stores-container'));
       break;
     case 'menu-qrcode':
       $('#view-qrcode').addClass('selected'); $('#tab').animate({marginLeft: '0%'}, 100);
       break;
     case 'menu-awards':
       $('#view-awards').addClass('selected'); $('#tab').animate({marginLeft: '20%'}, 100);
-      methods.showAllAwards($('.awards-container'));
+      methods.showAllBrands($('.awards-container'));
       break;
     case 'menu-favorites':
       $('#view-favorites').addClass('selected'); $('#tab').animate({marginLeft: '60%'}, 100);
@@ -82,7 +83,7 @@ $('.view-menu').on('click', function(){
   switch($(this).attr('id')){
     case 'stores-all':
       $('.categories-container').removeClass('selected'); $('.locations-container').removeClass('selected'); $('.stores-container').addClass('selected');
-      methods.showAllStores($('.stores-container'));
+      methods.showAllBrands($('.stores-container'));
       $('.back-from-selection').addClass('disable');
       break;
     case 'stores-categories':
@@ -113,7 +114,6 @@ $('.back-from-selection').on('click', function(){
     }
   });
   $('.back-from-selection').addClass('disable');
-  console.log(selectedCategories, selectedLocation);
   methods.showSelectedStores(selectedCategories, selectedLocation, $('.stores-container'), $('#selected-place'), $('#selected-categories'));
   $('.locations-container').removeClass('selected');
   $('.categories-container').removeClass('selected');

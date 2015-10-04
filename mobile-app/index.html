@@ -5,9 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="css/login.css" rel="stylesheet">
 <link rel="stylesheet" href="font/style.css" rel="stylesheet">
 <link rel="stylesheet" href="css/loading.css" rel="stylesheet">
-<link rel="stylesheet" href="css/login.css" rel="stylesheet">
 <link rel="stylesheet" href="css/menu.css" rel="stylesheet">
 <link rel="stylesheet" href="css/lojas.css" rel="stylesheet">
 <link rel="stylesheet" href="css/qrcode.css" rel="stylesheet">
@@ -131,16 +131,36 @@
         </div>
       </div>
     </div>
+    
     <div class="container-view" id="view-awards">
       <div class="header-container-little">
         <div class="table-cell">
             <div class="logo"></div>
         </div>
       </div>
-      <div class="body-container-big body-awards">
+      <div class="body-container-big awards body-awards">
         <div class="awards-container"></div>
       </div>
+      <div class="body-container-big awards body-selected-brand">
+        <div class="title" id="brand-title"><span></span></div>
+        <div class="image" id="brand-image"></div>
+        <div class="awards-list"></div>
+        <div class="awards-used"></div>
+        <div class="award-detail">
+          <div class="award-title" id="award-title"></div>
+          <div class="award-qrcode" id="award-qrcode"></div>
+          <div class="award-validity">
+            <div>Válido até <span id="award-validity"></span></div>
+            <div>Disponível nas lojas:<span id="award-stores"></span></div>
+          </div>
+          <div class="award-share">
+            <div class="share">PARTILHAR PRÉMIO</div>
+            <div class="share-icon"><span class="coup-partilhar"></span></div>
+          </div>
+        </div>
+      </div>
     </div>
+
     <div class="container-view" id="view-favorites">
       <div class="header-container-little">
           <div class="logo"></div>
@@ -215,8 +235,11 @@
       </div>
     </div>
   </div>
-
+  
+  <!--<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>-->
   <script src="js/jquery-1.11.3.min.js"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>-->
+  <script src="js/moment.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/index.js"></script>
   <script src="js/storesMethods.js"></script>

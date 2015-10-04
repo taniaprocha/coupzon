@@ -109,16 +109,24 @@
   display: block;
 }
 
-.container .container-view .body-container-big .stores-container .store-container{
+.container .container-view .body-container-big .stores-container .store-container,
+.container .container-view .body-container-big .stores-container .brand-container,
+.container .container-view .body-container-big .awards-container .brand-container{
   float: left;
   width: 100%;
-  height: 8rem;
+  height: auto;
   border-bottom: solid .1rem #F2F2F2;
-  padding: .4rem 0;
+  padding: .6rem 0;
+  list-style-type: none;
 }
 
-.container .container-view .body-container-big .stores-container .store-container .image{
-  height: 100%;
+.container .container-view .body-container-big .stores-container .store-container{
+  height: 6.5rem;
+}
+
+.container .container-view .body-container-big .stores-container .brand-container .image,
+.container .container-view .body-container-big .awards-container .brand-container .image{
+  height: 7rem;
   width: 25%;
   float: left;
   background-repeat: no-repeat;
@@ -127,14 +135,24 @@
   overflow: hidden;
 }
 
-.container .container-view .body-container-big .stores-container .store-container .body{
+.container .container-view .body-container-big .stores-container .store-container .body,
+.container .container-view .body-container-big .stores-container .brand-container .body,
+.container .container-view .body-container-big .awards-container .brand-container .body{
   height: 100%;
   width: 55%;
   float: left;
   padding-left: .8rem;
 }
 
-.container .container-view .body-container-big .stores-container .store-container .body .name{
+.container .container-view .body-container-big .stores-container .store-container .body,
+.container .container-view .body-container-big .awards-container .store-container .body{
+  width: 80%;
+  padding-left: 2rem;
+}
+
+.container .container-view .body-container-big .stores-container .store-container .body .name,
+.container .container-view .body-container-big .stores-container .brand-container .body .name,
+.container .container-view .body-container-big .awards-container .brand-container .body .name{
   color: #00436A;
   font-size: 1.5rem;
   text-overflow: ellipsis;
@@ -144,7 +162,9 @@
   font-weight: 600;
 }
 
-.container .container-view .body-container-big .stores-container .store-container .body .description{
+.container .container-view .body-container-big .stores-container .store-container .body .description,
+.container .container-view .body-container-big .stores-container .brand-container .body .description,
+.container .container-view .body-container-big .awards-container .brand-container .body .description{
   color: #0089C7;
   font-size: 1.1rem;
   text-overflow: ellipsis;
@@ -154,14 +174,28 @@
   font-weight: 300;
 }
 
-.container .container-view .body-container-big .stores-container .store-container .body .categorie{
+.container .container-view .body-container-big .awards-container .brand-container .body .award{
+  color: #0089C7;
+  font-size: 1.1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+
+.container .container-view .body-container-big .stores-container .store-container .body .categorie,
+.container .container-view .body-container-big .stores-container .brand-container .body .categorie{
+
   color: #B3B3B3;
   font-size: 1rem;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
 }
 
-.container .container-view .body-container-big .stores-container .store-container .arrow{
+.container .container-view .body-container-big .stores-container .store-container .arrow,
+.container .container-view .body-container-big .stores-container .brand-container .arrow,
+.container .container-view .body-container-big .awards-container .brand-container .arrow{
   height: 100%;
   width: 20%;
   float: left;
@@ -169,7 +203,9 @@
   text-align: center;
 }
 
-.container .container-view .body-container-big .stores-container .store-container .arrow span{
+.container .container-view .body-container-big .stores-container .store-container .arrow span,
+.container .container-view .body-container-big .stores-container .brand-container .arrow span,
+.container .container-view .body-container-big .awards-container .brand-container .arrow span{
   display: table-cell;
   vertical-align: middle;
   font-size: 2.5rem;
@@ -232,4 +268,6 @@
 .container .container-view .body-container-big .locations-container .location-container.selected .name{
   color: #E99638;
 }
+
+
 

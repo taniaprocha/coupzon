@@ -83,21 +83,21 @@
 }
 
 @media (max-width: 356px) {
-  .container .container-view .body-container,
+  .container .container-view .body-container-yellow,
   .container .container-view .body-container-big .lists-container,
   .container .container-view .qrcode-body,
   .container .container-view .body-container-big .view-menu-container,
-  .container .container-view .body-container-big.body-awards,
+  .container .container-view .body-container-big.awards,
   .container .container-view .body-store{
     background-image: url('../assets/app/sombra@320.png');
   }
 }
 @media (min-width: 360px) {
-  .container .container-view .body-container,
+  .container .container-view .body-container-yellow,
   .container .container-view .body-container-big .lists-container,
   .container .container-view .qrcode-body,
   .container .container-view .body-container-big .view-menu-container,
-  .container .container-view .body-container-big.body-awards,
+  .container .container-view .body-container-big.awards,
   .container .container-view .body-store{
     background-image: url('../assets/app/sombra@360.png');
   }
@@ -107,7 +107,7 @@
   .container .container-view .body-container-big .lists-container,
   .container .container-view .qrcode-body,
   .container .container-view .body-container-big .view-menu-container,
-  .container .container-view .body-container-big.body-awards,
+  .container .container-view .body-container-big.awards,
   .container .container-view .body-store{
     background-image: url('../assets/app/sombra@720.png');
   }
@@ -117,7 +117,7 @@
   .container .container-view .body-container-big .lists-container,
   .container .container-view .qrcode-body,
   .container .container-view .body-container-big .view-menu-container,
-  .container .container-view .body-container-big.body-awards,
+  .container .container-view .body-container-big.awards,
   .container .container-view .body-store{
     background-image: url('../assets/app/sombra@1080.png');
   }
