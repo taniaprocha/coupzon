@@ -46,7 +46,7 @@
             <div class="terms-container">
               <div class="check-terms">
                 <span class="coup-radio-null notchecked selected"></span>
-                <span class="coup-radio-check checked"></span>
+                <span class="coup-radio-check2 checked"></span>
               </div>
               <div class="check-title">ACEITO OS TERMOS E CONDIÇÕES</div>
             </div>
@@ -190,22 +190,44 @@
         </div>
       </div>
       <div class="body-container-store">
-        <div class="store-title"><div class="table-cell"><span id="store-name"></span></div></div>
+        <div class="store-title"><div id="store-name"></div><div id="store-local"></div></div>
         <div class="store-image" id="store-image"></div>
-        <div class="award-description"><div class="table-cell"><span id="store-award-description"></span></div></div>
-        <div class="check-ins"></div>
-        <div class="store-description"></div>
-        <div class="favorite-area">
-          <div class="title">FAVORITO</div>
-          <div class="icon"><span class="coup-favorito"></span></div>
+        <div class="award-description" id="store-award-description"></div>
+        <div class="award-validity" id="store-award-validity"></div>
+        <div class="store-description" id="store-description"></div>
+        <div class="available-check-ins"><div class="table-cell"><span>CHECK-INS ACUMULADOS: </span><span id="store-check-ins"></span></div></div>
+        <div class="available-awards"><div class="table-cell"><span>PRÉMIOS DISPONÍVEIS: </span><span id="store-available-awards"></span></div></div>
+        <div class="favorite-button" id="store-favorite">
+          <div class="table-cell"><div class="table-container">
+            <div class="title">FAVORITO</div>
+            <div class="icon"><span class="coup-favorito"></span></div>
+          </div></div>
         </div>
-        <div class="share-checkin-area">
-          <div class="title">PARTILHAS CHECK-INS</div>
-          <div class="icon"><span class="coup-partilhar"></span></div>
+        <div class="share-checkin-button">
+          <div class="table-cell"><div class="table-container">
+            <div class="title">PARTILHAS CHECK-INS</div>
+            <div class="icon"><span class="coup-partilhar"></span></div>
+          </div></div>
+        </div>
+        <div class="contacts-button">
+          <div class="table-cell"><div class="table-container">
+            <div class="title">MORADA E CONTACTOS</div>
+            <div class="icon"><span class="coup-seta-drt"></span></div>
+          </div></div>
         </div>
         <div class="contacts-area">
-          <div class="title">LOJAS E CONTACTOS</div>
-          <div class="icon"><span class="coup-seta-drt"></span></div>
+          <div class="address">
+            <div class="icon"><span class="coup-morada"></span></div>
+            <div class="title" id="store-address"></div>
+          </div>
+          <div class="phone">
+            <div class="icon"><span class="coup-telefone"></span></div>
+            <div class="title" id="store-phone"></div>
+          </div>
+          <div class="email">
+            <div class="icon"><span class="coup-email"></span></div>
+            <div class="title" id="store-email"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -236,10 +258,8 @@
     </div>
   </div>
   
-  <!--<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>-->
-  <script src="js/jquery-1.11.3.min.js"></script>
-  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>-->
-  <script src="js/moment.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/index.js"></script>
   <script src="js/storesMethods.js"></script>

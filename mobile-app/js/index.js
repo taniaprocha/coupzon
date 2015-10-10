@@ -114,7 +114,19 @@ $('.back-from-selection').on('click', function(){
     }
   });
   $('.back-from-selection').addClass('disable');
-  methods.showSelectedStores(selectedCategories, selectedLocation, $('.stores-container'), $('#selected-place'), $('#selected-categories'));
+  var allCat = [];
+  var allCities = [];
+  if(selectedCategories.length <= 0){
+    categoriesData.forEach(function(categorie){
+      allCat.push(parseInt(categorie.id));
+    });
+  }
+  if(selectedLocation.length <= 0){
+    citiesData.forEach(function(city){
+      allCities.push(parseInt(city.id));
+    });
+  }
+  methods.showSelectedStores(selectedCategories, selectedLocation, $('.stores-container'), $('#selected-place'), $('#selected-categories'), allCat, allCities);
   $('.locations-container').removeClass('selected');
   $('.categories-container').removeClass('selected');
   $('.stores-container').addClass('selected');
