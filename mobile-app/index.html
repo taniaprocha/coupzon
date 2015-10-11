@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="css/qrcode.css" rel="stylesheet">
 <link rel="stylesheet" href="css/premios.css" rel="stylesheet">
 <link rel="stylesheet" href="css/store.css" rel="stylesheet">
+<link rel="stylesheet" href="css/favorites.css" rel="stylesheet">
+<link rel="stylesheet" href="css/settings.css" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 
 <body>
@@ -98,7 +100,7 @@
       <div class="header-container-little">
         <div class="table-cell">
           <div class="logo"></div>
-          <div class="back-from-selection disable"><span class="coup-seta-esq"></span></div>
+          <div class="back back-from-selection disable"><span class="coup-seta-esq"></span></div>
         </div>
       </div>
       <div class="body-container-big">
@@ -131,31 +133,63 @@
         </div>
       </div>
     </div>
-    
     <div class="container-view" id="view-awards">
       <div class="header-container-little">
         <div class="table-cell">
-            <div class="logo"></div>
+          <div class="logo"></div>
         </div>
       </div>
-      <div class="body-container-big awards body-awards">
-        <div class="awards-container"></div>
+      <div class="body-container-big awards awards-list">
+        <div class="stores-container selected"></div>
       </div>
-      <div class="body-container-big awards body-selected-brand">
-        <div class="title" id="brand-title"><span></span></div>
+    </div>
+    <div class="container-view" id="view-award">
+      <div class="header-container-little">
+        <div class="table-cell">
+            <div class="logo"></div>
+            <div class="back" id="back-award"><span class="coup-seta-esq"></span></div>
+        </div>
+      </div>
+      <div class="body-container-big awards body-selected">
+        <div class="title">
+          <div class="name" id="brand-title"></div>
+          <div class="local" id="brand-local"></div>
+        </div>
         <div class="image" id="brand-image"></div>
-        <div class="awards-list"></div>
-        <div class="awards-used"></div>
         <div class="award-detail">
           <div class="award-title" id="award-title"></div>
           <div class="award-qrcode" id="award-qrcode"></div>
           <div class="award-validity">
             <div>Válido até <span id="award-validity"></span></div>
-            <div>Disponível nas lojas:<span id="award-stores"></span></div>
           </div>
-          <div class="award-share">
+          <div class="award-share" id="award-share">
             <div class="share">PARTILHAR PRÉMIO</div>
             <div class="share-icon"><span class="coup-partilhar"></span></div>
+          </div>
+        </div>
+        <div class="award-validated">
+          <div>PARABÉNS!</div>
+          <div>O SEU PRÉMIO FOI VALIDADO</div>
+          <div>COM SUCESSO.</div>
+        </div>
+      </div>
+      <div class="body-container-big awards body-share">
+        <div class="award-share">
+          <div class="share-icon"><span class="coup-partilhar"></span></div>
+          <div class="share-title">PARTILHAR PRÉMIO</div>          
+        </div>
+        <div class="share-number">
+          <div class="title">
+            <div>NÚMERO DE TELEFONE DA PESSOA</div>
+            <div>PARA QUEM QUER ENVIAR O SEU PRÉMIO</div>
+          </div>
+          <div class="share-input">
+            <input type="text" placeholder="Número de telefone" name="number" value=""/>
+          </div>
+        </div>
+        <div class="send-area">
+          <div class="table-cell">
+            <div class="send-award">ENVIAR PRÉMIO</div>
           </div>
         </div>
       </div>
@@ -163,24 +197,129 @@
 
     <div class="container-view" id="view-favorites">
       <div class="header-container-little">
+        <div class="table-cell">
           <div class="logo"></div>
+        </div>
       </div>
-      <div class="body-container-big body-favorites">
+      <div class="body-container-big favorites">
         <div class="search-container">
           <div class="search-icon"></div>
           <div class="search-input-container"><input type="text" placeholder="Search" name="search" value=""></div>
         </div>
-        <div class="favorites-container"></div>
+        <div class="favorites-container">
+          <div class="stores-container selected"></div>
+        </div>
       </div>
     </div>
     <div class="container-view" id="view-settings">
       <div class="header-container-little">
         <div class="table-cell">
             <div class="logo"></div>
+            <div class="back disable" id="back-settings"><span class="coup-seta-esq"></span></div>
         </div>
       </div>
-      <div class="body-container-big body-settings">
-        <div class="settings-container"></div>
+      <div class="body-container-big settings">
+        <div class="settings-container settings-menu-container selected">
+          <div class="settings-menu menu-profile">
+            <div class="icon"><span class="coup-perfil"></span></div>
+            <div class="title"><span>O MEU PERFIL</span></div>
+            <div class="arrow"><span class="coup-seta-drt"></span></div>
+          </div>
+          <div class="settings-menu menu-contacts">
+            <div class="icon"><span class="coup-telefone"></span></div>
+            <div class="title"><span>CONTACTOS COUPZON</span></div>
+            <div class="arrow"><span class="coup-seta-drt"></span></div>
+          </div>
+          <div class="settings-menu menu-faq">
+            <div class="icon"><span class="coup-faq"></span></div>
+            <div class="title"><span>F.A.Q.</span></div>
+            <div class="arrow"><span class="coup-seta-drt"></span></div>
+          </div>
+          <div class="settings-menu menu-terms">
+            <div class="icon"><span class="coup-termos"></span></div>
+            <div class="title"><span>TERMOS E CONDIÇÕES</span></div>
+            <div class="arrow"><span class="coup-seta-drt"></span></div>
+          </div>
+          <div class="settings-menu menu-language">
+            <div class="icon"><span class="coup-world"></span></div>
+            <div class="title"><span>IDIOMA</span></div>
+            <div class="arrow"><span class="coup-seta-drt"></span></div>
+          </div>
+        </div>
+        <div class="settings-container profile-container">
+          <div class="title">
+            <div class="icon"><span class="coup-perfil"></span></div>
+            <div class="name"><span>O MEU PERFIL</span></div>
+            <div class="logout"><span>LOGOUT</span></div>
+          </div>
+          <div class="profile-title">NÚMERO DE TELEFONE</div>
+          <div class="profile-description">919191919</div>
+          <div class="profile-title">PASSWORD</div>
+          <div class="profile-description">******</div>
+          <div class="profile-title">EMAIL</div>
+          <div class="profile-description">
+            <input type="text" placeholder="Inserir email" name="email" value="">
+          </div>
+          <div class="profile-title">NIF</div>
+          <div class="profile-description">
+            <input type="text" placeholder="Inserir NIF" name="email" value="">
+          </div>
+        </div>
+        <div class="settings-container contacts-container">
+          <div class="title">
+            <div class="icon"><span class="coup-telefone"></span></div>
+            <div class="name"><span>CONTACTOS COUPZON</span></div>
+          </div>
+          <div class="contact-title">NÚMERO DE TELEFONE DE SUPORTE</div>
+          <div class="contact-description">919191919</div>
+          <div class="contact-title">EMAIL DE SUPORTE</div>
+          <div class="contact-description">suporte@coupzon.pt</div>
+          <div class="contact-title">MORADA</div>
+          <div class="contact-description">
+            <div>Rua Paulo Renato nº3 3ºD</div>
+            <div>2795-147 Linda-a-Velha</div>
+          </div>
+        </div>
+        <div class="settings-container faq-container">
+          <div class="title">
+            <div class="icon"><span class="coup-faq"></span></div>
+            <div class="name"><span>F.A.Q.</span></div>
+          </div>
+          <div class="faqs">
+            <div class="question">Question 1</div>
+            <div class="answer">Vivamus sodales ligula at felis pharetra rhoncus. Nullam aliquet, neque ac gravida fermentum, purus orci feugiat massa, laoreet laoreet magna erat a urna. Duis eu libero quam. Mauris vel malesuada ipsum, vitae luctus lacus. Donec eleifend, leo nec ornare lobortis, velit est tincidunt elit, interdum feugiat sapien purus at eros. Maecenas sit amet erat imperdiet, consequat arcu non, tristique enim. In rutrum fermentum neque eu venenatis.</div>
+            <div class="question">Question 2</div>
+            <div class="answer">Aenean urna enim, facilisis nec consequat a, lacinia id turpis. Curabitur a est eleifend, bibendum dui malesuada, sagittis metus. Nulla pellentesque nisi ac luctus ullamcorper. Proin vitae mauris ut enim tristique sagittis. Maecenas et enim ac ligula vestibulum tempus. Quisque tortor lectus, scelerisque et justo ut, malesuada elementum nisl. In accumsan vehicula ante vitae eleifend.</div>
+          </div>
+        </div>
+        <div class="settings-container terms-container">
+          <div class="title">
+            <div class="icon"><span class="coup-termos"></span></div>
+            <div class="name"><span>TERMOS E CONDIÇÕES</span></div>
+          </div>
+          <div class="terms">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut tempor quam. Praesent suscipit erat vel dolor sodales pharetra. Morbi quis ipsum vulputate, placerat purus viverra, facilisis sem. Vestibulum imperdiet ac risus vel cursus. Curabitur interdum elementum vehicula. Curabitur fermentum, urna eu aliquet ultrices, sem lectus pretium urna, vel rhoncus nunc arcu quis justo. Mauris massa turpis, vulputate sit amet feugiat ut, cursus ut quam. Pellentesque vel nisl in lectus pretium lacinia in ut massa. Sed augue felis, tristique viverra imperdiet ac, sollicitudin nec elit. Curabitur a odio quis lacus tincidunt suscipit ut eu sapien. Vivamus eget nisl et lacus posuere pretium sit amet vel orci. Quisque eu dapibus dui, lacinia ornare neque.
+          </div>
+        </div>
+        <div class="settings-container language-container">
+          <div class="title">
+            <div class="icon"><span class="coup-world"></span></div>
+            <div class="name"><span>IDIOMA</span></div>
+          </div>
+          <div class="language-select">
+            <div class="language-line line-portuguese selected">
+              <div class="language-title">PORTUGUÊS</div>
+              <div class="language-icon"><span class="coup-radio-redondo-check"></span></div>
+            </div>
+            <div class="language-line line-portuguese">
+              <div class="language-title">ENGLISH</div>
+              <div class="language-icon"><span class="coup-radio-redondo-null"></span></div>
+            </div>
+          </div>
+          <div class="language-btn">
+            <div class="language-select">OK</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="container-view" id="view-store">

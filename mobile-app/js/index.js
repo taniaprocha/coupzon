@@ -13,6 +13,7 @@ $(document).ready(function() {
   $('#view-favorites').css({height: (partialH - footerH)+'px' });
   $('#view-settings').css({height: (partialH - footerH)+'px' });
   $('#view-store').css({height: (partialH - footerH)+'px' });
+  $('#view-award').css({height: (partialH - footerH)+'px' });
   $('#loading-view').addClass('selected');
 
   setTimeout(function(){
@@ -58,17 +59,18 @@ $('.menu-container').on('click', function(){
   switch(id){
     case 'menu-stores':
       $('#view-stores').addClass('selected'); $('#tab').animate({marginLeft: '40%'}, 100);
-      methods.showAllBrands($('.stores-container'));
+      methods.showAllBrands($('.stores-container'), 'stores');
       break;
     case 'menu-qrcode':
       $('#view-qrcode').addClass('selected'); $('#tab').animate({marginLeft: '0%'}, 100);
       break;
     case 'menu-awards':
       $('#view-awards').addClass('selected'); $('#tab').animate({marginLeft: '20%'}, 100);
-      methods.showAllBrands($('.awards-container'));
+      methods.showAllBrands($('.stores-container'), 'awards');
       break;
     case 'menu-favorites':
       $('#view-favorites').addClass('selected'); $('#tab').animate({marginLeft: '60%'}, 100);
+      methods.showAllBrands($('.stores-container'), 'favorites');
       break;
     case 'menu-settings':
       $('#view-settings').addClass('selected'); $('#tab').animate({marginLeft: '80%'}, 100);
@@ -97,6 +99,42 @@ $('.view-menu').on('click', function(){
       $('.back-from-selection').removeClass('disable');
       break;
   }
+});
+
+$('#award-share').on('click', function(){
+  $('#view-award').find($('.back')).removeClass('back-award');
+  $('#view-award').find($('.back')).addClass('back-share');
+  $('.body-container-big.body-selected').hide();
+  $('.body-container-big.body-share').show();
+});
+
+$('#back-award').on('click', function(){
+  console.log('back award');
+  if($(this).hasClass('back-award') === true){
+    $('.container-view').removeClass('selected');
+    $('#view-awards').addClass('selected');
+  }else if($(this).hasClass('back-share') === true){
+    $('.body-container-big.body-share').hide();
+    $('.body-container-big.body-selected').show();
+    $(this).removeClass('back-share');
+    $(this).addClass('back-award');
+  }  
+});
+
+$('.settings-menu').on('click', function(){
+  $('.settings-container').removeClass('selected');
+  if($(this).hasClass('menu-profile') === true){ $('.profile-container').addClass('selected');
+  }else if($(this).hasClass('menu-contacts') === true){ $('.contacts-container').addClass('selected');
+  }else if($(this).hasClass('menu-faq') === true){ $('.faq-container').addClass('selected');
+  }else if($(this).hasClass('menu-terms') === true){ $('.terms-container').addClass('selected');
+  }else if($(this).hasClass('menu-language') === true){ $('.language-container').addClass('selected'); }
+  $('#back-settings').removeClass('disable');
+});
+
+$('#back-settings').on('click', function(){
+  $('.settings-container').removeClass('selected');
+  $('.settings-menu-container').addClass('selected');
+  $(this).addClass('disable');
 });
 
 $('.back-from-selection').on('click', function(){

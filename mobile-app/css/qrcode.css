@@ -1,4 +1,4 @@
-.container .container-view .header-container-little{
+.header-container-little{
   height: 12%;
   width: 100%;
   text-align: center;
@@ -6,14 +6,14 @@
   position: relative;
 }
 
-.container .container-view .header-container-little .logo{
+.header-container-little .logo{
   background-size: contain;
   background-position: bottom center;
   background-repeat: no-repeat;
   height: 3.5rem;
 }
 
-.container .container-view .header-container-little .back-from-selection{
+.header-container-little .back{
   position: absolute;
   top: 0;
   height: 100%;
@@ -24,37 +24,37 @@
   color: #00436A;
 }
 
-.container .container-view .header-container-little .back-from-selection span{
+.header-container-little .back span{
   display: table-cell;
   vertical-align: middle;
 }
 
-.container .container-view .header-container-little .back-from-selection.disable{
+.header-container-little .back.disable{
   display: none;
 }
 
 @media (max-width: 356px) {
-  .container .container-view .header-container-little .logo{
+  .header-container-little .logo{
     background-image: url('../assets/app/logo-header@320.png');
   }
 }
 @media (min-width: 360px) {
-  .container .container-view .header-container-little .logo{
+  .header-container-little .logo{
     background-image: url('../assets/app/logo-header@360.png');
   }
 }
 @media (min-width: 720px) {
-  .container .container-view .header-container-little .logo{
+  .header-container-little .logo{
     background-image: url('../assets/app/logo-header@720.png');
   }
 }
 @media (min-width: 1000px) {
-  .container .container-view .header-container-little .logo{
+  .header-container-little .logo{
     background-image: url('../assets/app/logo-header@1080.png');
   }
 }
 
-.container .container-view .qrcode-body{
+.qrcode-body{
   height: 88%;
   background-size: contain;
   background-position: top center;
@@ -63,7 +63,7 @@
   font-weight: 400;
 }
 
-.container .container-view .qrcode-body .qrcode-text-1{
+.qrcode-body .qrcode-text-1{
   height: 30%;
   text-align: center;
   width: 100%;
@@ -72,7 +72,7 @@
   font-size: 1.5rem;
 }
 
-.container .container-view .qrcode-body .qrcode-text-2{
+.qrcode-body .qrcode-text-2{
   height: 40%;
   text-align: center;
   width: 100%;
@@ -81,19 +81,19 @@
   font-size: 1.3rem;
 }
 
-.container .container-view .qrcode-body .arrow-container{
+.qrcode-body .arrow-container{
   text-align: center;
   font-size: 2.7rem;
   color: #EFBD3B;
   padding-top: 1.5rem;
 }
 
-.container .container-view .qrcode-body .qrcode-text-1 span{
+.qrcode-body .qrcode-text-1 span{
   display: table-cell;
   vertical-align: middle;
 }
 
-.container .container-view .qrcode-body .qrcode{
+.qrcode-body .qrcode{
   height: 30%;
   width: 90%;
   margin: 0 auto;

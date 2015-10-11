@@ -89,7 +89,9 @@
   .container .container-view .body-container-big .view-menu-container,
   .container .container-view .body-container-big.awards,
   .container .container-view .body-store,
-  .container .container-view .body-container-store{
+  .container .container-view .body-container-store,
+  .container .container-view .body-container-big.favorites,
+  .container .container-view .body-container-big.settings{
     background-image: url('../assets/app/sombra@320.png');
   }
 }
@@ -100,7 +102,9 @@
   .container .container-view .body-container-big .view-menu-container,
   .container .container-view .body-container-big.awards,
   .container .container-view .body-store,
-  .container .container-view .body-container-store{
+  .container .container-view .body-container-store,
+  .container .container-view .body-container-big.favorites,
+  .container .container-view .body-container-big.settings{
     background-image: url('../assets/app/sombra@360.png');
   }
 }
@@ -111,7 +115,9 @@
   .container .container-view .body-container-big .view-menu-container,
   .container .container-view .body-container-big.awards,
   .container .container-view .body-store,
-  .container .container-view .body-container-store{
+  .container .container-view .body-container-store,
+  .container .container-view .body-container-big.favorites,
+  .container .container-view .body-container-big.settings{
     background-image: url('../assets/app/sombra@720.png');
   }
 }
@@ -122,7 +128,9 @@
   .container .container-view .body-container-big .view-menu-container,
   .container .container-view .body-container-big.awards,
   .container .container-view .body-store,
-  .container .container-view .body-container-store{
+  .container .container-view .body-container-store,
+  .container .container-view .body-container-big.favorites,
+  .container .container-view .body-container-big.settings{
     background-image: url('../assets/app/sombra@1080.png');
   }
 }

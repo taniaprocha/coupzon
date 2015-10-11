@@ -1,12 +1,19 @@
 
-.container .container-view .body-container-big.awards{
+.body-container-big.awards{
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
   padding-top: 7%;
 }
 
-.container .container-view .body-container-big .awards-container{
+.body-container-big.body-share{
+  width: 100%;
+  height: 100;
+  display: none;
+}
+
+.body-container-big .body-selected,
+.body-container-big .awards-list{
   height: 100%;
   width: 100%;
   overflow-x: hidden;
@@ -17,98 +24,30 @@
   -ms-scroll-chaining: none;
 }
 
-.container .container-view .body-container-big .awards-container .award-container{
-  width: 100%;
-  height: 7rem;
-  border-bottom: solid .1rem #F2F2F2;
-  padding: .4rem 0;
-}
-
-.container .container-view .body-container-big .awards-container .award-container .image{
-  height: 100%;
-  width: 25%;
-  float: left;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  overflow: hidden;
-}
-
-.container .container-view .body-container-big .awards-container .award-container .body{
-  height: 100%;
-  width: 55%;
-  float: left;
-  padding-left: .8rem;
-}
-
-.container .container-view .body-container-big .awards-container .award-container .body .store{
-  color: #00436A;
-  display: block;
-  font-size: 1.5rem;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 600;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.container .container-view .body-container-big .awards-container .award-container .body .description{
-  color: #0089C7;
-  font-size: 1.3rem;
-  height: 1.7rem;
-  display: block;
-  overflow-x: hidden;
-  white-space: nowrap;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 700;
-  text-overflow: ellipsis;
-  /* Required for text-overflow to do anything */
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.container .container-view .body-container-big .awards-container .award-container .body .categorie{
-  color: #B3B3B3;
-  font-size: 1rem;
-}
-
-.container .container-view .body-container-big .awards-container .award-container .arrow{
-  height: 100%;
-  width: 20%;
-  float: left;
-  display: table;
-  text-align: center;
-}
-
-.container .container-view .body-container-big .awards-container .award-container .arrow span{
-  display: table-cell;
-  vertical-align: middle;
-  font-size: 2.5rem;
-  color: #BEDEE8;
-}
-
-.container .container-view .body-container-big.awards.body-selected-brand{
+.body-container-big.awards.body-selected{
   padding-top: 2%;
 }
 
-.container .container-view .body-container-big.body-selected-brand .title{
+.body-container-big.body-selected .title{
   width: 100%;
   height: 3rem;
   font-size: 2rem;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
+  font-weight: 600;
   text-align: center;
   color: #0089C7;
   display: table;
   padding: .5rem 0;
 }
 
-.container .container-view .body-container-big.body-selected-brand .title span{
-  display: table-cell;
-  vertical-align: middle;
+.body-container-big.body-selected .title .local{
+  color: #00436A;
+  font-size: 1.5rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
 }
 
-.container .container-view .body-container-big.body-selected-brand .image{
+.body-container-big.body-selected .image{
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -116,60 +55,11 @@
   width: auto;
 }
 
-.container .container-view .body-container-big.body-selected-brand .awards-list{
-  padding-top: 1rem;
-}
-
-.container .container-view .body-container-big.body-selected-brand .awards-list .award-brand-container{
-  list-style-type: none;
-  display: inline-block;
-  padding: .5rem;
-  border-bottom: solid .1rem #F2F2F2;
-  display: flex;
-}
-
-.container .container-view .body-container-big.body-selected-brand .awards-list .award-brand-container .body{
-  width: 80%;
-  float: left;
-}
-
-.container .container-view .body-container-big.body-selected-brand .awards-list .award-brand-container .arrow{
-  width: 20%;
-  float: left;
-  display: table;
-  text-align: center;
-}
-
-.container .container-view .body-container-big.body-selected-brand .awards-list .award-brand-container .arrow span{
-  display: table-cell;
-  vertical-align: middle;
-  font-size: 2.5rem;
-  color: #BEDEE8;
-}
-
-.container .container-view .body-container-big.body-selected-brand .awards-list .award-brand-container .body .title{
-  color: #00436A;
-  font-size: 1.6rem;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  text-align: left;
-  height: auto;
-}
-
-.container .container-view .body-container-big.body-selected-brand .awards-list .award-brand-container .body .validy{
-  color: #0089C7;
-  font-size: 1.1rem;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  text-align: left;
-  padding-top: .2rem;
-}
-
-.container .container-view .body-container-big.body-selected-brand .award-detail{
+.body-container-big.body-selected .award-detail{
 
 }
 
-.container .container-view .body-container-big.body-selected-brand .award-detail .award-title{
+.body-container-big.body-selected .award-detail .award-title{
   width: 60%;
   margin: 0 auto;
   color: #00436A;
@@ -178,9 +68,10 @@
   font-weight: 400;
   font-size: 1.3rem;
   padding: 1rem 0;
+  text-align: center;
 }
 
-.container .container-view .body-container-big.body-selected-brand .award-detail .award-qrcode{
+.body-container-big.body-selected .award-detail .award-qrcode{
   height: 12rem;
   width: auto;
   margin: 0 auto;
@@ -190,20 +81,19 @@
   background-image: url('../assets/qr-code.png');
 }
 
-.container .container-view .body-container-big.body-selected-brand .award-detail .award-validity{
+.body-container-big.body-selected .award-detail .award-validity{
   width: 100%;
-  height: 3rem;
+  height: 3.5rem;
   color: #00436A;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   font-size: 1.1rem;
   text-align: center;
   padding: 1rem 0;
-  height: 6rem;
   border-bottom: solid .1rem #F2F2F2;
 }
 
-.container .container-view .body-container-big.body-selected-brand .award-detail .award-share{
+.body-container-big.body-selected .award-detail .award-share{
   color: #0089C7;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
@@ -212,16 +102,102 @@
   height: 4rem;
 }
 
-.container .container-view .body-container-big.body-selected-brand .award-detail .award-share .share{
+.body-container-big.body-selected .award-detail .award-share .share{
   width: 80%;
   float: left;
   height: 3rem; 
   padding-left: 2rem;
 }
-.container .container-view .body-container-big.body-selected-brand .award-detail .award-share .share-icon{
+.body-container-big.body-selected .award-detail .award-share .share-icon{
   width: 20%;
   float: left;
   height: 3rem; 
   font-size: 2rem;
   text-align: center;
+}
+
+.body-container-big.body-selected .award-validated{
+  display: none;
+  color: #00436A;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.body-container-big.body-share .award-share{
+  width: 100%;
+  height: 20%;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.body-container-big.body-share .award-share .share-icon{
+  width: 20%;
+  float: left;
+  color: #BEDEE8;
+  font-size: 2.5rem;
+  text-align: center;
+  height: 100%;
+}
+
+.body-container-big.body-share .award-share .share-title{
+  width: 80%;
+  float: left;
+  color: #00436A;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+  height: 100%;
+}
+
+.body-container-big.body-share .share-number{
+  width: 90%;
+  margin: 0 auto;
+  height: 30%;
+}
+
+.body-container-big.body-share .share-number .title{
+  -moz-border-bottom: solid .1rem #BEDEE8;
+  -webkit-border-bottom: solid .1rem #BEDEE8;
+  border-bottom: solid .1rem #BEDEE8;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  color: #0089C7;
+  padding-bottom: 1rem;
+}
+
+.body-container-big.body-share .share-number .share-input{
+  padding-top: 1rem;
+  color: #B3B3B3;
+}
+
+.body-container-big.body-share .share-number .share-input input{
+  border: none;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+}
+
+.body-container-big.body-share .send-area{
+  width: 90%;
+  margin: 0 auto;
+  height: 50%;
+  display: table;
+}
+
+.body-container-big.body-share .send-area .send-award{
+  background-color: #007FB1;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.7rem;
+     -moz-border-radius: .5rem;
+  -webkit-border-radius: .5rem;
+          border-radius: .5rem;
+  padding: .8rem 1rem .8rem 1rem;
+  width: 30rem;
+  text-align: center;
+  margin: 0 auto;
 }

@@ -1,4 +1,4 @@
-.container-view .body-container-store{
+.body-container-store{
   height: 88%;
   width: 100%;
   background-size: contain;
@@ -13,7 +13,7 @@
   padding-top: 1.5rem;
 }
 
-.container-view .body-container-store .store-title{
+.body-container-store .store-title{
   width: 100%;
   height: 5rem;
   text-align: center;
@@ -24,7 +24,7 @@
   padding: .2rem 0;
 }
 
-.container-view .body-container-store .store-title #store-local{
+.body-container-store .store-title #store-local{
   color: #00436A;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.3rem;
@@ -33,7 +33,7 @@
   width: 100%;
 }
 
-.container-view .body-container-store .store-image{
+.body-container-store .store-image{
   width: 100%;
   height: 14rem;
   background-repeat: no-repeat;
@@ -41,7 +41,7 @@
   background-position: center center;
 }
 
-.container-view .body-container-store .award-description{
+.body-container-store .award-description{
   width: 70%;
   height: auto;
   color: #00436A;
@@ -53,7 +53,7 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-.container-view .body-container-store .award-validity{
+.body-container-store .award-validity{
   font-size: 1.1rem;
   color: #0089C7;
   height: auto;
@@ -67,8 +67,8 @@
   padding: .5rem 0 1rem 0;
 }
 
-.container-view .body-container-store .available-check-ins,
-.container-view .body-container-store .available-awards{
+.body-container-store .available-check-ins,
+.body-container-store .available-awards{
   height: 3.3rem;
   width: 100%;
   background-color: #EEF3FA;
@@ -81,7 +81,7 @@
   padding-left: 5%;
 }
 
-.container-view .body-container-store .store-description{
+.body-container-store .store-description{
   width: 90%;
   height: auto;
   text-align: center;
@@ -93,9 +93,9 @@
   padding: 1rem 0 1rem 0;
 }
 
-.container-view .body-container-store .favorite-button,
-.container-view .body-container-store .share-checkin-button,
-.container-view .body-container-store .contacts-button{
+.body-container-store .favorite-button,
+.body-container-store .share-checkin-button,
+.body-container-store .contacts-button{
   display: table;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.5rem;
@@ -109,32 +109,32 @@
   border-bottom: solid .1rem #F2F2F2;
 }
 
-.container-view .body-container-store .contacts-button{
+.body-container-store .contacts-button{
   display: none;
 }
 
-.container-view .body-container-store .favorite-button.favorite{
+.body-container-store .favorite-button.favorite{
   color: #E99638;
 }
 
-.container-view .body-container-store .favorite-button .table-container,
-.container-view .body-container-store .share-checkin-button .table-container,
-.container-view .body-container-store .contacts-button .table-container{
+.body-container-store .favorite-button .table-container,
+.body-container-store .share-checkin-button .table-container,
+.body-container-store .contacts-button .table-container{
   display: list-item;
   list-style-type: none;
 }
 
-.container-view .body-container-store .favorite-button .title,
-.container-view .body-container-store .share-checkin-button .title,
-.container-view .body-container-store .contacts-button .title{
+.body-container-store .favorite-button .title,
+.body-container-store .share-checkin-button .title,
+.body-container-store .contacts-button .title{
   float: left;
   width: 80%;
   height: 1.6rem;
 }
 
-.container-view .body-container-store .favorite-button .icon,
-.container-view .body-container-store .share-checkin-button .icon,
-.container-view .body-container-store .contacts-button .icon{
+.body-container-store .favorite-button .icon,
+.body-container-store .share-checkin-button .icon,
+.body-container-store .contacts-button .icon{
   float: left;
   width: 20%;
   text-align: center;
@@ -142,18 +142,18 @@
   height: 2rem;
 }
 
-.container-view .body-container-store .contacts-button{
+.body-container-store .contacts-button{
   display: none;
 }
 
-.container-view .body-container-store .contacts-area{
-  margin: 1rem auto 0 auto;
+.body-container-store .contacts-area{
+  margin: 1rem auto 1rem auto;
   width: 90%;
 }
 
-.container-view .body-container-store .contacts-area .address,
-.container-view .body-container-store .contacts-area .phone,
-.container-view .body-container-store .contacts-area .email{
+.body-container-store .contacts-area .address,
+.body-container-store .contacts-area .phone,
+.body-container-store .contacts-area .email{
   width: 90%;
   margin: 0 auto;
   float: none;
@@ -162,18 +162,18 @@
   height: auto;
 }
 
-.container-view .body-container-store .contacts-area .address .icon,
-.container-view .body-container-store .contacts-area .phone .icon,
-.container-view .body-container-store .contacts-area .email .icon{
+.body-container-store .contacts-area .address .icon,
+.body-container-store .contacts-area .phone .icon,
+.body-container-store .contacts-area .email .icon{
   width: 18%;
   float: left;
   font-size: 2.2rem;
   color: #BEDEE8;
 }
 
-.container-view .body-container-store .contacts-area .address .title,
-.container-view .body-container-store .contacts-area .phone .title,
-.container-view .body-container-store .contacts-area .email .title{
+.body-container-store .contacts-area .address .title,
+.body-container-store .contacts-area .phone .title,
+.body-container-store .contacts-area .email .title{
   width: 82%;
   float: left;
   height: auto;
