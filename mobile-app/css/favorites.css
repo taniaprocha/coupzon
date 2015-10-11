@@ -3,4 +3,10 @@
   background-position: top center;
   background-repeat: no-repeat;
   padding-top: 7%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-y: scroll;
+  -ms-touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  -ms-scroll-chaining: none;
 }

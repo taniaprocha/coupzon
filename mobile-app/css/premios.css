@@ -12,8 +12,8 @@
   display: none;
 }
 
-.body-container-big .body-selected,
-.body-container-big .awards-list{
+.body-container-big.awards.body-selected,
+.body-container-big.awards.awards-list{
   height: 100%;
   width: 100%;
   overflow-x: hidden;
