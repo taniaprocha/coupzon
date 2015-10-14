@@ -55,7 +55,6 @@ $('.menu-container').on('click', function(){
   $('.menu-container').removeClass('selected')
   $(this).addClass('selected');
   $('.container-view').removeClass('selected');
-  console.log(id);
   switch(id){
     case 'menu-stores':
       $('#view-stores').addClass('selected'); $('#tab').animate({marginLeft: '40%'}, 100);
@@ -81,22 +80,24 @@ $('.menu-container').on('click', function(){
 $('.view-menu').on('click', function(){
   if($(this).hasClass('selected') && $('.stores-container').hasClass('selected') === false ){ return; }
   $('.view-menu').removeClass('selected');
-  $(this).addClass('selected');
+  $(this).addClass('selected'); $('#stores-filter').hide();
+  var filterArea = 0;  
   switch($(this).attr('id')){
     case 'stores-all':
       $('.categories-container').removeClass('selected'); $('.locations-container').removeClass('selected'); $('.stores-container').addClass('selected');
       methods.showAllBrands($('.stores-container'));
-      $('.back-from-selection').addClass('disable');
       break;
     case 'stores-categories':
-      $('.stores-container').removeClass('selected'); $('.locations-container').removeClass('selected'); $('.categories-container').addClass('selected');
-      methods.showCategories($('.categories-container'));
-      $('.back-from-selection').removeClass('disable');
+      $('.categories-container').addClass('selected'); $('.stores-container').removeClass('selected'); $('.locations-container').removeClass('selected'); 
+      methods.showCategories($('.categories-container .list'));
+      filterArea = $('.categories-container').height() - $('.categories-container .filter-container').height();
+      $('.categories-container .list').css({height: filterArea+'px'});
       break;
     case 'stores-locations':
-      $('.categories-container').removeClass('selected'); $('.stores-container').removeClass('selected'); $('.locations-container').addClass('selected');
-      methods.showLocations($('.locations-container'));
-      $('.back-from-selection').removeClass('disable');
+      $('.locations-container').addClass('selected'); $('.categories-container').removeClass('selected'); $('.stores-container').removeClass('selected'); 
+      methods.showLocations($('.locations-container .list'));
+      filterArea = $('.locations-container').height() - $('.locations-container .filter-container').height();
+      $('.locations-container .list').css({height: filterArea+'px'});
       break;
   }
 });
@@ -137,7 +138,7 @@ $('#back-settings').on('click', function(){
   $(this).addClass('disable');
 });
 
-$('.back-from-selection').on('click', function(){
+$('.stores-filter').on('click', function(){
   var selectedCategories = [];
   var selectedLocation = [];
   var selectedID = '';
@@ -151,7 +152,6 @@ $('.back-from-selection').on('click', function(){
       selectedID = $(this).attr('id'); selectedID = selectedID.substring(selectedID.indexOf('-')+1, selectedID.length); selectedLocation.push(parseInt(selectedID));
     }
   });
-  $('.back-from-selection').addClass('disable');
   var allCat = [];
   var allCities = [];
   if(selectedCategories.length <= 0){
@@ -169,5 +169,6 @@ $('.back-from-selection').on('click', function(){
   $('.categories-container').removeClass('selected');
   $('.stores-container').addClass('selected');
 });
+
 
 

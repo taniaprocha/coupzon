@@ -160,11 +160,6 @@
   padding-top: .5rem;
 }
 
-.body-container-big.settings .settings-container.language-container{
-  height: 100%;
-  width: 100%;
-}
-
 .body-container-big.settings .settings-container.language-container .language-select{
   height: 30%;
   width: 100%;
