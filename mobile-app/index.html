@@ -21,7 +21,7 @@
   <div class="container" id="container">
     <div class="container-view" id="loading-view">
       <div class="table-cell">
-        <div class="loading">
+        <div class="loading" id="loading">
           <div class="icon-loading"></div>
           <div class="message-loading">Vamos poupar?</div>
         </div>
@@ -40,10 +40,10 @@
         <div class="insert-number-container">
           <div class="table-cell">
             <div class="insert-number-title">PARA COMEÇAR A COLECIONAR DESCONTOS</div>
-            <div class="insert-number-title">INSIRA O SEU NÚMERO DE TELEFONE</div>
+            <div class="insert-number-title title">INSIRA O SEU NÚMERO DE TELEFONE</div>
             <div class="number-box">
               <div class="insert-number-icon"><span class="coup-telefone"></span></div>
-              <div class="insert-number-input"><input type="text" placeholder="Number" name="number" value=""/></div>
+              <div class="insert-number-input"><input id="input-number" type="text" placeholder="Number" name="number" value=""/></div>
             </div>
             <div class="terms-container">
               <div class="check-terms">
@@ -54,14 +54,19 @@
             </div>
           </div>
         </div>
-        <div class="login-container" id="login-number">
-          <div class="login-box"><span>ENVIAR</span></div>
+        <div class="login-container">
+          <div class="login-box" id="login-number"><span>ENVIAR</span></div>
         </div>
+        <div class="change-language">CHANGE LANGUAGE TO ENGLISH</div>
       </div>
     </div>
     <div class="container-view" id="login-password">
       <div class="header-container-big">
-          <div class="app-icon-container"></div>
+          <div class="app-icon-container">
+            <div class="table-cell">
+              <div class="logo"></div>
+            </div>
+          </div>
           <div class="services-message"><span>Todos os serviços de fidelização<br>no seu telemóvel, totalmente grátis!</span></div>
       </div>
       <div class="body-container-yellow" id="container-password">
@@ -70,13 +75,18 @@
             <div class="insert-password-title">INSIRA A PASSWORD QUE RECEBEU POR SMS</div>
             <div class="password-box">
               <div class="insert-password-icon"><span class="coup-password"></span></div>
-              <div class="insert-password-input"><input type="text" placeholder="Password" name="password" value=""></div>
+              <div class="insert-password-input"><input id="input-password" type="text" placeholder="Password" name="password" value=""></div>
             </div>
           </div>
         </div>
-        <div class="login-container" id="login-password">
-          <div class="login-box"><span>ENVIAR</span></div>
+        <div class="login-container">
+          <div class="login-box" id="phone-password"><span>ENVIAR</span></div>
         </div>
+        <div class="message-not-received">
+          <div>NÃO RECEBEU O SMS?</div>
+          <div>PEÇA AQUI UM NOVO ENVIO.</div>
+        </div>
+        <div class="message-sended">NOVO SMS ENVIADO COM SUCESSO.</div>
       </div>
     </div>
     <div class="container-view" id="view-qrcode">
@@ -88,6 +98,7 @@
       <div class="qrcode-body">
         <div class="qrcode-text-1"><span>ESTE É O SEU CÓDIGO,<br>PASSE-O NAS LOJAS ADERENTES.</span></div>
         <div class="qrcode"></div>
+        <div class="coupzon-points"><div class="points">TEM 10 PONTOS COUPZON</div></div>
         <div class="qrcode-text-2">
           <div class="table-cell">
             <div class="title">DESCUBRA EM “LOJAS” TODOS OS<br>DESCONTOS QUE ESTÃO À SUA ESPERA.</div>
@@ -101,6 +112,7 @@
         <div class="table-cell">
           <div class="logo"></div>
           <div class="back back-from-selection disable"><span class="coup-seta-esq"></span></div>
+          <div class="search-btn"><span class="coup-pesquisa"></span></div>
         </div>
       </div>
       <div class="body-container-big">
@@ -116,8 +128,10 @@
           </div>
         </div>
         <div class="search-container">
-          <div class="search-icon"></div>
-          <div class="search-input-container"><input type="text" placeholder="Search" name="search" value=""></div>
+          <div class="search-input-container">
+            <div class="table-cell"><input id="search-input" type="text" placeholder="Search" name="search" value=""></div>
+          </div>
+          <div class="close-search-btn"><span class="coup-anular"></span></div>
         </div>
         <div class="lists-container">
           <div class="list-selected">
@@ -332,7 +346,8 @@
     <div class="container-view" id="view-store">
       <div class="header-container-little">
         <div class="table-cell">
-            <div class="logo"></div>
+          <div class="logo"></div>
+          <div class="back back-from-store" id="back-store"><span class="coup-seta-esq"></span></div>
         </div>
       </div>
       <div class="body-container-store">
@@ -341,8 +356,8 @@
         <div class="award-description" id="store-award-description"></div>
         <div class="award-validity" id="store-award-validity"></div>
         <div class="store-description" id="store-description"></div>
-        <div class="available-check-ins"><div class="table-cell"><span>CHECK-INS ACUMULADOS: </span><span id="store-check-ins"></span></div></div>
-        <div class="available-awards"><div class="table-cell"><span>PRÉMIOS DISPONÍVEIS: </span><span id="store-available-awards"></span></div></div>
+        <div class="available-check-ins"><div class="table-cell"><span>CHECK-INS ACUMULADOS: </span><span class="available-value" id="store-check-ins"></span></div></div>
+        <div class="available-awards"><div class="table-cell"><span>PRÉMIOS DISPONÍVEIS: </span><span class="available-value" id="store-available-awards"></span></div></div>
         <div class="favorite-button" id="store-favorite">
           <div class="table-cell"><div class="table-container">
             <div class="title">FAVORITO</div>

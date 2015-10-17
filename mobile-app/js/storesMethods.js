@@ -2,6 +2,11 @@ function storesMethods(){
 
 }
 
+storesMethods.prototype.showFilteredBrands = function(container, menu, brands){
+  $('.brand-container').off(); $('.store-container').off(); container.empty();
+  showFilteredBrands(brands, container, menu);
+};
+
 storesMethods.prototype.showAllBrands = function(container, menu){
   $('.brand-container').off(); $('.store-container').off(); container.empty();
   showFilteredBrands(brandsData, container, menu);
@@ -69,6 +74,8 @@ function showFilteredBrands(brands, container, menu){
 }
 
 function showAwardDetail(award, store){
+  $('.container-view').removeClass('selected');
+  $('#view-award').addClass('selected');
   var brand = getBrandByStoreId(store.id);
   $('#brand-title').text(brand.name.toUpperCase());
   $('#brand-local').text(store.local);
@@ -163,8 +170,6 @@ storesMethods.prototype.showSelectedStores = function(selectedCategories, select
 
 function addAwardListeners(){
   $('.store-container').on('click', function(){
-    $('.container-view').removeClass('selected');
-    $('#view-award').addClass('selected');
     $('#view-award').find($('.back')).removeClass('back-share');
     $('#view-award').find($('.back')).addClass('back-award');
     var id = $(this).attr('id'); id = id.substring(id.indexOf('-')+1, id.length);
@@ -185,7 +190,7 @@ function addStoreListeners(){
 function addBrandListener(){
   $('.brand-container.stores').on('click', function(e){
     e.preventDefault(); $(this).find($('li')).toggle();
-    if($(this).find($('li')).is(':visible') === true){
+    if($(this).find($('li')).is(':visible') === false){
       $(this).find($('.coup-seta-cima')).hide();
       $(this).find($('.coup-seta-baixo')).css('display', 'table-cell');
     }else{
@@ -202,11 +207,14 @@ function showStoreDetails(storeId){
   var brand = getBrandById(store.brand.toString());
   if(!brand){ return; }
   var award = getAwardByStoreId(store.id);
+  $('.store-title').attr('id', store.id);
   $('#store-image').css({backgroundImage: 'url('+brand.image+')'});
   $('#store-name').text(brand.name.toUpperCase());
   $('#store-local').text(store.local);
-  var validity = (award !== null) ? validity = moment(award.validity*1000).format('YYYY-MM-DD') : validity = '';
-  $('#store-award-validity').text('Validade até: '+validity);
+  $('#store-available-awards').text((award !== null) ? '1' : '0');
+  $('#store-check-ins').text((brand.checkins !== null) ? brand.checkins : '');
+  var validity = (award !== null) ? validity = 'Validade até: '+moment(award.validity*1000).format('YYYY-MM-DD') : validity = '';
+  $('#store-award-validity').text(validity);
   $('#store-award-description').text((award !== null) ? award.title.toUpperCase() : '');
   $('#store-description').text(brand.description);
   if(store.favorite === true){ $('#store-favorite').addClass('favorite'); }
@@ -235,12 +243,12 @@ function setBrandDiv(name, id, image, categorie){
 function setStoreDiv1(id, premio, local){
   var storeDiv = $('<li class="store-container store1" id="store-'+id+'"></li>');
     var _validity, title = '';
-    (premio !== null) ? _validity = moment(premio.validity*1000).format('YYYY-MM-DD') : _validity = '';
+    (premio !== null) ? _validity = 'Válido até '+moment(premio.validity*1000).format('YYYY-MM-DD') : _validity = '';
     (premio !== null) ? title = premio.title : title = '';
     storeDiv.append($('<div class="body">'
       +'<div class="local">'+local+'</div>'
       +'<div class="description">'+title+'</div>'
-      +'<div class="validity">Válido até '+_validity+'</div>'
+      +'<div class="validity">'+_validity+'</div>'
     +'</div>'
     +'<div class="arrow"><span class="coup-seta-drt"></span></div>'));
   return storeDiv;

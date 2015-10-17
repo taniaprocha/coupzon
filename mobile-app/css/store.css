@@ -81,6 +81,11 @@
   padding-left: 5%;
 }
 
+.body-container-store .available-check-ins .available-value,
+.body-container-store .available-awards .available-value{
+  color: #00436A;
+}
+
 .body-container-store .store-description{
   width: 90%;
   height: auto;

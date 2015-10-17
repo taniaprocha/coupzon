@@ -4,6 +4,55 @@
   width: 100%;
 }
 
+.body-container-big .search-container{
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  background-color: #F1F3F6;
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+.body-container-big .search-container .search-input-container{
+  width: 80%;
+  height: 100%;
+  float: left;
+  display: table;
+}
+
+.body-container-big .search-container .search-input-container #search-input{
+  border: none;
+  height: 2rem;
+  font-size: 1.5em;
+  background-color: #F1F3F6;
+  padding-left: 2.2rem;
+  display: table-cell;
+  vertical-align: middle;
+  color: #00436A;
+  width: 100%;
+}
+
+.body-container-big .search-container .search-input-container #search-input::-webkit-input-placeholder{
+  color: #00436A;
+}
+
+.body-container-big .search-container .close-search-btn{
+  width: 20%;
+  height: 100%;
+  display: table;
+  float: left;
+  font-size: 2rem;
+  color: #00436A;
+  text-align: center;
+}
+
+.body-container-big .search-container .close-search-btn span{
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .body-container-big .view-menu-container{
   height: 12%;
   width: 100%;
@@ -30,39 +79,18 @@
   color: #E99638;
 }
 
-.body-container-big .search-container{
-  height: 5%;
-  width: 100%;
-  -moz-border: .1rem solid black;
-  -webkit-border: .1rem solid black;
-  border: .1rem solid black;
-  display: none;
-  position: absolute;
-}
-
-.body-container-big .search-container .search-icon{
-  width: 10%;
-  float: left;
-  height: 100%;
-}
-
-.body-container-big .search-container .search-input-container{
-  width: 90%;
-  float: left;
-  height: 100%;
-}
-
-.body-container-big .search-container .search-input-container input{
-  width: 100%;
-  border: none;
-}
-
 .body-container-big .lists-container{
   height: 88%;
   width: 100%;
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-y: scroll;
+  -ms-touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  -ms-scroll-chaining: none;
 }
 
 .body-container-big .lists-container .list-selected{
@@ -142,7 +170,7 @@
   float: left;
   width: 100%;
   height: auto;
-  padding: .6rem 0;
+  padding: .8rem 0;
   list-style-type: none;
 }
 
@@ -150,7 +178,7 @@
   display: none;
   background-color: #F1F6FC;
   margin-bottom: .2rem;
-  height: 5.5rem;
+  height: 6.6rem;
 }
 
 .body-container-big .stores-container .store-container.store2{

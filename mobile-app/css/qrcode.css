@@ -13,7 +13,8 @@
   height: 3.5rem;
 }
 
-.header-container-little .back{
+.header-container-little .back,
+.header-container-little .search-btn{
   position: absolute;
   top: 0;
   height: 100%;
@@ -24,7 +25,12 @@
   color: #00436A;
 }
 
-.header-container-little .back span{
+.header-container-little .search-btn{
+  right: 1rem;
+}
+
+.header-container-little .back span,
+.header-container-little .search-btn span{
   display: table-cell;
   vertical-align: middle;
 }
@@ -72,8 +78,24 @@
   font-size: 1.5rem;
 }
 
+.qrcode-body .coupzon-points{
+  height: 10%;
+}
+
+.qrcode-body .coupzon-points .points{
+  background-color: #EEF3FA;
+  height: 3rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #00436A;
+  text-align: center;
+  margin-top: 1rem;
+  padding: .5rem 0 .5rem 0;
+}
+
 .qrcode-body .qrcode-text-2{
-  height: 40%;
+  height: 27%;
   text-align: center;
   width: 100%;
   display: table;
