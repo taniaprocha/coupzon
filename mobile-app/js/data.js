@@ -15,7 +15,13 @@ var awardsData = [
   {id: 13,  store: 20, validity: 1445558400,  title: "Desconto de 30€", description: "Desconto de 30€ em qualquer compra superior a 50€. Dispõe de 10 dias para usufruir do seu prémio"},
   {id: 12,  store: 15, validity: 1444003200,  title: "2 dias de 50% de desconto", description: "Você escolhe os 2 dias em que vai usufruir do seu desconto."},
   {id: 13,  store: 21, validity: 1444003200,  title: "Oferta de um verniz numa compra superior a 10€", description: "Oferta de um verniz numa compra superior a 10€."},
-  {id: 14,  store: 8,  validity: 1444003200,  title: "Oferta de um verniz numa compra superior a 10€", description: "Oferta de um verniz numa compra superior a 10€."}
+  {id: 14,  store: 8,  validity: 1444003200,  title: "Oferta de um verniz numa compra superior a 10€", description: "Oferta de um verniz numa compra superior a 10€."},
+  {id: 1,   store: 2,  validity: 1444867200,  title: "Vale uma sandes á escolha Vale uma sandes á escolha Vale uma sandes á escolha", description: "Na compra de qualquer salada, o Vitaminas ofereçe uma sandes á sua companhia."},
+  {id: 1,   store: 4,  validity: 1444867200,  title: "Vale uma sandes á escolha Vale uma sandes á escolha Vale uma sandes á escolha", description: "Na compra de qualquer salada, o Vitaminas ofereçe uma sandes á sua companhia."},
+  {id: 13,  store: 22, validity: 1444003200,  title: "Oferta de um verniz numa compra superior a 10€", description: "Oferta de um verniz numa compra superior a 10€."},
+  {id: 13,  store: 23, validity: 1444003200,  title: "Oferta de um verniz numa compra superior a 10€", description: "Oferta de um verniz numa compra superior a 10€."},
+  {id: 13,  store: 24, validity: 1444003200,  title: "Oferta de um verniz numa compra superior a 10€", description: "Oferta de um verniz numa compra superior a 10€."},
+  {id: 13,  store: 25, validity: 1444003200,  title: "Oferta de um verniz numa compra superior a 10€", description: "Oferta de um verniz numa compra superior a 10€."}
 ];
 
 var brandsData =[
@@ -88,3 +94,5 @@ var citiesData = [
   {id: 17, name: 'Beja'},
   {id: 18, name: 'Faro'}
 ];
+
+var terms = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut tempor quam. Praesent suscipit erat vel dolor sodales pharetra. Morbi quis ipsum vulputate, placerat purus viverra, facilisis sem. Vestibulum imperdiet ac risus vel cursus. Curabitur interdum elementum vehicula. Curabitur fermentum, urna eu aliquet ultrices, sem lectus pretium urna, vel rhoncus nunc arcu quis justo. Mauris massa turpis, vulputate sit amet feugiat ut, cursus ut quam. Pellentesque vel nisl in lectus pretium lacinia in ut massa. Sed augue felis, tristique viverra imperdiet ac, sollicitudin nec elit. Curabitur a odio quis lacus tincidunt suscipit ut eu sapien. Vivamus eget nisl et lacus posuere pretium sit amet vel orci. Quisque eu dapibus dui, lacinia ornare neque.';

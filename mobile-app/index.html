@@ -5,8 +5,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="stylesheet" href="css/login.css" rel="stylesheet">
 <link rel="stylesheet" href="font/style.css" rel="stylesheet">
+<link rel="stylesheet" href="css/login.css" rel="stylesheet">
 <link rel="stylesheet" href="css/loading.css" rel="stylesheet">
 <link rel="stylesheet" href="css/menu.css" rel="stylesheet">
 <link rel="stylesheet" href="css/lojas.css" rel="stylesheet">
@@ -43,7 +43,7 @@
             <div class="insert-number-title title">INSIRA O SEU NÚMERO DE TELEFONE</div>
             <div class="number-box">
               <div class="insert-number-icon"><span class="coup-telefone"></span></div>
-              <div class="insert-number-input"><input id="input-number" type="text" placeholder="Number" name="number" value=""/></div>
+              <div class="insert-number-input"><input id="input-number" type="number" placeholder="Number" name="number" value=""/></div>
             </div>
             <div class="terms-container">
               <div class="check-terms">
@@ -112,7 +112,7 @@
         <div class="table-cell">
           <div class="logo"></div>
           <div class="back back-from-selection disable"><span class="coup-seta-esq"></span></div>
-          <div class="search-btn"><span class="coup-pesquisa"></span></div>
+          <div class="search-btn stores"><span class="coup-pesquisa"></span></div>
         </div>
       </div>
       <div class="body-container-big">
@@ -127,9 +127,9 @@
             <span class="table-cell">LOCALIDADE</span>
           </div>
         </div>
-        <div class="search-container">
+        <div class="search-container stores">
           <div class="search-input-container">
-            <div class="table-cell"><input id="search-input" type="text" placeholder="Search" name="search" value=""></div>
+            <div class="table-cell"><input id="search-input-stores" type="text" placeholder="Pesquisar" name="search" value=""></div>
           </div>
           <div class="close-search-btn"><span class="coup-anular"></span></div>
         </div>
@@ -160,8 +160,13 @@
           <div class="logo"></div>
         </div>
       </div>
-      <div class="body-container-big awards awards-list">
-        <div class="stores-container selected"></div>
+      <div class="body-container-big awards">
+        <div class="search-container awards">
+          <div class="search-input-container">
+            <div class="table-cell"><input id="search-input-awards" type="text" placeholder="Pesquisar" name="search" value=""></div>
+          </div>
+        </div>
+        <div class="awards-list"><div class="stores-container selected"></div></div>
       </div>
     </div>
     <div class="container-view" id="view-award">
@@ -271,7 +276,7 @@
           <div class="title">
             <div class="icon"><span class="coup-perfil"></span></div>
             <div class="name"><span>O MEU PERFIL</span></div>
-            <div class="logout"><span>LOGOUT</span></div>
+            <div class="logout" id="logout"><span>LOGOUT</span></div>
           </div>
           <div class="profile-title">NÚMERO DE TELEFONE</div>
           <div class="profile-description">919191919</div>
@@ -318,9 +323,7 @@
             <div class="icon"><span class="coup-termos"></span></div>
             <div class="name"><span>TERMOS E CONDIÇÕES</span></div>
           </div>
-          <div class="terms">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut tempor quam. Praesent suscipit erat vel dolor sodales pharetra. Morbi quis ipsum vulputate, placerat purus viverra, facilisis sem. Vestibulum imperdiet ac risus vel cursus. Curabitur interdum elementum vehicula. Curabitur fermentum, urna eu aliquet ultrices, sem lectus pretium urna, vel rhoncus nunc arcu quis justo. Mauris massa turpis, vulputate sit amet feugiat ut, cursus ut quam. Pellentesque vel nisl in lectus pretium lacinia in ut massa. Sed augue felis, tristique viverra imperdiet ac, sollicitudin nec elit. Curabitur a odio quis lacus tincidunt suscipit ut eu sapien. Vivamus eget nisl et lacus posuere pretium sit amet vel orci. Quisque eu dapibus dui, lacinia ornare neque.
-          </div>
+          <div class="terms"></div>
         </div>
         <div class="settings-container language-container">
           <div class="title">
@@ -366,7 +369,7 @@
         </div>
         <div class="share-checkin-button">
           <div class="table-cell"><div class="table-container">
-            <div class="title">PARTILHAS CHECK-INS</div>
+            <div class="title">PARTILHAR CHECK-INS</div>
             <div class="icon"><span class="coup-partilhar"></span></div>
           </div></div>
         </div>
@@ -390,6 +393,31 @@
             <div class="title" id="store-email"></div>
           </div>
         </div>
+      </div>
+      <div class="body-container-big store body-share">
+        <div class="checkin-share">
+          <div class="share-icon"><span class="coup-partilhar"></span></div>
+          <div class="share-title">PARTILHAR CHECK-INS</div>          
+        </div>
+        <div class="share-number">
+          <div class="title">
+            <div>NÚMERO DE TELEFONE DA PESSOA</div>
+            <div>COM QUEM QUER PARTILHAR OS SEUS CHECK-INS</div>
+          </div>
+          <div class="share-input">
+            <input type="text" placeholder="Número de telefone" name="number" value=""/>
+          </div>
+        </div>
+        <div class="share-checkins-number">
+          <div class="title">
+            <div>TEM 8 CHECK-IN ACUMULADOS.</div>
+            <div>QUANTOS QUER PARTILHAR?</div>
+          </div>
+          <div class="checkins-input">
+            <input type="text" placeholder="Check-ins a partilhar" name="number" value=""/>
+          </div>
+        </div>
+        <div class="share-checkins-btn">PARTILHAR CHECK-INS</div>
       </div>
     </div>
     <div class="footer-menu">
@@ -419,6 +447,7 @@
     </div>
   </div>
   
+  <script src="phonegap.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
   <script src="js/data.js"></script>

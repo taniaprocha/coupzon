@@ -4,13 +4,69 @@ function storesMethods(){
 
 storesMethods.prototype.showFilteredBrands = function(container, menu, brands){
   $('.brand-container').off(); $('.store-container').off(); container.empty();
+  container.addClass('selected'); container.animate({opacity: 1}, 300);  
   showFilteredBrands(brands, container, menu);
 };
 
 storesMethods.prototype.showAllBrands = function(container, menu){
   $('.brand-container').off(); $('.store-container').off(); container.empty();
+  container.addClass('selected'); container.animate({opacity: 1}, 300); 
   showFilteredBrands(brandsData, container, menu);
 };
+
+storesMethods.prototype.showSelectedStores = function(selectedCategories, selectedLocation, container, selectedPlace, selectedCat, allCat, allCities){
+  $('.store-container').off(); container.empty();
+  console.log(selectedCategories);
+  if(selectedCategories.length > 0){
+    if(selectedCategories.length == 1){
+      selectedCat.text(getCategorieNameById(selectedCategories[0]).toUpperCase());
+    }else{
+      selectedCat.text(selectedCategories.length +' CATEGORIAS');
+    }
+  }else{ 
+    selectedCategories = allCat;
+    selectedCat.text('--'); 
+  }
+  if(selectedLocation.length > 0){
+    selectedPlace.text(getLocationNameById(selectedLocation[0]).toUpperCase());
+  }else{ selectedLocation = allCities; selectedPlace.text('--'); }
+  var results = 0;  
+  
+  brandsData.forEach(function(brand){
+    if( selectedCategories.indexOf(brand.categorie) !== -1 ){
+      var categoria = getCategorieNameById(brand.categorie).toUpperCase();
+      var brandDiv = setBrandDiv(brand.name, brand.id, brand.image, categoria);
+      var stores = getStoresByBrandAndCities(brand.id, selectedLocation);
+      if(stores !== null && stores.length > 0){
+        if(stores.length > 1){
+          brandDiv = setBrandDiv(brand.name, brand.id, brand.image, categoria);
+          stores.forEach(function(store){
+            appendStore(store, brandDiv, 1, [], brand); results++;
+          });
+          container.append(brandDiv);
+        }else{
+          appendStore(stores[0], container, 2, [], brand); results++;
+        }
+      }
+    }
+  });
+  function appendStore(store, container, type, storesWidthAward, brand) {
+    if(storesWidthAward.length > 0 && storesWidthAward.indexOf(store.id) === -1){ return; }
+    var premio = getAwardByStoreId(store.id); 
+    var categoria = getCategorieNameById(brand.categorie).toUpperCase();
+    if(type === 1){
+      container.append(setStoreDiv1(store.id, premio, store.local));
+    }else{
+      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, premio));
+    }    
+  }
+  if(results === 0){
+    container.append('<div class="no-stores-filtered">Não existem lojas para essa Categoria ou Localidade seleccionada.</div>');
+  }else{
+    addBrandListener();
+    addStoreListeners();
+  }
+}
 
 function showFilteredBrands(brands, container, menu){
   var storesWidthAward = [];
@@ -65,6 +121,7 @@ function showFilteredBrands(brands, container, menu){
       container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, premio));
     }    
   }
+  
   addBrandListener();
   if(menu === 'stores' || menu === 'favorites'){
     addStoreListeners();
@@ -85,88 +142,51 @@ function showAwardDetail(award, store){
 }
 
 storesMethods.prototype.showCategories = function(container){
-  $('.categorie-container').off(); container.empty();
-  categoriesData.forEach(function(categorie){
-    var categorieDiv = $('<div class="categorie-container" id="categorie-'+categorie.id+'">'
-        +'<div class="name"><div class="table-cell">'+categorie.name.toUpperCase()+'</div></div>'
-        +'<div class="check-cat">'
-          +'<div class="table-cell">'
-            +'<span class="coup-radio-redondo-null notchecked"></span>'
-            +'<span class="coup-radio-redondo-check checked"></span>'
+  if($('.categorie-container').length <= 0){
+    $('.categorie-container').off(); container.empty();
+    categoriesData.forEach(function(categorie){
+      var categorieDiv = $('<div class="categorie-container" id="categorie-'+categorie.id+'">'
+          +'<div class="name"><div class="table-cell">'+categorie.name.toUpperCase()+'</div></div>'
+          +'<div class="check-cat">'
+            +'<div class="table-cell">'
+              +'<span class="coup-radio-redondo-null notchecked"></span>'
+              +'<span class="coup-radio-redondo-check checked"></span>'
+            +'</div>'
           +'</div>'
-        +'</div>'
-      +'</div>');
-    container.append(categorieDiv);
-  });
-  $('.categorie-container').on('click', function(){
-    if($(this).hasClass('selected') === true){
-      $(this).removeClass('selected');
-    }else{
-      $(this).addClass('selected');
-    }
-  });
+        +'</div>');
+      container.append(categorieDiv);
+    });
+    $('.categorie-container').on('click', function(){
+      if($(this).hasClass('selected') === true){
+        $(this).removeClass('selected');
+      }else{
+        $(this).addClass('selected');
+      }
+    });
+  }
 };
 
 storesMethods.prototype.showLocations = function(container){
-  $('.location-container').off(); container.empty();
-  citiesData.forEach(function(location){
-    var locationDiv = $('<div class="location-container" id="location-'+location.id+'">'
-        +'<div class="name"><div class="table-cell">'+location.name.toUpperCase()+'</div></div>'
-        +'<div class="check-loc">'
-          +'<div class="table-cell">'
-            +'<span class="coup-radio-redondo-null notchecked"></span>'
-            +'<span class="coup-radio-redondo-check checked"></span>'
+  if($('.location-container').length <= 0){
+    $('.location-container').off(); container.empty();
+      citiesData.forEach(function(location){
+      var locationDiv = $('<div class="location-container" id="location-'+location.id+'">'
+          +'<div class="name"><div class="table-cell">'+location.name.toUpperCase()+'</div></div>'
+          +'<div class="check-loc">'
+            +'<div class="table-cell">'
+              +'<span class="coup-radio-redondo-null notchecked"></span>'
+              +'<span class="coup-radio-redondo-check checked"></span>'
+            +'</div>'
           +'</div>'
-        +'</div>'
-      +'</div>');
-    container.append(locationDiv);
-  });
-  $('.location-container').on('click', function(){
-    $('.location-container').removeClass('selected');
-    $(this).addClass('selected');
-  });
+        +'</div>');
+      container.append(locationDiv);
+    });
+    $('.location-container').on('click', function(){
+      $('.location-container').removeClass('selected');
+      $(this).addClass('selected');
+    });
+  }
 };
-
-storesMethods.prototype.showSelectedStores = function(selectedCategories, selectedLocation, container, selectedPlace, selectedCat, allCat, allCities){
-  $('.store-container').off(); container.empty();
-  if(selectedCategories.length > 0){
-    if(selectedCategories.length == 1){
-      selectedCat.text(getCategorieNameById(selectedCategories[0]).toUpperCase());
-    }else{
-      selectedCat.text(selectedCategories.length +' CATEGORIAS');
-    }
-  }else{ 
-    selectedCategories = allCat;
-    selectedCat.text('--'); 
-  }
-  if(selectedLocation.length > 0){
-    selectedPlace.text(getLocationNameById(selectedLocation[0]).toUpperCase());
-  }else{ selectedLocation = allCities; selectedPlace.text('--'); }
-  var results = 0;  
-  brandsData.forEach(function(brand){
-    if( selectedCategories.indexOf(brand.categorie) !== -1 ){
-      var categoria = getCategorieNameById(brand.categorie).toUpperCase();
-      var brandDiv = setBrandDiv(brand.name, brand.id, brand.image, categoria);
-      var stores = getStoresByBrandAndCities(brand.id, selectedLocation);
-      if(stores !== null && stores.length > 0){
-        if(stores.length > 1){ 
-          stores.forEach(function(store){
-            if($('#brand-'+brand.id).length <= 0){ container.append(brandDiv); }
-            brandDiv.append(setStoreDiv1(store.id, getAwardByStoreId(store.id), store.local)); results ++;
-          });
-        }else{
-          results ++; container.append(setStoreDiv2(brand.name, stores[0].id, categoria, brand.image, getAwardByStoreId(stores[0].id)));
-        }
-      }
-    }
-  });
-  if(results === 0){
-    container.append('<div class="no-stores-filtered">Não existem lojas para essa Categoria ou Localidade seleccionada.</div>');
-  }else{
-    addBrandListener();
-    addStoreListeners();
-  }
-}
 
 function addAwardListeners(){
   $('.store-container').on('click', function(){
@@ -189,7 +209,8 @@ function addStoreListeners(){
 
 function addBrandListener(){
   $('.brand-container.stores').on('click', function(e){
-    e.preventDefault(); $(this).find($('li')).toggle();
+    e.preventDefault(); 
+    $(this).find($('li')).toggle();
     if($(this).find($('li')).is(':visible') === false){
       $(this).find($('.coup-seta-cima')).hide();
       $(this).find($('.coup-seta-baixo')).css('display', 'table-cell');
@@ -201,6 +222,8 @@ function addBrandListener(){
 }
 
 function showStoreDetails(storeId){
+  methods.showAllBrands($('.stores-container'), 'stores');
+  $('.body-container-big.store.body-share').hide();
   var id = storeId; id = id.substring(id.indexOf('-')+1, id.length);
   var store = getStoreById(parseInt(id));
   if(!store){ return; }
@@ -217,7 +240,7 @@ function showStoreDetails(storeId){
   $('#store-award-validity').text(validity);
   $('#store-award-description').text((award !== null) ? award.title.toUpperCase() : '');
   $('#store-description').text(brand.description);
-  if(store.favorite === true){ $('#store-favorite').addClass('favorite'); }
+  if(store.favorite === true){ store.favorite = true; $('#store-favorite').addClass('favorite'); }
   $('#store-address').text(store.address);
   $('#store-phone').text(store.phone);
   $('#store-email').text(store.email);

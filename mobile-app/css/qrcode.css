@@ -39,7 +39,7 @@
   display: none;
 }
 
-@media (max-width: 356px) {
+@media (max-width: 360px) {
   .header-container-little .logo{
     background-image: url('../assets/app/logo-header@320.png');
   }

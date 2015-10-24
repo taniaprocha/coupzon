@@ -19,31 +19,6 @@
   width: auto;
 }
 
-@media (max-width: 356px) {
-  .header-container-big .app-icon-container .logo,
-  .loading .icon-loading{
-    background-image: url('../assets/app/logo_loading@320.png');
-  }
-}
-@media (min-width: 360px) {
-  .header-container-big .app-icon-container .logo,
-  .loading .icon-loading{
-    background-image: url('../assets/app/logo_loading@360.png');
-  }
-}
-@media (min-width: 720px) {
-  .header-container-big .app-icon-container .logo,
-  .loading .icon-loading{
-    background-image: url('../assets/app/logo_loading@720.png');
-  }
-}
-@media (min-width: 1000px) {
-  .header-container-big .app-icon-container .logo,
-  .loading .icon-loading{
-    background-image: url('../assets/app/logo_loading@1080.png');
-  }
-}
-
 .header-container-big .open-message,
 .header-container-big .services-message{
   height: 30%;
