@@ -15,7 +15,7 @@ $(document).ready(function() {
   $('#view-store').css({height: (partialH - footerH)+'px' });
   $('#view-award').css({height: (partialH - footerH)+'px' });
   $('#loading-view').addClass('selected');
-
+  
   $('#view-settings .terms').text(terms);
   setTimeout(function(){
     $('.message-loading').addClass('show');
@@ -28,6 +28,31 @@ $(document).ready(function() {
     }, 200);
   });  
 });
+
+document.addEventListener("deviceready", getContactList, false); 
+
+function getContactList() {
+  alert("deviceready");
+  var contactList = new ContactFindOptions(); 
+  contactList.filter=""; 
+  contactList.multiple=true;
+  var fields = ["*"];  //"*" will return all contact fields
+  navigator.contacts.find(fields, getContactFields, onContactsError, contactList );
+}
+
+function getContactFields(contacts) {
+  //alert(JSON.stringify(contacts));
+  var contactsName = [];
+  for (var i=0; i<contacts.length; i++){
+    //alert(contacts.length);
+    contactsName.push(contacts[i].displayName);
+    //alert("Name:" + contacts[i].displayName);
+    /*for (var j=0; j<contacts[i].phoneNumbers.length; j++) {
+      alert("Type: " + contacts[i].phoneNumbers[j].type + "\n" + "Value: "  + contacts[i].phoneNumbers[j].value );
+    }*/
+  } 
+  alert(JSON.stringify(contactsName));
+}
 
 $('.check-terms').on('click', function(){
   if($(this).find($('.checked')).hasClass('selected') ){

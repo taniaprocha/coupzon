@@ -65,6 +65,10 @@ body {
   -webkit-user-select: none;       
 }
 
+input:focus{
+  outline: none;
+}
+
 .table-cell{
   display: table-cell;
   vertical-align: middle;
