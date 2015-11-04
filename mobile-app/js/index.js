@@ -17,6 +17,7 @@ $(document).ready(function() {
   $('#loading-view').addClass('selected');
   
   $('#view-settings .terms').text(terms);
+  $('#view-terms .terms-container .terms').text(terms);
   setTimeout(function(){
     $('.message-loading').addClass('show');
   }, 300);
@@ -29,10 +30,9 @@ $(document).ready(function() {
   });  
 });
 
-document.addEventListener("deviceready", getContactList, false); 
+/*document.addEventListener("deviceready", getContactList, false); 
 
 function getContactList() {
-  alert("deviceready");
   var contactList = new ContactFindOptions(); 
   contactList.filter=""; 
   contactList.multiple=true;
@@ -41,18 +41,16 @@ function getContactList() {
 }
 
 function getContactFields(contacts) {
-  //alert(JSON.stringify(contacts));
   var contactsName = [];
   for (var i=0; i<contacts.length; i++){
-    //alert(contacts.length);
     contactsName.push(contacts[i].displayName);
-    //alert("Name:" + contacts[i].displayName);
-    /*for (var j=0; j<contacts[i].phoneNumbers.length; j++) {
-      alert("Type: " + contacts[i].phoneNumbers[j].type + "\n" + "Value: "  + contacts[i].phoneNumbers[j].value );
-    }*/
   } 
-  alert(JSON.stringify(contactsName));
-}
+  //alert(JSON.stringify(contactsName));
+}*/
+
+$('#check-terms-title').on('click', function(){
+  $('.container-view').removeClass('selected'); $('#view-terms').addClass('selected');
+});
 
 $('.check-terms').on('click', function(){
   if($(this).find($('.checked')).hasClass('selected') ){
@@ -73,13 +71,17 @@ $('#input-password').on('click', function(){
 });
 
 $('#login-number').on('click', function(){
-  if($('#input-number').val() === '' && $('.check-terms').find($('.checked')).hasClass('selected') === false){
-    $('.insert-number-title').addClass('alert'); $('.check-title').addClass('alert'); return;
+  var alert = false;
+  if( $('.check-terms').find($('.checked')).hasClass('selected') === false ){
+    $('.check-title').addClass('alert'); alert = true;
   }
-  if($('#input-number').val() === ''){ $('.insert-number-title.title').addClass('alert'); return; }
-  if($('.check-terms').find($('.checked')).hasClass('selected') === false){ $('.check-title').addClass('alert'); return; }
+  if($('#input-number').val().length < 9 || $('#input-number').val().length > 12){ 
+    $('.insert-number-title.title').addClass('alert'); alert = true;
+  }
+  if(alert === true){ return; }
   $('.check-title').removeClass('alert'); $('.insert-number-title').removeClass('alert'); 
   $('.container-view').removeClass('selected'); $('#login-password').addClass('selected');
+  $('#input-number').val('');
 });
 
 $('#phone-password').on('click', function(){
@@ -88,10 +90,11 @@ $('#phone-password').on('click', function(){
   $('.container-view').removeClass('selected');
   $('#view-qrcode').addClass('selected');
   $('.footer-menu').addClass('selected');
+  $('#input-password').val('');
 });
 
 $('#logout').on('click', function(){
-  location.reload();
+  $('.container-view').removeClass('selected'); $('#login-phone').addClass('selected'); $('.footer-menu').removeClass('selected');
 });
 
 $('#view-stores .search-btn').on('click', function(){
@@ -132,6 +135,8 @@ $('.menu-container').on('click', function(){
     case 'menu-awards':
       $('#view-awards').addClass('selected'); $('#tab').animate({marginLeft: '20%'}, 100);
       methods.showAllBrands($('#view-awards .stores-container'), 'awards');
+      var newH = $('.body-container-big.awards').height() - $('.search-container.awards').height();
+      $('#view-awards .awards-list').css('height', newH+'px');
       break;
     case 'menu-favorites':
       $('#view-favorites').addClass('selected'); $('#tab').animate({marginLeft: '60%'}, 100);
@@ -176,6 +181,10 @@ $('.share-checkin-button').on('click', function(){
   $('#back-store').addClass('share');
   $('.body-container-store').hide();
   $('.body-container-big.store.body-share').show();
+});
+
+$('#back-terms').on('click', function(){
+  $('.container-view').removeClass('selected'); $('#login-phone').addClass('selected');
 });
 
 $('#back-store').on('click', function(){

@@ -1,4 +1,5 @@
-.body-container-big.settings{
+.body-container-big.settings,
+.body-container-big.terms{
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
@@ -24,6 +25,10 @@
   -webkit-border-bottom: solid .1rem #F2F2F2;
   border-bottom: solid .1rem #F2F2F2;
 } 
+
+.body-container-big.settings .settings-menu-container .settings-menu.menu-language{
+  display: none;
+}
 
 .body-container-big.settings .settings-menu-container .settings-menu .icon{
   width: 20%;
@@ -63,11 +68,13 @@
   vertical-align: middle;
 }
 
-.body-container-big.settings .settings-container .title{
+.body-container-big.settings .settings-container .title,
+.body-container-big.terms .title{
   height: 4rem;
 }
 
-.body-container-big.settings .settings-container .title .icon{
+.body-container-big.settings .settings-container .title .icon,
+.body-container-big.terms .title .icon{
   font-size: 3rem;
   color: #BEDEE8;
   float: left;
@@ -76,7 +83,8 @@
   display: table;
 }
 
-.body-container-big.settings .settings-container .title .name{
+.body-container-big.settings .settings-container .title .name,
+.body-container-big.terms .title .name{
   font-size: 1.6rem;
   color: #00436A;
   float: left;
@@ -89,7 +97,9 @@
 
 .body-container-big.settings .settings-container .title .icon span,
 .body-container-big.settings .settings-container .title .name span,
-.body-container-big.settings .settings-container .title .logout span{
+.body-container-big.settings .settings-container .title .logout span,
+.body-container-big.terms .title .icon span,
+.body-container-big.terms .title .name span{
   display: table-cell;
   vertical-align: middle;
 }
@@ -109,7 +119,8 @@
   height: 100%;
 }
 
-.body-container-big.settings .settings-container.terms-container .terms{
+.body-container-big.settings .settings-container.terms-container .terms,
+.body-container-big.terms .terms-container .terms{
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   color: #00436A;
@@ -121,7 +132,8 @@
 .body-container-big.settings .settings-container.contacts-container,
 .body-container-big.settings .settings-container.faq-container,
 .body-container-big.settings .settings-container.terms-container,
-.body-container-big.settings .settings-container.language-container{
+.body-container-big.settings .settings-container.language-container,
+.body-container-big.terms{
   width: 90%;
   height: 100%;
   margin: 0 auto;
@@ -229,7 +241,7 @@
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 1.3rem;
-  padding: 2rem 0 .2rem 0;
+  padding: 1rem 0 .2rem 0;
 }
 
 

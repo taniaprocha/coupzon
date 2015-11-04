@@ -40,7 +40,7 @@
         <div class="body-container-yellow" id="container-number">
           <div class="insert-number-container">
             <div class="table-cell">
-              <div class="insert-number-title">PARA COMEÇAR A COLECIONAR DESCONTOS</div>
+              <div class="insert-number-title">PARA COMEÇAR A COLECIONAR VANTAGENS</div>
               <div class="insert-number-title title">INSIRA O SEU NÚMERO DE TELEFONE</div>
               <div class="number-box">
                 <div class="insert-number-icon"><span class="coup-telefone"></span></div>
@@ -48,10 +48,10 @@
               </div>
               <div class="terms-container">
                 <div class="check-terms">
-                  <span class="coup-radio-null notchecked selected"></span>
-                  <span class="coup-radio-check2 checked"></span>
+                  <span class="coup-radio-null notchecked"></span>
+                  <span class="coup-radio-check2 checked selected"></span>
                 </div>
-                <div class="check-title">ACEITO OS TERMOS E CONDIÇÕES</div>
+                <div class="check-title" id="check-terms-title">ACEITO OS TERMOS E CONDIÇÕES</div>
               </div>
             </div>
           </div>
@@ -68,7 +68,7 @@
                 <div class="logo"></div>
               </div>
             </div>
-            <div class="services-message"><span>Todos os serviços de fidelização<br>no seu telemóvel, totalmente grátis!</span></div>
+            <div class="services-message"><span>Todas as vantagens no seu telemóvel,<br>totalmente grátis, para sempre!</span></div>
         </div>
         <div class="body-container-yellow" id="container-password">
           <div class="insert-password-container">
@@ -76,7 +76,7 @@
               <div class="insert-password-title">INSIRA A PASSWORD QUE RECEBEU POR SMS</div>
               <div class="password-box">
                 <div class="insert-password-icon"><span class="coup-password"></span></div>
-                <div class="insert-password-input"><input id="input-password" type="text" placeholder="Password" name="password" value=""></div>
+                <div class="insert-password-input"><input id="input-password" type="password" placeholder="Password" name="password" value=""></div>
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@
           </div>
           <div class="search-container stores">
             <div class="search-input-container">
-              <div class="table-cell"><input id="search-input-stores" type="text" placeholder="Pesquisar" name="search" value=""></div>
+              <input id="search-input-stores" type="text" placeholder="Pesquisar lojas" name="search" value=""/>
             </div>
             <div class="close-search-btn"><span class="coup-anular"></span></div>
           </div>
@@ -164,7 +164,7 @@
         <div class="body-container-big awards">
           <div class="search-container awards">
             <div class="search-input-container">
-              <div class="table-cell"><input id="search-input-awards" type="text" placeholder="Pesquisar" name="search" value=""></div>
+              <input id="search-input-awards" type="text" placeholder="Pesquisar prémios" name="search" value=""/>
             </div>
           </div>
           <div class="awards-list"><div class="stores-container selected"></div></div>
@@ -211,7 +211,7 @@
               <div>PARA QUEM QUER ENVIAR O SEU PRÉMIO</div>
             </div>
             <div class="share-input">
-              <input type="text" placeholder="Número de telefone" name="number" value=""/>
+              <input type="number" placeholder="Número de telefone" name="number" value=""/>
             </div>
           </div>
           <div class="send-area">
@@ -221,7 +221,6 @@
           </div>
         </div>
       </div>
-
       <div class="container-view" id="view-favorites">
         <div class="header-container-little">
           <div class="table-cell">
@@ -232,6 +231,21 @@
           <div class="favorites-container">
             <div class="stores-container selected"></div>
           </div>
+        </div>
+      </div>
+      <div class="container-view" id="view-terms">
+        <div class="header-container-little">
+          <div class="table-cell">
+              <div class="logo"></div>
+              <div class="back" id="back-terms"><span class="coup-seta-esq"></span></div>
+          </div>
+        </div>
+        <div class="body-container-big terms">
+          <div class="title">
+            <div class="icon"><span class="coup-termos"></span></div>
+            <div class="name"><span>TERMOS E CONDIÇÕES</span></div>
+          </div>
+          <div class="terms-container"><div class="terms"></div></div>
         </div>
       </div>
       <div class="container-view" id="view-settings">
@@ -274,6 +288,10 @@
               <div class="icon"><span class="coup-perfil"></span></div>
               <div class="name"><span>O MEU PERFIL</span></div>
               <div class="logout" id="logout"><span>LOGOUT</span></div>
+            </div>
+            <div class="profile-title">NOME</div>
+            <div class="profile-description">
+              <input type="text" placeholder="Inserir nome" name="nome" value="">
             </div>
             <div class="profile-title">NÚMERO DE TELEFONE</div>
             <div class="profile-description">919191919</div>
@@ -446,7 +464,7 @@
 
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-    <script src="js/data.js"></script>
+    <script src="js/data2.js"></script>
     <script src="js/index.js"></script>
     <script src="js/storesMethods.js"></script>
   </body>
