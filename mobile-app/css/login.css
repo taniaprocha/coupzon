@@ -61,7 +61,8 @@
   .body-container-big.favorites,
   .body-container-big.settings,
   .body-container-big.terms,
-  .body-container-big .search-container{
+  .body-container-big .search-container,
+  .body-container-big.store.body-share{
     background-image: url('../assets/app/sombra@320.png');
   }
 }
@@ -76,7 +77,8 @@
   .body-container-big.favorites,
   .body-container-big.settings,
   .body-container-big.terms,
-  .body-container-big .search-container{
+  .body-container-big .search-container,
+  .body-container-big.store.body-share{
     background-image: url('../assets/app/sombra@360.png');
   }
 }
@@ -91,7 +93,8 @@
   .body-container-big.favorites,
   .body-container-big.settings,
   .body-container-big.terms,
-  .body-container-big .search-container{
+  .body-container-big .search-container,
+  .body-container-big.store.body-share{
     background-image: url('../assets/app/sombra@720.png');
   }
 }
@@ -106,7 +109,8 @@
   .body-container-big.favorites,
   .body-container-big.settings,
   .body-container-big.terms,
-  .body-container-big .search-container{
+  .body-container-big .search-container,
+  .body-container-big.store.body-share{
     background-image: url('../assets/app/sombra@1080.png');
   }
 }
@@ -119,11 +123,17 @@
 }
 
 .body-container-yellow .insert-number-container .insert-number-title,
-.body-container-yellow .insert-password-container .insert-password-title{
+.body-container-yellow .insert-password-container .insert-password-title,
+.body-container-yellow .insert-password-container .insert-password-aler{
   font-size: 1.1rem;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   color: #00436A;
+}
+
+.body-container-yellow .insert-password-container .insert-password-alert{
+  opacity: 0;
+  margin-top: .5rem;
 }
 
 .body-container-yellow .insert-number-container .number-box,
@@ -211,8 +221,22 @@
 
 .body-container-yellow .insert-number-container .terms-container .check-title.alert,
 .body-container-yellow .insert-number-container .insert-number-title.title.alert,
-.body-container-yellow .insert-password-container .insert-password-title.alert{
+.body-container-yellow .insert-password-container .insert-password-title.alert,
+.body-container-yellow .insert-password-container .insert-password-alert,
+.body-container-yellow .message-not-received.alert,
+.body-container-yellow .insert-number-container .error{
   color: #ED1C24;
+}
+
+
+.body-container-yellow .insert-number-container .error{
+  opacity: 0;
+  font-size: 1.1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: #ED1C24;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 .body-container-yellow .login-container{

@@ -1,5 +1,6 @@
 
-.body-container-big.awards{
+.body-container-big.awards,
+.body-container-big.store{
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
@@ -185,6 +186,13 @@
   font-size: 2.5rem;
   text-align: center;
   height: 100%;
+  display: table;
+}
+
+.body-container-big.body-share .award-share .share-icon span,
+.body-container-big.body-share .checkin-share .share-icon span{
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .body-container-big.body-share .award-share .share-title,
@@ -196,6 +204,13 @@
   font-weight: 600;
   font-size: 1.6rem;
   height: 100%;
+  display: table;
+}
+
+.body-container-big.body-share .award-share .share-title span,
+.body-container-big.body-share .checkin-share .share-title span{
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .body-container-big.body-share .share-number,

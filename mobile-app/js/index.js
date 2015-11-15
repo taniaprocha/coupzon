@@ -1,4 +1,5 @@
 var methods;
+var userLocation= null;
 
 $(document).ready(function() {
   var partialW = window.innerWidth;
@@ -18,19 +19,59 @@ $(document).ready(function() {
   
   $('#view-settings .terms').text(terms);
   $('#view-terms .terms-container .terms').text(terms);
+  //window.localStorage.clear();
+  console.log(JSON.parse(window.localStorage.getItem('user')));
+  var localData = JSON.parse(window.localStorage.getItem('user'));
+  console.log(localData);
   setTimeout(function(){
     $('.message-loading').addClass('show');
   }, 300);
-  $('#loading').delay(1000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
-    setTimeout(function(){
-      $('#loading-view').removeClass('selected');
-      $('#login-phone').addClass('selected');
-      $('#login-phone').animate({opacity: 1}, 300);
-    }, 200);
-  });  
+  if(localData === null){
+    $('#loading').delay(2000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
+      setTimeout(function(){
+        $('#loading-view').removeClass('selected');
+        $('#login-phone').addClass('selected');
+        $('#login-phone').animate({opacity: 1}, 300);
+      }, 200);
+    });  
+  }else{
+    $('#loading').delay(2000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
+      showUserQrCode(localData.barId);
+      $('.container-view').removeClass('selected');
+      $('#view-qrcode').addClass('selected');
+      $('.footer-menu').addClass('selected');
+      checkLocation();
+    });
+  }
 });
 
-/*document.addEventListener("deviceready", getContactList, false); 
+var checkLoc=false;
+function checkLocation(){
+  console.log('get position ', userLocation);
+  checkLoc = true;
+  if(userLocation !== null){
+    getStoresFromAPI(userLocation);
+  }else{
+    // remover quando for para o telemovel
+    getLocation(function(position){
+      userLocation = {lat: position.lat, long: position.lng};
+      if(checkLoc === true){
+        getStoresFromAPI(userLocation);
+      }
+    });
+  }
+}
+
+/*document.addEventListener("deviceready", function(){
+  getLocation(function(position){
+    userLocation = {lat: position.lat, long: position.lng};
+    if(checkLoc === true){
+      getStoresFromAPI(userLocation);
+    }
+  });
+}, false); 
+
+document.addEventListener("deviceready", getContactList, false); 
 
 function getContactList() {
   var contactList = new ContactFindOptions(); 
@@ -70,6 +111,19 @@ $('#input-password').on('click', function(){
   $(this).focus();
 });
 
+$('#input-number').on('input', function(){
+  if( $('#input-number').val().length > 8){
+    $(this).blur();
+  }
+});  
+
+$('#input-password').keypress(function(e) {
+  if (e.which == 13) {
+    $(this).blur();
+  }
+});
+
+var phoneNumber = '';
 $('#login-number').on('click', function(){
   var alert = false;
   if( $('.check-terms').find($('.checked')).hasClass('selected') === false ){
@@ -79,18 +133,29 @@ $('#login-number').on('click', function(){
     $('.insert-number-title.title').addClass('alert'); alert = true;
   }
   if(alert === true){ return; }
-  $('.check-title').removeClass('alert'); $('.insert-number-title').removeClass('alert'); 
-  $('.container-view').removeClass('selected'); $('#login-password').addClass('selected');
-  $('#input-number').val('');
+  createNewUser($('#input-number').val(), function(){
+    $('.check-title').removeClass('alert'); $('.insert-number-title').removeClass('alert'); 
+    $('.container-view').removeClass('selected'); $('#login-password').addClass('selected');
+    $('#input-number').val('');
+  });
 });
 
 $('#phone-password').on('click', function(){
   if($('#input-password').val() === ''){ $('.insert-password-title').addClass('alert'); return; }
-  $('.insert-password-title').removeClass('alert'); 
-  $('.container-view').removeClass('selected');
-  $('#view-qrcode').addClass('selected');
-  $('.footer-menu').addClass('selected');
-  $('#input-password').val('');
+  var login = loginUser($('#input-password').val(), phoneNumber, function(success, barcodeId){
+    if(success === true){
+      showUserQrCode(barcodeId);
+      $('.insert-password-alert').css('opacity', 0); $('.message-not-received').removeClass('alert');
+      $('.insert-password-title').removeClass('alert'); 
+      $('.container-view').removeClass('selected');
+      $('#view-qrcode').addClass('selected');
+      $('.footer-menu').addClass('selected');
+      $('#input-password').val('');
+      checkLocation();
+    }else{
+      $('.insert-password-alert').css('opacity', 1); //$('.message-not-received').addClass('alert');
+    }
+  });
 });
 
 $('#logout').on('click', function(){
@@ -308,3 +373,33 @@ function showAllStores(){
   methods.showAllBrands($('.stores-container'), 'stores');
 }
 
+function saveOnLocalStorage(data){
+  var dataToStore = JSON.stringify(data);
+  window.localStorage.setItem('user', dataToStore);
+}
+
+function showUserQrCode(barId){
+  //var data = {"id":"19","name":"","phone":"351927955308","email":"","nif":"","barId":"3519526108192","password":"b3e139ee7838261437948b303472347f"};
+  var codeH = ($("#view-qrcode").height()*.88)*.3;
+  console.log(barId);
+  $("#user-qrcode").barcode(barId, "ean13", {barWidth: (codeH*.02), barHeight:codeH*.8+'px', fontSize: codeH*.2+'px'});
+}
+
+function getLocation(callback){
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      callback(pos);
+    }, function() {
+      console.log('error'); callback(null);
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    console.log('error'); callback(null);
+  }
+
+}

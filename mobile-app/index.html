@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <script src="cordova.js"></script>
     <link rel="stylesheet" href="font/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/login.css" rel="stylesheet">
@@ -24,7 +25,7 @@
         <div class="table-cell">
           <div class="loading" id="loading">
             <div class="icon-loading"></div>
-            <div class="message-loading">Vamos poupar?</div>
+            <div class="message-loading">Um para todos!</div>
           </div>
         </div>
       </div>
@@ -53,6 +54,7 @@
                 </div>
                 <div class="check-title" id="check-terms-title">ACEITO OS TERMOS E CONDIÇÕES</div>
               </div>
+              <div class="error">Não é possivel efectuar o registo. Por favor tente mais tarde</div>
             </div>
           </div>
           <div class="login-container">
@@ -78,6 +80,7 @@
                 <div class="insert-password-icon"><span class="coup-password"></span></div>
                 <div class="insert-password-input"><input id="input-password" type="password" placeholder="Password" name="password" value=""></div>
               </div>
+              <div class="insert-password-alert">PASSWORD INCORRECTA</div>
             </div>
           </div>
           <div class="login-container">
@@ -98,7 +101,9 @@
         </div>
         <div class="qrcode-body">
           <div class="qrcode-text-1"><span>ESTE É O SEU CÓDIGO,<br>PASSE-O NAS LOJAS ADERENTES.</span></div>
-          <div class="qrcode"></div>
+          <div class="qrcode">
+            <div id="user-qrcode"></div>
+          </div>
           <div class="coupzon-points"><div class="points">TEM 10 PONTOS COUPZON</div></div>
           <div class="qrcode-text-2">
             <div class="table-cell">
@@ -151,7 +156,6 @@
               <div class="list"></div>
               <div class="filter-container"><div class="stores-filter">FILTRAR</div></div>
             </div>
-            
           </div>
         </div>
       </div>
@@ -203,7 +207,7 @@
         <div class="body-container-big awards body-share">
           <div class="award-share">
             <div class="share-icon"><span class="coup-partilhar"></span></div>
-            <div class="share-title">PARTILHAR PRÉMIO</div>          
+            <div class="share-title"><span>PARTILHAR PRÉMIO</span></div>          
           </div>
           <div class="share-number">
             <div class="title">
@@ -412,7 +416,7 @@
         <div class="body-container-big store body-share">
           <div class="checkin-share">
             <div class="share-icon"><span class="coup-partilhar"></span></div>
-            <div class="share-title">PARTILHAR CHECK-INS</div>          
+            <div class="share-title"><span>PARTILHAR CHECK-INS</span></div>          
           </div>
           <div class="share-number">
             <div class="title">
@@ -461,11 +465,13 @@
         </div>
       </div>
     </div>
-
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="js/storesMethods.js"></script>
     <script src="js/data2.js"></script>
     <script src="js/index.js"></script>
-    <script src="js/storesMethods.js"></script>
+    <script src="js/apiCalls.js"></script>
+    <script src="js/jquery-barcode.min.js"></script>
   </body>
 </html>
