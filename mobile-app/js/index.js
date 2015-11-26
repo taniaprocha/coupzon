@@ -1,5 +1,6 @@
 var methods;
 var userLocation= null;
+var userData = null;
 
 $(document).ready(function() {
   var partialW = window.innerWidth;
@@ -21,12 +22,12 @@ $(document).ready(function() {
   $('#view-terms .terms-container .terms').text(terms);
   //window.localStorage.clear();
   console.log(JSON.parse(window.localStorage.getItem('user')));
-  var localData = JSON.parse(window.localStorage.getItem('user'));
-  console.log(localData);
+  userData = JSON.parse(window.localStorage.getItem('user'));
+  console.log(userData);
   setTimeout(function(){
     $('.message-loading').addClass('show');
   }, 300);
-  if(localData === null){
+  if(userData === null){
     $('#loading').delay(2000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
       setTimeout(function(){
         $('#loading-view').removeClass('selected');
@@ -36,7 +37,7 @@ $(document).ready(function() {
     });  
   }else{
     $('#loading').delay(2000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
-      showUserQrCode(localData.barId);
+      showUserQrCode(userData.barId);
       $('.container-view').removeClass('selected');
       $('#view-qrcode').addClass('selected');
       $('.footer-menu').addClass('selected');
@@ -62,16 +63,23 @@ function checkLocation(){
   }
 }
 
-/*document.addEventListener("deviceready", function(){
+document.addEventListener("deviceready", function(){
   getLocation(function(position){
     userLocation = {lat: position.lat, long: position.lng};
     if(checkLoc === true){
       getStoresFromAPI(userLocation);
     }
   });
+  /*var element = document.getElementById('deviceProperties');
+  element.innerHTML = 'Device Model: '    + device.model    + '<br />' +
+                      'Device Cordova: '  + device.cordova  + '<br />' +
+                      'Device Platform: ' + device.platform + '<br />' +
+                      'Device UUID: '     + device.uuid     + '<br />' +
+                      'Device Version: '  + device.version  + '<br />';
+  alert(device.uuid);*/
 }, false); 
 
-document.addEventListener("deviceready", getContactList, false); 
+/*document.addEventListener("deviceready", getContactList, false); 
 
 function getContactList() {
   var contactList = new ContactFindOptions(); 

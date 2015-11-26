@@ -16,7 +16,6 @@ storesMethods.prototype.showAllBrands = function(container, menu){
 
 storesMethods.prototype.showSelectedStores = function(selectedCategories, selectedLocation, container, selectedPlace, selectedCat, allCat, allCities){
   $('.store-container').off(); container.empty();
-  console.log(selectedCategories);
   if(selectedCategories.length > 0){
     if(selectedCategories.length == 1){
       selectedCat.text(getCategorieNameById(selectedCategories[0]).toUpperCase());
@@ -33,7 +32,7 @@ storesMethods.prototype.showSelectedStores = function(selectedCategories, select
   var results = 0;  
   
   brandsData.forEach(function(brand){
-    if( selectedCategories.indexOf(brand.categorie) !== -1 ){
+    if( selectedCategories.indexOf(parseInt(brand.categorie)) !== -1 ){
       var categoria = getCategorieNameById(brand.categorie).toUpperCase();
       var brandDiv = setBrandDiv(brand.name, brand.id, brand.image, categoria);
       var stores = getStoresByBrandAndCities(brand.id, selectedLocation);
@@ -115,6 +114,7 @@ function showFilteredBrands(brands, container, menu){
     if(storesWidthAward.length > 0 && storesWidthAward.indexOf(store.id) === -1){ return; }
     var premio = getAwardByStoreId(store.id); 
     var categoria = getCategorieNameById(brand.categorie).toUpperCase();
+    console.log(store);
     if(type === 1){
       container.append(setStoreDiv1(store.id, premio, store.local));
     }else{
@@ -231,9 +231,10 @@ function showStoreDetails(storeId){
   if(!brand){ return; }
   var award = getAwardByStoreId(store.id);
   $('.store-title').attr('id', store.id);
-  $('#store-image').css({backgroundImage: 'url('+brand.image+')'});
+  var imageUrl = (siteUrl+brand.image).toString();
+  $('#store-image').css({backgroundImage: 'url('+imageUrl+')'});
   $('#store-name').text(brand.name.toUpperCase());
-  $('#store-local').text(store.local);
+  $('#store-local').text(store.local || '');
   $('#store-available-awards').text((award !== null) ? '1' : '0');
   $('#store-check-ins').text((brand.checkins !== null) ? brand.checkins : '');
   var validity = (award !== null) ? validity = 'Validade até: '+moment(award.validity*1000).format('YYYY-MM-DD') : validity = '';
@@ -244,15 +245,16 @@ function showStoreDetails(storeId){
   $('#store-address').text(store.address);
   $('#store-phone').text(store.phone);
   $('#store-email').text(store.email);
-  (store.address !== '') ? $('.address').show() : $('.address').hide();
-  (store.phone !== '') ? $('.phone').show() : $('.phone').hide();
-  (store.email !== '') ? $('.email').show() : $('.email').hide();
+  (store.address !== null) ? $('.address').show() : $('.address').hide();
+  (store.phone !== null) ? $('.phone').show() : $('.phone').hide();
+  (store.email !== null) ? $('.email').show() : $('.email').hide();
 }
 
 function setBrandDiv(name, id, image, categorie){
+  var imageUrl = (siteUrl+image).toString();
   var brandDiv = $('<li class="brand-container stores" id="brand-'+id+'">'
       +'<div class="brand">'
-        +'<div class="image" style="background-image: url('+image+')"></div>'
+        +'<div class="image" style="background-image: url('+imageUrl+')"></div>'
         +'<div class="body">'
           +'<div class="name">'+name.toUpperCase()+'</div>'
           +'<div class="categorie">'+categorie+'</div>'
@@ -280,8 +282,9 @@ function setStoreDiv1(id, premio, local){
 function setStoreDiv2(name, id, categorie, image, premio){
   var title = '';
   (premio !== null) ? title = premio.title : title = '';
+  var imageUrl = (siteUrl+image).toString();
   var storeDiv = $('<li class="store-container store2" id="store-'+id+'">'
-        +'<div class="image" style="background-image: url('+image+')"></div>'
+        +'<div class="image" style="background-image: url('+imageUrl+')"></div>'
         +'<div class="body">'
           +'<div class="name">'+name.toUpperCase()+'</div>'
           +'<div class="categorie">'+categorie+'</div>'
@@ -295,7 +298,9 @@ function setStoreDiv2(name, id, categorie, image, premio){
 function getStoresByBrandAndCities(brand, cities){
   var stores = [];
   storesData.forEach(function(store){
-    if(brand === store.brand && cities.indexOf(store.city) !== -1){ stores.push(store);}
+    if(brand === store.brand && cities.indexOf(parseInt(store.city)) !== -1){ 
+      stores.push(store);
+    }
   });
   return stores;
 }
