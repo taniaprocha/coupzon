@@ -1,6 +1,7 @@
 var methods;
 var userLocation= null;
 var userData = null;
+var checkIns = [];
 
 $(document).ready(function() {
   var partialW = window.innerWidth;
@@ -21,12 +22,16 @@ $(document).ready(function() {
   $('#view-settings .terms').text(terms);
   $('#view-terms .terms-container .terms').text(terms);
   //window.localStorage.clear();
-  console.log(JSON.parse(window.localStorage.getItem('user')));
   userData = JSON.parse(window.localStorage.getItem('user'));
   console.log(userData);
   setTimeout(function(){
     $('.message-loading').addClass('show');
   }, 300);
+
+  if(userData !== null && userData.user === undefined){
+    window.localStorage.clear();
+  }
+
   if(userData === null){
     $('#loading').delay(2000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
       setTimeout(function(){
@@ -36,15 +41,25 @@ $(document).ready(function() {
       }, 200);
     });  
   }else{
-    $('#loading').delay(2000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
-      showUserQrCode(userData.barId);
-      $('.container-view').removeClass('selected');
-      $('#view-qrcode').addClass('selected');
-      $('.footer-menu').addClass('selected');
+    checkIns = userData.checkins; 
+    setUserInfo(userData.user);
+    loginUser(userData.user.password, false, userData.user.phone, function(){
+      showUserQrCode(userData.user.barId);
+      $('#coupzon-points').text('TEM '+userData.coupzonpoints+' PONTOS COUPZON');
       checkLocation();
     });
   }
 });
+
+function stopLoader(){
+  $('#loading').delay(2000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
+    $('.container-view').removeClass('selected');
+    $('#view-qrcode').addClass('selected'); setFotterMenu('menu-qrcode');
+    $('.footer-menu').addClass('selected');
+    $('.menu-container').removeClass('selected'); 
+    $('#menu-qrcode').addClass('selected');
+  });
+}
 
 var checkLoc=false;
 function checkLocation(){
@@ -150,13 +165,16 @@ $('#login-number').on('click', function(){
 
 $('#phone-password').on('click', function(){
   if($('#input-password').val() === ''){ $('.insert-password-title').addClass('alert'); return; }
-  var login = loginUser($('#input-password').val(), phoneNumber, function(success, barcodeId){
+  var login = loginUser($('#input-password').val(), true, phoneNumber, function(success, barcodeId){
     if(success === true){
+      userData = JSON.parse(window.localStorage.getItem('user'));
+      setUserInfo(userData);
+      checkIns = []; checkIns = userData.checkins;
       showUserQrCode(barcodeId);
       $('.insert-password-alert').css('opacity', 0); $('.message-not-received').removeClass('alert');
       $('.insert-password-title').removeClass('alert'); 
       $('.container-view').removeClass('selected');
-      $('#view-qrcode').addClass('selected');
+      $('#view-qrcode').addClass('selected'); setFotterMenu('menu-qrcode');
       $('.footer-menu').addClass('selected');
       $('#input-password').val('');
       checkLocation();
@@ -167,7 +185,10 @@ $('#phone-password').on('click', function(){
 });
 
 $('#logout').on('click', function(){
-  $('.container-view').removeClass('selected'); $('#login-phone').addClass('selected'); $('.footer-menu').removeClass('selected');
+  $('.container-view').removeClass('selected'); 
+  $('#login-phone').addClass('selected'); 
+  $('.footer-menu').removeClass('selected');
+  window.localStorage.clear();
 });
 
 $('#view-stores .search-btn').on('click', function(){
@@ -191,7 +212,10 @@ $('#search-input-awards').on('input',function(e){
 
 $('.menu-container').on('click', function(){
   var id= $(this).attr('id');
-  var totalH = 0;
+  setFotterMenu(id);
+});
+
+function setFotterMenu(id){
   $('.menu-container').removeClass('selected'); $(this).addClass('selected');
   $('.container-view').removeClass('selected'); $('.search-container.stores').css({opacity:0, top: '0px'});
   $('.stores-container').css({opacity:0});
@@ -220,7 +244,7 @@ $('.menu-container').on('click', function(){
       $('#view-settings').addClass('selected'); $('#tab').animate({marginLeft: '80%'}, 100);
       break;
   }
-});
+}
 
 $('.view-menu').on('click', function(){
   if($(this).hasClass('selected') && $('.stores-container').hasClass('selected') === false ){ return; }
@@ -251,9 +275,11 @@ $('.view-menu').on('click', function(){
 });
 
 $('.share-checkin-button').on('click', function(){
-  $('#back-store').addClass('share');
-  $('.body-container-store').hide();
-  $('.body-container-big.store.body-share').show();
+  if(parseFloat($('.share-checkin-button').css('opacity')) === 1){
+    $('#back-store').addClass('share');
+    $('.body-container-store').hide();
+    $('.body-container-big.store.body-share').show();
+  }
 });
 
 $('#back-terms').on('click', function(){
@@ -273,8 +299,41 @@ $('#back-store').on('click', function(){
 });
 
 $('#store-favorite').on('click', function(){
-  if($('#store-favorite').hasClass('favorite')){ $('#store-favorite').removeClass('favorite');
-  }else{ $('#store-favorite').addClass('favorite'); }
+  var storeId = $('.store-title').attr('id');
+  var store = getStoreById(storeId);
+  console.log(store.favorite);
+  if(store.favorite === true){ 
+    $('#store-favorite').removeClass('favorite');
+  }else{ 
+    $('#store-favorite').addClass('favorite'); 
+  }
+  setStoreFavorite(storeId, !store.favorite);
+});
+
+$('#share-checkins').on('click', function(){
+  var phoneNumber = $('#share-checkins-phone-number').val();
+  var checkinsNumber = $('#share-checkins-number').val(); checkinsNumber = parseInt(checkinsNumber);
+  var storeId = $('.store-title').attr('id');
+  $('#share-checkins-phone-number').val('');
+  $('#share-checkins-number').val('');
+  if(phoneNumber.length !== 9 && checkinsNumber <= 0){
+    return alert('Por favor coloque um numero correcto e o numero de check-ins a partilhar');
+  }else if(phoneNumber.length !== 9){
+    return alert('Por favor coloque um numero correcto');
+  }else if(checkinsNumber <= 0){
+    return alert('Por favor coloque o numero de check-ins a partilhar');
+  }
+  shareCheckIn(storeId, phoneNumber, checkinsNumber);
+});
+
+$('#send-award').on('click', function(){
+  var number = $('#share-award-number').val();
+  var prizeId = $('#view-award .title').attr('id');
+  $('#share-award-number').val('');
+  if(number.length !== 9){
+    return alert('Por favor coloque um numero correcto');
+  }
+  sharePrize(prizeId, number);
 });
 
 $('#award-share').on('click', function(){
@@ -313,6 +372,11 @@ $('.available-awards').on('click', function(){
   }
 });
 
+$('#change-password').on('click', function(){
+  $('.settings-container').removeClass('selected'); 
+  $('.settings-container.change-password-container').addClass('selected');
+});
+
 $('.settings-menu').on('click', function(){
   $('.settings-container').removeClass('selected');
   if($(this).hasClass('menu-profile') === true){ $('.profile-container').addClass('selected');
@@ -322,6 +386,14 @@ $('.settings-menu').on('click', function(){
   }else if($(this).hasClass('menu-language') === true){ $('.language-container').addClass('selected'); }
   $('#back-settings').removeClass('disable');
 });
+
+function setUserInfo(data){
+  console.log(data);
+  if(data.name !== ''){ $('#user-name').val(data.name); }
+  if(data.phone !== ''){ $('#user-phone').text(data.phone); }
+  if(data.email !== ''){ $('#user-email').val(data.email); }
+  if(data.nif !== ''){ $('#user-nif').val(data.nif); }
+}
 
 $('#back-settings').on('click', function(){
   $('.settings-container').removeClass('selected');
@@ -384,6 +456,7 @@ function showAllStores(){
 function saveOnLocalStorage(data){
   var dataToStore = JSON.stringify(data);
   window.localStorage.setItem('user', dataToStore);
+  console.log(window.localStorage);
 }
 
 function showUserQrCode(barId){

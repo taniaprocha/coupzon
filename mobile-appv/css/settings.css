@@ -133,7 +133,8 @@
 .body-container-big.settings .settings-container.faq-container,
 .body-container-big.settings .settings-container.terms-container,
 .body-container-big.settings .settings-container.language-container,
-.body-container-big.terms{
+.body-container-big.terms,
+.body-container-big.settings .settings-container.change-password-container{
   width: 90%;
   height: 100%;
   margin: 0 auto;
@@ -238,11 +239,29 @@
   -webkit-border-bottom: solid .1rem #BEDEE8;
   border-bottom: solid .1rem #BEDEE8;
   color: #0089C7;
+  width: 100%;
+  height: 3.5rem;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 1.3rem;
   padding: 1rem 0 .2rem 0;
 }
+
+.body-container-big.settings .settings-container.profile-container .profile-title .title,
+.body-container-big.settings .settings-container.profile-container .profile-title .change{
+  width: 50%;
+  float: left;
+  font-size: 1.3rem;
+  height: 2rem;
+}
+
+.body-container-big.settings .settings-container.profile-container .profile-title .change{
+  text-align: right;
+  color: #00436A;
+}
+ 
+.body-container-big.settings .settings-container.profile-container .user-password .profile-title,
+.body-container-big.settings .settings-container.profile-container .user-password .profile-title,
 
 
 .body-container-big.settings .settings-container.contacts-container .contact-description,
@@ -261,4 +280,69 @@
   font-weight: 400;
   font-size: 2rem;
   color: #B3B3B3;
+}
+
+.body-container-big.settings .settings-container.change-password-container .pass-line{
+  width: 100%;
+  -moz-border-bottom: solid .1rem #BEDEE8;
+  -webkit-border-bottom: solid .1rem #BEDEE8;
+  border-bottom: solid .1rem #BEDEE8;
+  color: #0089C7;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  padding: 1rem 0 .2rem 0;
+  height: 3.1rem;
+  margin-top: 1rem;
+}
+
+.body-container-big.settings .settings-container.change-password-container .pass-forget{
+  width: 100%;
+  text-align: right;
+  color: #0089C7;
+  font-size: 1.1rem;
+  padding: 1rem 0 .2rem 0;
+}
+
+.body-container-big.settings .settings-container.change-password-container .pass-line .pass-title{
+  width: 50%;
+  float: left;
+}
+
+.body-container-big.settings .settings-container.change-password-container .pass-line .pass-alert{
+  width: 50%;
+  float: left;
+  color: #ED1C24;
+  text-align: right;
+  opacity: 0;
+}
+
+.body-container-big.settings .settings-container.change-password-container input{
+  border: none;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  color: #B3B3B3;
+  padding-top: 1rem;
+}
+
+.body-container-big.settings .settings-container.change-password-container .change-password-btn,
+.body-container-big.settings .settings-container.profile-container .profile-info-btn{
+  background-color: #007FB1;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.7rem;
+     -moz-border-radius: .5rem;
+  -webkit-border-radius: .5rem;
+          border-radius: .5rem;
+  padding: .8rem 1rem .8rem 1rem;
+  width: 30rem;
+  text-align: center;
+  margin: 1.5rem auto 0 auto;
+}
+
+.body-container-big.settings .settings-container.change-password-container .change-password-btn{
+  margin-top: 2rem;
 }

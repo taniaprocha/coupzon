@@ -104,7 +104,7 @@
           <div class="qrcode">
             <div id="user-qrcode"></div>
           </div>
-          <div class="coupzon-points"><div class="points">TEM 10 PONTOS COUPZON</div></div>
+          <div class="coupzon-points"><div class="points" id="coupzon-points"></div></div>
           <div class="qrcode-text-2">
             <div class="table-cell">
               <div class="title">DESCUBRA EM “LOJAS” TODOS OS<br>DESCONTOS QUE ESTÃO À SUA ESPERA.</div>
@@ -215,12 +215,12 @@
               <div>PARA QUEM QUER ENVIAR O SEU PRÉMIO</div>
             </div>
             <div class="share-input">
-              <input type="number" placeholder="Número de telefone" name="number" value=""/>
+              <input id="share-award-number" type="number" placeholder="Número de telefone" name="number" value=""/>
             </div>
           </div>
           <div class="send-area">
             <div class="table-cell">
-              <div class="send-award">ENVIAR PRÉMIO</div>
+              <div class="send-award" id="send-award">ENVIAR PRÉMIO</div>
             </div>
           </div>
         </div>
@@ -295,20 +295,49 @@
             </div>
             <div class="profile-title">NOME</div>
             <div class="profile-description">
-              <input type="text" placeholder="Inserir nome" name="nome" value="">
+              <input id='user-name' type="text" placeholder="Inserir nome" name="nome" value="">
             </div>
             <div class="profile-title">NÚMERO DE TELEFONE</div>
-            <div class="profile-description">919191919</div>
-            <div class="profile-title">PASSWORD</div>
-            <div class="profile-description">******</div>
+            <div class="profile-description" id='user-phone'></div>
+            <div class="profile-title">
+              <div class='title'>PASSWORD</div>
+              <div class='change' id="change-password">ALTERAR</div>
+            </div>
+            <div class="profile-description" id='user-password'>******</div>
             <div class="profile-title">EMAIL</div>
             <div class="profile-description">
-              <input type="text" placeholder="Inserir email" name="email" value="">
+              <input id='user-email' type="text" placeholder="Inserir email" name="email" value="">
             </div>
             <div class="profile-title">NIF</div>
             <div class="profile-description">
-              <input type="text" placeholder="Inserir NIF" name="email" value="">
+              <input id='user-nif' type="text" placeholder="Inserir NIF" name="email" value="">
             </div>
+            <div class="profile-info-btn" id="send-profile-info">ATUALIZAR</div>
+          </div>
+          <div class="settings-container change-password-container">
+            <div class="pass-line">
+              <div class="pass-title">PASSWORD ATUAL</div>
+              <div class="pass-alert">PREENCHA, POR FAVOR</div>
+            </div>
+            <div class="actual-pass">
+              <input id='actual-pass-input' type="password" placeholder="Inserir password actual" value="">
+            </div>
+            <div class="pass-forget">ESQUECI-ME DA PASSWORD</div>
+            <div class="pass-line">
+              <div class="pass-title">NOVA PASSWORD</div>
+              <div class="pass-alert">PREENCHA, POR FAVOR</div>
+            </div>
+            <div class="new-pass">
+              <input id='new-pass-input' type="password" placeholder="Inserir nova password" value="">
+            </div>
+            <div class="pass-line">
+              <div class="pass-title">NOVA PASSWORD</div>
+              <div class="pass-alert">PREENCHA, POR FAVOR</div>
+            </div>
+            <div class="new-pass-confim">
+              <input id='new-pass-confim-input' type="password" placeholder="Inserir nova password" value="">
+            </div>
+            <div class="change-password-btn" id="send-change-password">CONFIRMAR</div>
           </div>
           <div class="settings-container contacts-container">
             <div class="title">
@@ -424,7 +453,7 @@
               <div>COM QUEM QUER PARTILHAR OS SEUS CHECK-INS</div>
             </div>
             <div class="share-input">
-              <input type="text" placeholder="Número de telefone" name="number" value=""/>
+              <input type="text" id='share-checkins-phone-number' placeholder="Número de telefone" name="number" value=""/>
             </div>
           </div>
           <div class="share-checkins-number">
@@ -433,10 +462,10 @@
               <div>QUANTOS QUER PARTILHAR?</div>
             </div>
             <div class="checkins-input">
-              <input type="text" placeholder="Check-ins a partilhar" name="number" value=""/>
+              <input type="text" id='share-checkins-number' placeholder="Check-ins a partilhar" name="number" value=""/>
             </div>
           </div>
-          <div class="share-checkins-btn">PARTILHAR CHECK-INS</div>
+          <div class="share-checkins-btn" id="share-checkins">PARTILHAR CHECK-INS</div>
         </div>
       </div>
       <div class="footer-menu">

@@ -11,15 +11,17 @@ var awardsData = [
   {id: 9, store: 9, validity: 1444867200, title: "2€ Desconto", description: "Compra superior a 20€ ganha um prémio de 2€"}
 ];
 
-var brandsData =[
-  {id: 1, name: "Sapatos e Sapatos",  categorie: 5, checkins: 1,  image: "assets/img4.jpg",    description: "A Sapatos e Sapatos produz os melhores Sapatos da Peninsula Ibérica. Neste momento tem 28 Lojas em Portugal e 10 em Espanha."},
-  {id: 2, name: "Chapéus Delas",      categorie: 1, checkins: 10, image: "assets/img1.jpg",  description: "A Chapéu Delas existe em Portugal desde 1967. Produz os chapéus mais bonitos para as mulheres mais bonitas, todas!"},
-  {id: 3, name: "Le Food",            categorie: 1, checkins: 8,  image: "assets/img2.jpg",    description: "Le Food oferece a melhor comida saudável. Desde uma salada a um batido, saudável é na Le Food."},
-  {id: 4, name: "Aneis e Companhia",  categorie: 4, checkins: 8,  image: "assets/img3.jpg",    description: "Somos os melhores de amigos dos homens e das mulheres, pois sabemos o que elas merecem e o que eles lhe devem oferecer."},
-  {id: 5, name: "Festanças",          categorie: 1, checkins: 8,  image: "assets/img5.jpg",    description: "Bolos e festas é na Festanças! Todos os artigos para as suas festas desde 1645! "}
-];
+var brandsData =[];
+/*var brandsData =[
+  {id: 1, name: "Sapatos e Sapatos",  categorie: 5, checkins: 1,  image: "assets/img4.jpg", description: "A Sapatos e Sapatos produz os melhores Sapatos da Peninsula Ibérica. Neste momento tem 28 Lojas em Portugal e 10 em Espanha."},
+  {id: 2, name: "Chapéus Delas",      categorie: 1, checkins: 10, image: "assets/img1.jpg", description: "A Chapéu Delas existe em Portugal desde 1967. Produz os chapéus mais bonitos para as mulheres mais bonitas, todas!"},
+  {id: 3, name: "Le Food",            categorie: 1, checkins: 8,  image: "assets/img2.jpg", description: "Le Food oferece a melhor comida saudável. Desde uma salada a um batido, saudável é na Le Food."},
+  {id: 4, name: "Aneis e Companhia",  categorie: 4, checkins: 8,  image: "assets/img3.jpg", description: "Somos os melhores de amigos dos homens e das mulheres, pois sabemos o que elas merecem e o que eles lhe devem oferecer."},
+  {id: 5, name: "Festanças",          categorie: 1, checkins: 8,  image: "assets/img5.jpg", description: "Bolos e festas é na Festanças! Todos os artigos para as suas festas desde 1645! "}
+];*/
 
-var storesData = [
+var storesData = [];
+/*var storesData = [
   {id : 1,  city: 14, brand: 1,  local: "Alegro Alfragide",    favorite: false, address: "Alegro Alfragide, Av. Dos Cavaleiros - Outorela - Carnaxide 2790-045 Carnaxide", email: '', phone: '218166590'},
   {id : 2,  city: 14, brand: 2,  local: "Cais da Viscondessa", favorite: false, address: "GARRETT, 54 - CHIADO 1200 - 204 LISBOA", email: 'mailto:info.online@gardenia.com.pt', phone: '93 451 31 58'},
   {id : 3,  city: 14, brand: 3,  local: "Rua Garrett",         favorite: true,  address: "Rua Garrett, n69/71 1200-203 Lisboa", email: '', phone: '218166590'},
@@ -29,7 +31,7 @@ var storesData = [
   {id : 7,  city: 2,  brand: 3,  local: "Braga Parque",        favorite: true, address: "Quinta dos Congregados 4710-427 Braga", email: '', phone: '218166590'},
   {id : 8,  city: 1,  brand: 3,  local: "Estação Viana Shopping",    favorite: false, address: "Cc Estação Viana Shopping 4900-317 VIANA, Portugal", email: '', phone: '218166590'},
   {id : 9,  city: 18,  brand: 5,  local: "PORTIMAO - Aqua Portimão", favorite: true, address: "Cc Aqua Portimão 8500-282 PORTIMAO, Portugal", email: '', phone: '218166590'}
-];
+];*/
 
 var categoriesData = [
   {id: 1, name: 'Restauração'},

@@ -86,10 +86,12 @@ input:focus{
   font-size: 1rem;
   display: none; 
   z-index: 1;
+  opacity: 1;
 }
 
 .container .container-view.selected{
   display: block;
+  opacity: 1;
 }
 
 .container .container-view.selected#loading-view{
@@ -196,6 +198,6 @@ input:focus{
     }
 }
 
-#login-phone{
+/*#login-phone{
   opacity: 0;
-}
+}*/

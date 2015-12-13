@@ -51,12 +51,11 @@ storesMethods.prototype.showSelectedStores = function(selectedCategories, select
   });
   function appendStore(store, container, type, storesWidthAward, brand) {
     if(storesWidthAward.length > 0 && storesWidthAward.indexOf(store.id) === -1){ return; }
-    var premio = getAwardByStoreId(store.id); 
     var categoria = getCategorieNameById(brand.categorie).toUpperCase();
     if(type === 1){
-      container.append(setStoreDiv1(store.id, premio, store.local));
+      container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address));
     }else{
-      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, premio));
+      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize));
     }    
   }
   if(results === 0){
@@ -74,31 +73,46 @@ function showFilteredBrands(brands, container, menu){
       storesWidthAward.push(award.store);
     });
   }
+  var totalPrices = 0;
   brands.forEach(function(brand){
     var categoria = getCategorieNameById(brand.categorie).toUpperCase();
     var brandDiv;
     var stores = getStoresByBrand(brand.id);
     if(stores !== null && stores.length > 0){
+      var favoritesCount = 0;
+      var pricesCount = 0;
       if(stores.length > 1){
         brandDiv = setBrandDiv(brand.name, brand.id, brand.image, categoria);
         stores.forEach(function(store){
           if(menu === 'awards'){
             if(storesWidthAward.indexOf(store.id) !== -1){
-              appendStore(store, brandDiv, 1, storesWidthAward, brand);
+              appendStore(store, brandDiv, 1, storesWidthAward, brand); pricesCount++;
             }
           }else if(menu === 'favorites'){
-            if(store.favorite === true){
-              appendStore(store, brandDiv, 1, storesWidthAward, brand);
+            if(store.favorite === true){ 
+              appendStore(store, brandDiv, 1, storesWidthAward, brand); favoritesCount++;
             }
           }else{
             appendStore(store, brandDiv, 1, storesWidthAward, brand);
           }
         });
-        container.append(brandDiv);
+        if(menu === 'favorites'){ 
+          if(favoritesCount > 0){ 
+            container.append(brandDiv); 
+          }else{ 
+            container.append('<div class="no-stores-filtered">Não existem favoritos para mostrar.</div>');
+          }
+        }else if(menu === 'awards'){ 
+          if(pricesCount > 0){ 
+            container.append(brandDiv); 
+          }
+        }else{ 
+          container.append(brandDiv); 
+        }
       }else{
         if(menu === 'awards'){
           if(storesWidthAward.indexOf(stores[0].id) !== -1){
-            appendStore(stores[0], container, 2, storesWidthAward, brand);
+            appendStore(stores[0], container, 2, storesWidthAward, brand); pricesCount++;
           }
         }else if(menu === 'favorites'){
           if(stores[0].favorite === true){
@@ -109,16 +123,19 @@ function showFilteredBrands(brands, container, menu){
         }
       }
     }
+    totalPrices = totalPrices + pricesCount;
   });
+  //console.log('total prices', totalPrices);
+  if(menu === 'awards' && totalPrices <= 0){ 
+    container.append('<div class="no-stores-filtered">Não existem prémios para mostrar.</div>');
+  }
   function appendStore(store, container, type, storesWidthAward, brand) {
     if(storesWidthAward.length > 0 && storesWidthAward.indexOf(store.id) === -1){ return; }
-    var premio = getAwardByStoreId(store.id); 
     var categoria = getCategorieNameById(brand.categorie).toUpperCase();
-    console.log(store);
     if(type === 1){
-      container.append(setStoreDiv1(store.id, premio, store.local));
+      container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address));
     }else{
-      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, premio));
+      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize));
     }    
   }
   
@@ -134,9 +151,11 @@ function showAwardDetail(award, store){
   $('.container-view').removeClass('selected');
   $('#view-award').addClass('selected');
   var brand = getBrandByStoreId(store.id);
+  var imageUrl = (siteUrl+brand.image).toString();
+  $('#view-award .title').attr('id', award.id);
   $('#brand-title').text(brand.name.toUpperCase());
   $('#brand-local').text(store.local);
-  $('#brand-image').css({backgroundImage: 'url('+brand.image+')'});
+  $('#brand-image').css({backgroundImage: 'url('+imageUrl+')'});
   $('#award-title').text(' '+award.title.toUpperCase());
   $('#award-validity').text(moment(award.validity*1000).format('YYYY-MM-DD'));
 }
@@ -234,12 +253,16 @@ function showStoreDetails(storeId){
   var imageUrl = (siteUrl+brand.image).toString();
   $('#store-image').css({backgroundImage: 'url('+imageUrl+')'});
   $('#store-name').text(brand.name.toUpperCase());
-  $('#store-local').text(store.local || '');
+  $('#store-local').text((store.local !== null) ? store.local : store.address);
   $('#store-available-awards').text((award !== null) ? '1' : '0');
-  $('#store-check-ins').text((brand.checkins !== null) ? brand.checkins : '');
-  var validity = (award !== null) ? validity = 'Validade até: '+moment(award.validity*1000).format('YYYY-MM-DD') : validity = '';
-  $('#store-award-validity').text(validity);
-  $('#store-award-description').text((award !== null) ? award.description.toUpperCase() : '');
+  
+  var checkins = getAvailableCheckinsByStore(id);
+  $('#store-check-ins').text(checkins);
+  if(checkins <= 0){ $(".share-checkin-button").css("opacity", .3);
+  }else{ $(".share-checkin-button").css("opacity", 1); }
+  //var validity = (award !== null) ? validity = 'Validade até: '+moment(award.validity*1000).format('YYYY-MM-DD') : validity = '';
+  $('#store-award-validity').text('Validade até: Falta validade');
+  $('#store-award-description').text((store.description_prize !== undefined) ? store.description_prize.toUpperCase() : '');
   $('#store-description').text(brand.description);
   if(store.favorite === true){ store.favorite = true; $('#store-favorite').addClass('favorite'); }
   $('#store-address').text(store.address);
@@ -248,6 +271,16 @@ function showStoreDetails(storeId){
   (store.address !== null) ? $('.address').show() : $('.address').hide();
   (store.phone !== null) ? $('.phone').show() : $('.phone').hide();
   (store.email !== null) ? $('.email').show() : $('.email').hide();
+}
+
+function getAvailableCheckinsByStore(idStore){
+  var value = 0;
+  checkIns.forEach(function(checkin){
+    if(checkin.id_store === idStore){
+      value = (checkin.total !== undefined) ? checkin.total : 1;
+    }
+  });
+  return value;
 }
 
 function setBrandDiv(name, id, image, categorie){
@@ -265,13 +298,13 @@ function setBrandDiv(name, id, image, categorie){
   return brandDiv;
 }
 
-function setStoreDiv1(id, premio, local){
+function setStoreDiv1(id, premio, local, address){
   var storeDiv = $('<li class="store-container store1" id="store-'+id+'"></li>');
-    var _validity, title = '';
-    (premio !== null) ? _validity = 'Válido até '+moment(premio.validity*1000).format('YYYY-MM-DD') : _validity = '';
-    (premio !== null) ? title = premio.title : title = '';
+    var _validity = 'Sem validade definida';
+    //(premio !== null) ? _validity = 'Válido até '+moment(premio.validity*1000).format('YYYY-MM-DD') : _validity = '';
+    var title = (premio !== undefined) ? premio : 'Sem prémio';
     storeDiv.append($('<div class="body">'
-      +'<div class="local">'+local+'</div>'
+      +'<div class="local">'+((local !== null) ? local : address)+'</div>'
       +'<div class="description">'+title+'</div>'
       +'<div class="validity">'+_validity+'</div>'
     +'</div>'
@@ -281,7 +314,7 @@ function setStoreDiv1(id, premio, local){
 
 function setStoreDiv2(name, id, categorie, image, premio){
   var title = '';
-  (premio !== null) ? title = premio.title : title = '';
+  title = (premio !== undefined) ? premio : 'Sem prémio';
   var imageUrl = (siteUrl+image).toString();
   var storeDiv = $('<li class="store-container store2" id="store-'+id+'">'
         +'<div class="image" style="background-image: url('+imageUrl+')"></div>'
