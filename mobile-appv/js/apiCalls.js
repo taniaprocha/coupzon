@@ -47,8 +47,6 @@ function loginUser(password, md5, number, callback){
     if(data.code === undefined){ data = data = eval("(function(){return " + data + ";})()"); }
     if(data.code === 403){ callback(false);
     }else if(data.code === 200){
-      checkIns = []; checkIns = data.checkins;
-      console.log(checkIns);
       saveOnLocalStorage(data.data);
       callback(true, data.data.user.barId);
     }
@@ -57,7 +55,7 @@ function loginUser(password, md5, number, callback){
 }
 
 function getStoresFromAPI(location){
-  var data = { lat: location.lat, long: location.long, category: -1, city: -1, checkVal: '-', radius: 30, id_user: userData.user.id };
+  var data = { lat: (location && location.lat) ? location.lat : '0', long: (location && location.long) ? location.long : '0', category: -1, city: -1, checkVal: '-', radius: 30, id_user: userData.user.id };
   console.log(data);
   $.ajax({ type: 'POST', url: apiUrl+"/getCloseStores.html", data: data, cache: false})
   .done(function(data){ 
@@ -228,6 +226,20 @@ function shareCheckIn(idStore, number, checkins){
       $('.body-container-big.store.body-share').hide();
       $('#view-stores').addClass('selected');
     }
+  })
+  .fail(function(){ 
+    console.log("Some error occurred. Try later"); 
+  });
+}
+
+function setProfileInfo(name, email, nif){
+  var data = {checkVal: '-', id_user: userData.user.id,name: name, email: email, nif: nif};
+  console.log('set profile info ', data);
+  $.ajax({ type: 'POST', url: apiUrl+"/setProfileInfo.html", data: data, cache: false})
+  .done(function(data){ 
+    data = eval("(function(){return " + data + ";})()");
+    console.log("set profile info second success", data ); 
+    
   })
   .fail(function(){ 
     console.log("Some error occurred. Try later"); 

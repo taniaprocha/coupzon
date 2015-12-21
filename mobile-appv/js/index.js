@@ -70,7 +70,7 @@ function checkLocation(){
   }else{
     // remover quando for para o telemovel
     getLocation(function(position){
-      userLocation = {lat: position.lat, long: position.lng};
+      userLocation = ( position !== null) ? {lat: position.lat, long: position.lng} : null;
       if(checkLoc === true){
         getStoresFromAPI(userLocation);
       }
@@ -370,6 +370,14 @@ $('.available-awards').on('click', function(){
   }else if( awards > 1){
 
   }
+});
+
+$('#send-profile-info').on('click', function(){
+  var name = $('#user-name').val();
+  var email = $('#user-email').val();
+  var nif = $('#user-nif').val();
+  console.log(name, email, nif);
+  setProfileInfo(name, email, nif);
 });
 
 $('#change-password').on('click', function(){
