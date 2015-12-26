@@ -385,6 +385,18 @@ $('#change-password').on('click', function(){
   $('.settings-container.change-password-container').addClass('selected');
 });
 
+$('#send-change-password').on('click', function(){
+  var oldPassword = $('#actual-pass-input').val();
+  var newPassword = $('#new-pass-input').val();
+  if($('#new-pass-confim-input').val() !== newPassword){
+    $('#actual-pass-input').val(''); $('#new-pass-confim-input').val('');
+    return alert('Passwords não coincidem');
+  }
+  if(newPassword !== ''){
+    changePassword(oldPassword, newPassword);
+  }
+});
+
 $('.settings-menu').on('click', function(){
   $('.settings-container').removeClass('selected');
   if($(this).hasClass('menu-profile') === true){ $('.profile-container').addClass('selected');
@@ -462,6 +474,7 @@ function showAllStores(){
 }
 
 function saveOnLocalStorage(data){
+  if(userData !== null){ window.localStorage.clear(); }
   var dataToStore = JSON.stringify(data);
   window.localStorage.setItem('user', dataToStore);
   console.log(window.localStorage);

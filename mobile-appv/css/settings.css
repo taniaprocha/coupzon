@@ -311,6 +311,7 @@
   color: #0089C7;
   font-size: 1.1rem;
   padding: 1rem 0 .2rem 0;
+  opacity: 0;
 }
 
 .body-container-big.settings .settings-container.change-password-container .pass-line .pass-title{

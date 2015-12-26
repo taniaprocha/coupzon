@@ -233,13 +233,36 @@ function shareCheckIn(idStore, number, checkins){
 }
 
 function setProfileInfo(name, email, nif){
-  var data = {checkVal: '-', id_user: userData.user.id,name: name, email: email, nif: nif};
+  var data = {checkVal: '-', id_user: userData.user.id, name: name, email: email, nif: nif};
   console.log('set profile info ', data);
   $.ajax({ type: 'POST', url: apiUrl+"/setProfileInfo.html", data: data, cache: false})
   .done(function(data){ 
     data = eval("(function(){return " + data + ";})()");
     console.log("set profile info second success", data ); 
-    
+    if(data !== undefined && data.user !== undefined){
+      //saveOnLocalStorage(data);
+      //setUserInfo(data.user);
+    }
+  })
+  .fail(function(){ 
+    console.log("Some error occurred. Try later"); 
+  });
+}
+
+function changePassword(oldPassword, newPassword){
+
+  var data = {checkVal: '-', id_user: userData.user.id, pass: md5converter(newPassword), previous_pass: md5converter(oldPassword)};
+  console.log('change password : old: ', oldPassword ,' new: ', newPassword, data);
+  $.ajax({ type: 'POST', url: apiUrl+"/changePassword.html", data: data, cache: false})
+  .done(function(data){ 
+    data = eval("(function(){return " + data + ";})()");
+    console.log("change password", data ); 
+    if(data !== undefined && data.user !== undefined){
+      //saveOnLocalStorage(data);
+      //setUserInfo(data.user);
+    }
+    $('.settings-container').removeClass('selected');
+    $('.settings-container.profile-container').addClass('selected');
   })
   .fail(function(){ 
     console.log("Some error occurred. Try later"); 
