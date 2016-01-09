@@ -2,6 +2,25 @@ var methods;
 var userLocation= null;
 var userData = null;
 var checkIns = [];
+var isMobile = false;
+
+function detectmob() { 
+ if( navigator.userAgent.match(/Android/i)
+ || navigator.userAgent.match(/webOS/i)
+ || navigator.userAgent.match(/iPhone/i)
+ || navigator.userAgent.match(/iPad/i)
+ || navigator.userAgent.match(/iPod/i)
+ || navigator.userAgent.match(/BlackBerry/i)
+ || navigator.userAgent.match(/Windows Phone/i)
+ ){
+    isMobile = true; return isMobile;
+  }
+ else {
+    isMobile = false; return isMobile;
+  }
+}
+
+detectmob();
 
 $(document).ready(function() {
   var partialW = window.innerWidth;
@@ -79,6 +98,7 @@ function checkLocation(){
 }
 
 document.addEventListener("deviceready", function(){
+  isMobile = false;
   getLocation(function(position){
     userLocation = {lat: position.lat, long: position.lng};
     if(checkLoc === true){
@@ -92,9 +112,9 @@ document.addEventListener("deviceready", function(){
                       'Device UUID: '     + device.uuid     + '<br />' +
                       'Device Version: '  + device.version  + '<br />';
   alert(device.uuid);*/
+  getContactList();
 }, false); 
 
-/*document.addEventListener("deviceready", getContactList, false); 
 
 function getContactList() {
   var contactList = new ContactFindOptions(); 
@@ -104,13 +124,50 @@ function getContactList() {
   navigator.contacts.find(fields, getContactFields, onContactsError, contactList );
 }
 
+function onContactsError(contactError) {
+  alert('onError!');
+}
+
 function getContactFields(contacts) {
   var contactsName = [];
   for (var i=0; i<contacts.length; i++){
-    contactsName.push(contacts[i].displayName);
+    var numbers =[];
+    if(contacts[i].phoneNumbers && contacts[i].phoneNumbers.length > 0){
+      contacts[i].phoneNumbers.forEach(function(number){
+        if(number.type === 'mobile' && numbers.indexOf(number.value) === -1){
+          numbers.push(number.value);
+        }
+      });
+    }
+    numbers.forEach(function(number){
+      contactsName.push({name: contacts[i].displayName, number: number});
+    });
   } 
-  //alert(JSON.stringify(contactsName));
-}*/
+
+  contactsName.forEach(function(contact){
+    $('#select-number-store').append('<option value="'+contact.number+'">'+contact.name+'</option>');
+    $('#select-number-awards').append('<option value="'+contact.number+'">'+contact.name+'</option>');
+  });
+}
+
+function onContactSelectedAwards(){
+  var value = $('#select-number-awards').find(":selected").val();
+  if(value !== ''){
+    $('#share-award-number').val(value);
+  }
+}
+
+function onContactSelectedStore(){
+  var value = $('#select-number-store').find(":selected").val();
+  if(value !== ''){
+    $('#share-checkins-phone-number').val(value);
+  }
+  
+}
+
+window.onerror = function (errorMsg, url, lineNumber) {
+  //alert('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber);
+}
 
 $('#check-terms-title').on('click', function(){
   $('.container-view').removeClass('selected'); $('#view-terms').addClass('selected');
@@ -168,7 +225,7 @@ $('#phone-password').on('click', function(){
   var login = loginUser($('#input-password').val(), true, phoneNumber, function(success, barcodeId){
     if(success === true){
       userData = JSON.parse(window.localStorage.getItem('user'));
-      setUserInfo(userData);
+      setUserInfo(userData.user);
       checkIns = []; checkIns = userData.checkins;
       showUserQrCode(barcodeId);
       $('.insert-password-alert').css('opacity', 0); $('.message-not-received').removeClass('alert');
@@ -224,7 +281,7 @@ function setFotterMenu(id){
       $('#view-stores').addClass('selected'); $('#tab').animate({marginLeft: '40%'}, 100);
       if($('#back-store').hasClass('stores') === false){ $('#back-store').addClass('stores'); } $('#back-store').removeClass('favorites');
       $('.search-container.stores').css({height: $('.view-menu-container').height()+'px'});
-      showAllStores();
+      showAllStores('stores');
       break;
     case 'menu-qrcode':
       $('#view-qrcode').addClass('selected'); $('#tab').animate({marginLeft: '0%'}, 100);
@@ -257,7 +314,7 @@ $('.view-menu').on('click', function(){
 
   switch($(this).attr('id')){
     case 'stores-all':
-      showAllStores();
+      showAllStores('stores');
       break;
     case 'stores-categories':
       $('.categories-container').addClass('selected'); $('.categories-container').animate({marginLeft: 0, opacity: 1}, 300);
@@ -279,6 +336,8 @@ $('.share-checkin-button').on('click', function(){
     $('#back-store').addClass('share');
     $('.body-container-store').hide();
     $('.body-container-big.store.body-share').show();
+    var number = $('#store-check-ins').text();
+    $('.share-checkins-number .title .check').text('TEM '+number+' CHECK-IN ACUMULADOS.');
   }
 });
 
@@ -287,13 +346,15 @@ $('#back-terms').on('click', function(){
 });
 
 $('#back-store').on('click', function(){
-  showAllStores();
   if($('#back-store').hasClass('share') === true){
+    showAllStores('stores');
     $('#back-store').removeClass('share');
     $('.body-container-store').show(); $('.body-container-big.store.body-share').hide(); return;
   }else if($('#back-store').hasClass('stores') === true){
+    showAllStores('stores');
     $('#view-store').removeClass('selected'); $('#view-stores').addClass('selected');
   }else if($('#back-store').hasClass('favorites') === true){
+    showAllStores('favorites');
     $('#view-store').removeClass('selected'); $('#view-favorites').addClass('selected');
   }
 });
@@ -376,7 +437,9 @@ $('#send-profile-info').on('click', function(){
   var name = $('#user-name').val();
   var email = $('#user-email').val();
   var nif = $('#user-nif').val();
-  console.log(name, email, nif);
+  $('#user-name').blur();
+  $('#user-email').blur();
+  $('#user-nif').blur();
   setProfileInfo(name, email, nif);
 });
 
@@ -408,7 +471,7 @@ $('.settings-menu').on('click', function(){
 });
 
 function setUserInfo(data){
-  console.log(data);
+  console.log('set user info --->', data);
   if(data.name !== ''){ $('#user-name').val(data.name); }
   if(data.phone !== ''){ $('#user-phone').text(data.phone); }
   if(data.email !== ''){ $('#user-email').val(data.email); }
@@ -465,12 +528,12 @@ function searchBrands(searchValue, container, type){
   }
 }
 
-function showAllStores(){
+function showAllStores(menu){
   $('.categorie-container').removeClass('selected'); $('.location-container').removeClass('selected'); 
   $('#selected-place').text(''); $('#selected-categories').text('');
   $('.view-menu').removeClass('selected'); $('.all-menu').addClass('selected');
   $('#search-input-stores').val(''); 
-  methods.showAllBrands($('.stores-container'), 'stores');
+  methods.showAllBrands($('.stores-container'), menu);
 }
 
 function saveOnLocalStorage(data){
@@ -505,3 +568,18 @@ function getLocation(callback){
   }
 
 }
+
+/*
+ * Fix for footer when the keyboard is displayed
+ */
+
+if(isMobile === true){
+  $(document).on('focus', 'input, textarea', function(){
+    $('.footer-menu').hide();
+  });
+
+  $(document).on('blur', 'input, textarea', function(){
+    $('.footer-menu').show();
+  });
+}
+

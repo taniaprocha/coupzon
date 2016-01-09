@@ -212,7 +212,7 @@
   width: 25%;
   float: left;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: center center;
   overflow: hidden;
 }

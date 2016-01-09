@@ -217,6 +217,11 @@
             <div class="share-input">
               <input id="share-award-number" type="number" placeholder="Número de telefone" name="number" value=""/>
             </div>
+            <div class="select-number">
+              <select id="select-number-awards" onchange="onContactSelectedAwards()">
+                <option value="">Seleccione o contacto</option>
+              </select>
+            </div>
           </div>
           <div class="send-area">
             <div class="table-cell">
@@ -360,10 +365,40 @@
               <div class="name"><span>F.A.Q.</span></div>
             </div>
             <div class="faqs">
-              <div class="question">Question 1</div>
-              <div class="answer">Vivamus sodales ligula at felis pharetra rhoncus. Nullam aliquet, neque ac gravida fermentum, purus orci feugiat massa, laoreet laoreet magna erat a urna. Duis eu libero quam. Mauris vel malesuada ipsum, vitae luctus lacus. Donec eleifend, leo nec ornare lobortis, velit est tincidunt elit, interdum feugiat sapien purus at eros. Maecenas sit amet erat imperdiet, consequat arcu non, tristique enim. In rutrum fermentum neque eu venenatis.</div>
-              <div class="question">Question 2</div>
-              <div class="answer">Aenean urna enim, facilisis nec consequat a, lacinia id turpis. Curabitur a est eleifend, bibendum dui malesuada, sagittis metus. Nulla pellentesque nisi ac luctus ullamcorper. Proin vitae mauris ut enim tristique sagittis. Maecenas et enim ac ligula vestibulum tempus. Quisque tortor lectus, scelerisque et justo ut, malesuada elementum nisl. In accumsan vehicula ante vitae eleifend.</div>
+              <div class="type">Users</div>
+              <div class="question">1 - Coupzon, o que é e como vai mudar a minha vida?</div>
+              <div class="answer">A Coupzon é um serviço de fidelização e acumulação de cupões e descontos. Na Coupzon podes encontrar várias marcas tuas conhecidas que aceitaram juntar-se a um serviço único no mundo. A tua vida é agora muito mais fácil e principalmente a da tua namorada, tudo no mesmo sítio era o que faltava a todos, um para todos!</div>
+              <div class="question">2 - O que é um Check-in?</div>
+              <div class="answer">Check-ins são como carimbos digitais. Nas marcas onde tens que acumular carimbos, deves apresentar na loja o teu código de barras que se encontra na página principal (ID). Caso não tenhas a Coupzon contigo, podes sempre dar o teu número de telefone na loja.</div>
+              <div class="question">3 - Quantos Check-ins tenho?</div>
+              <div class="answer">Na página “Lojas” podes ver em cada marca quantos check-ins tens, caso a marca tenha uma campanha de acumulação de carimbos.</div>
+              <div class="question">4 - Todas as marcas têm Check-ins?</div>
+              <div class="answer">Não, existem marcas que onde não é necessário a acumulação de check-ins. Estas podem atribuir cupões ou outro tipo de prémios, que podes encontrar na página “Prémios”.</div>
+              <div class="question">5 - Como sei que tenho prémios?</div>
+              <div class="answer">Os prémios encontram-se na página “Prémios”. Podes ver também na página de cada marca se já foi atribuído algum dos prémios.</div>
+              <div class="question">6 - Como reclamo os meus prémios?</div>
+              <div class="answer">Para receberes os teus prémios, deves dirigir-te à página “Prémios” e à marca em questão e apresentar o código do prémio específico. </div>
+              <div class="question">7 - O que são Pontos Coupzon?</div>
+              <div class="answer">Os pontos Coupzon são oferta da casa. Além de tudo o que ganhas com a Coupzon, nós oferecemos pontos com cada acção tua que podem vir a ser trocados mais tarde por prémios. Por cada acção (Check-in, utilização de cupões, etc..) oferecemos 1 ponto Coupzon.</div>
+              <div class="question">8 - Como protegem a minha privacidade?</div>
+              <div class="answer">A Coupzon vai de acordo ao código de conduta da comissão nacional de base de dados, onde asseguramos que todos os dados pessoais serão guardados e serão intransmissíveis a terceiros.</div>
+              <div class="question">9 - Quer sair da Coupzon, o que devo fazer?</div>
+              <div class="answer">Apesar de acharmos que é um dos maiores erros da vida, deves enviar um email para support@coupzon.com.</div>
+              <div class="question">8 - Onde posso encontrar a Coupzon?</div>
+              <div class="answer">A Coupzon está na AppStore na GoogleStore e podes sempre aceder em <a href="http://www.coupzon.com/app">www.coupzon.com/app</a>.</div>
+              <div class="type">Clients</div>
+              <div class="question">1 - Onde é que a Coupzon me vai ajudar?</div>
+              <div class="answer">A Coupzon irá ajudar a sua marca a trazer novos clientes, mas principalmente irá ajudá-los a ficarem fidelizados.</div>
+              <div class="question">2 - Como faço para aderir?</div>
+              <div class="answer">Deixe-nos o seu contacto no formulário abaixo e entraremos em contacto consigo nas próximas 48h.</div>
+              <div class="question">3 - Quanto tempo demora até uma campanha estar pronta?</div>
+              <div class="answer">Em média, dentro de uma semana após a escolha da campanha, a sua marca estará na Coupzon.</div>
+              <div class="question">4 - Existem custos de integração e mensais?</div>
+              <div class="answer">Não.</div>
+              <div class="question">5 - A minha marca não tem leitor de código de barras, pode aderir na mesma?</div>
+              <div class="answer">Sim pode. Apesar de a Coupzon ser mais eficaz com o leitor, tudo funciona perfeitamente sem o mesmo.</div>
+              <div class="question">6 - É preciso algum software específico para integrar?</div>
+              <div class="answer">Não. A Coupzon foi feita a pensar em todos os casos, dando para integrar com POS ou simplesmente através de uma aplicação WEB.</div>
             </div>
           </div>
           <div class="settings-container terms-container">
@@ -455,10 +490,15 @@
             <div class="share-input">
               <input type="text" id='share-checkins-phone-number' placeholder="Número de telefone" name="number" value=""/>
             </div>
+            <div class="select-number">
+              <select id="select-number-store" onchange="onContactSelectedStore()">
+                <option value="">Seleccione o contacto</option>
+              </select>
+            </div>
           </div>
           <div class="share-checkins-number">
             <div class="title">
-              <div>TEM 8 CHECK-IN ACUMULADOS.</div>
+              <div class="check">TEM CHECK-IN ACUMULADOS.</div>
               <div>QUANTOS QUER PARTILHAR?</div>
             </div>
             <div class="checkins-input">

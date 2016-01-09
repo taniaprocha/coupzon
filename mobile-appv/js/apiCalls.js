@@ -178,7 +178,7 @@ function checkAwards(awards, callback){
   });
   awardsData = [];
   awardsData = awards;
-  console.log('awards', JSON.stringify(awards));
+  console.log('awards', awards);
   stopLoader();
   if(callback){
     callback();
@@ -257,7 +257,7 @@ function changePassword(oldPassword, newPassword){
   .done(function(data){ 
     data = eval("(function(){return " + data + ";})()");
     console.log("change password", data ); 
-    if(data !== undefined && data.user !== undefined){
+    if(data !== undefined && data.user !== undefined && data.user !== null){
       //saveOnLocalStorage(data);
       //setUserInfo(data.user);
     }

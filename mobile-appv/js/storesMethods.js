@@ -10,7 +10,7 @@ storesMethods.prototype.showFilteredBrands = function(container, menu, brands){
 
 storesMethods.prototype.showAllBrands = function(container, menu){
   $('.brand-container').off(); $('.store-container').off(); container.empty();
-  container.addClass('selected'); container.animate({opacity: 1}, 300); 
+  container.addClass('selected'); container.animate({opacity: 1}, 300);
   showFilteredBrands(brandsData, container, menu);
 };
 
@@ -74,6 +74,7 @@ function showFilteredBrands(brands, container, menu){
     });
   }
   var totalPrices = 0;
+  var totalFavorites = 0;
   brands.forEach(function(brand){
     var categoria = getCategorieNameById(brand.categorie).toUpperCase();
     var brandDiv;
@@ -99,8 +100,6 @@ function showFilteredBrands(brands, container, menu){
         if(menu === 'favorites'){ 
           if(favoritesCount > 0){ 
             container.append(brandDiv); 
-          }else{ 
-            container.append('<div class="no-stores-filtered">Não existem favoritos para mostrar.</div>');
           }
         }else if(menu === 'awards'){ 
           if(pricesCount > 0){ 
@@ -116,7 +115,7 @@ function showFilteredBrands(brands, container, menu){
           }
         }else if(menu === 'favorites'){
           if(stores[0].favorite === true){
-            appendStore(stores[0], container, 2, storesWidthAward, brand);
+            appendStore(stores[0], container, 2, storesWidthAward, brand); favoritesCount++;
           }
         }else{
           appendStore(stores[0], container, 2, storesWidthAward, brand);
@@ -124,11 +123,16 @@ function showFilteredBrands(brands, container, menu){
       }
     }
     totalPrices = totalPrices + pricesCount;
+    totalFavorites = totalFavorites + favoritesCount;
   });
   //console.log('total prices', totalPrices);
   if(menu === 'awards' && totalPrices <= 0){ 
     container.append('<div class="no-stores-filtered">Não existem prémios para mostrar.</div>');
   }
+  if(menu === 'favorites' && totalFavorites <= 0){ 
+    container.append('<div class="no-stores-filtered">Não existem favoritos para mostrar.</div>');
+  }
+
   function appendStore(store, container, type, storesWidthAward, brand) {
     if(storesWidthAward.length > 0 && storesWidthAward.indexOf(store.id) === -1){ return; }
     var categoria = getCategorieNameById(brand.categorie).toUpperCase();
@@ -141,9 +145,9 @@ function showFilteredBrands(brands, container, menu){
   
   addBrandListener();
   if(menu === 'stores' || menu === 'favorites'){
-    addStoreListeners();
+    addStoreListeners(menu);
   }else if(menu === 'awards'){
-    addAwardListeners();
+    addAwardListeners(menu);
   }
 }
 
@@ -158,6 +162,10 @@ function showAwardDetail(award, store){
   $('#brand-image').css({backgroundImage: 'url('+imageUrl+')'});
   $('#award-title').text(' '+award.title.toUpperCase());
   $('#award-validity').text(moment(award.validity*1000).format('YYYY-MM-DD'));
+
+  var codeH = $("#award-qrcode").height();
+  console.log(award.barCode, codeH);
+  $("#award-qrcode").barcode(award.barCode, "ean13", {barWidth: (codeH*.02), barHeight:codeH*.8+'px', fontSize: codeH*.2+'px'});
 }
 
 storesMethods.prototype.showCategories = function(container){
@@ -207,7 +215,7 @@ storesMethods.prototype.showLocations = function(container){
   }
 };
 
-function addAwardListeners(){
+function addAwardListeners(menu){
   $('.store-container').on('click', function(){
     $('#view-award').find($('.back')).removeClass('back-share');
     $('#view-award').find($('.back')).addClass('back-award');
@@ -218,11 +226,11 @@ function addAwardListeners(){
   });
 }
 
-function addStoreListeners(){
+function addStoreListeners(menu){
   $('.store-container').on('click', function(){
     $('.container-view').removeClass('selected');
     $('#view-store').addClass('selected');
-    showStoreDetails($(this).attr('id'));
+    showStoreDetails($(this).attr('id'), menu);
   });
 }
 
@@ -240,8 +248,8 @@ function addBrandListener(){
   });
 }
 
-function showStoreDetails(storeId){
-  methods.showAllBrands($('.stores-container'), 'stores');
+function showStoreDetails(storeId, menu){
+  methods.showAllBrands($('.stores-container'), menu);
   $('.body-container-big.store.body-share').hide();
   var id = storeId; id = id.substring(id.indexOf('-')+1, id.length);
   var store = getStoreById(parseInt(id));
@@ -257,9 +265,17 @@ function showStoreDetails(storeId){
   $('#store-available-awards').text((award !== null) ? '1' : '0');
   
   var checkins = getAvailableCheckinsByStore(id);
-  $('#store-check-ins').text(checkins);
-  if(checkins <= 0){ $(".share-checkin-button").css("opacity", .3);
-  }else{ $(".share-checkin-button").css("opacity", 1); }
+  if(brand.has_checkin === true){
+    $('.available-check-ins').css('display', 'table');
+    $('#store-check-ins').text(checkins);
+    $(".share-checkin-button").css('display', 'table');
+    if(checkins <= 0){ $(".share-checkin-button").css("opacity", .3);
+    }else{ $(".share-checkin-button").css("opacity", 1); }
+  }else{
+    $('.available-check-ins').css('display', 'none');
+    $(".share-checkin-button").css('display', 'none');
+  }
+  
   //var validity = (award !== null) ? validity = 'Validade até: '+moment(award.validity*1000).format('YYYY-MM-DD') : validity = '';
   $('#store-award-validity').text('Validade até: Falta validade');
   $('#store-award-description').text((store.description_prize !== undefined) ? store.description_prize.toUpperCase() : '');
@@ -268,9 +284,9 @@ function showStoreDetails(storeId){
   $('#store-address').text(store.address);
   $('#store-phone').text(store.phone);
   $('#store-email').text(store.email);
-  (store.address !== null) ? $('.address').show() : $('.address').hide();
-  (store.phone !== null) ? $('.phone').show() : $('.phone').hide();
-  (store.email !== null) ? $('.email').show() : $('.email').hide();
+  (store.address !== null && store.address !== '') ? $('.address').show() : $('.address').hide();
+  (store.phone !== null && store.phone !== '') ? $('.phone').show() : $('.phone').hide();
+  (store.email !== null && store.email !== '') ? $('.email').show() : $('.email').hide();
 }
 
 function getAvailableCheckinsByStore(idStore){
