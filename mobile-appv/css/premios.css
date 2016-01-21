@@ -104,8 +104,25 @@
 }
 
 .body-container-big.body-selected .award-detail{
-
+  display: none;
 }
+
+.body-container-big.body-selected .award-detail.selected{
+  display: block;
+  height: 25rem;
+}
+
+.body-container-big.body-selected .award-validated{
+  display: none;
+}
+
+.body-container-big.body-selected .award-validated.selected{
+  display: block;
+  height: 25rem;
+  text-align: center;
+  padding-top: 2rem;
+}
+
 
 .body-container-big.body-selected .award-detail .award-title{
   width: 60%;

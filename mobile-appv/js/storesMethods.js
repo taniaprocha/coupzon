@@ -164,8 +164,11 @@ function showAwardDetail(award, store){
   $('#award-validity').text(moment(award.validity*1000).format('YYYY-MM-DD'));
 
   var codeH = $("#award-qrcode").height();
-  console.log(award.barCode, codeH);
+  console.log(award.barCode, codeH, award);
   $("#award-qrcode").barcode(award.barCode, "ean13", {barWidth: (codeH*.02), barHeight:codeH*.8+'px', fontSize: codeH*.2+'px'});
+  if(award.barCode !== undefined && award.barCode !== ''){
+    startAwardTimeout(award.barCode);
+  }
 }
 
 storesMethods.prototype.showCategories = function(container){
@@ -265,6 +268,7 @@ function showStoreDetails(storeId, menu){
   $('#store-available-awards').text((award !== null) ? '1' : '0');
   
   var checkins = getAvailableCheckinsByStore(id);
+  console.log('checkins', checkins, 'store ', id);
   if(brand.has_checkin === true){
     $('.available-check-ins').css('display', 'table');
     $('#store-check-ins').text(checkins);

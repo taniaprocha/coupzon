@@ -67,6 +67,35 @@
   background-repeat: no-repeat;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
+  display: none;
+}
+
+.qrcode-body.selected{
+  display: block;
+}
+
+.qrcode-body-success{
+  height: 75%;
+  width: 100%;
+  display: none;
+  background-color: white;
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.qrcode-body-success.selected{
+  display: table;
+}
+
+.qrcode-body-success .qrcode-message{
+  display: table-cell;
+  vertical-align: middle;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: #00436A;
+  font-size: 2rem;
+  text-align: center;
 }
 
 .qrcode-body .qrcode-text-1{

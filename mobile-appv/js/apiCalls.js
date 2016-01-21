@@ -47,6 +47,7 @@ function loginUser(password, md5, number, callback){
     if(data.code === undefined){ data = data = eval("(function(){return " + data + ";})()"); }
     if(data.code === 403){ callback(false);
     }else if(data.code === 200){
+      data.data.coupzonpoints = data.coupzonpoints;
       saveOnLocalStorage(data.data);
       callback(true, data.data.user.barId);
     }
@@ -54,7 +55,7 @@ function loginUser(password, md5, number, callback){
   .fail(function() { console.log("error"); callback(false); });
 }
 
-function getStoresFromAPI(location){
+function getStoresFromAPI(location, getPrizes){
   var data = { lat: (location && location.lat) ? location.lat : '0', long: (location && location.long) ? location.long : '0', category: -1, city: -1, checkVal: '-', radius: 30, id_user: userData.user.id };
   console.log(data);
   $.ajax({ type: 'POST', url: apiUrl+"/getCloseStores.html", data: data, cache: false})
@@ -62,7 +63,7 @@ function getStoresFromAPI(location){
     data = eval("(function(){return " + data + ";})()");
     console.log("get stores second success", data ); 
     if(data.code === 201){
-      checkBrandPrizes(data.data.stores, data.data.brands);
+      checkBrandPrizes(data.data.stores, data.data.brands, getPrizes);
     }else{
       console.log("Error", data.error );
     }
@@ -74,9 +75,9 @@ function getStoresFromAPI(location){
   getLocationsFromAPI();
 }
 
-function checkBrandPrizes(stores, brands){
-  storesData = stores;
-  brandsData = brands;
+function checkBrandPrizes(stores, brands, getPrizes){
+  storesData = []; storesData = stores;
+  brandsData = []; brandsData = brands;
   brands.forEach(function(brand){
     if(brand.title_prize !== undefined){
       var stores = getStoresByBrand(brand.id);
@@ -89,7 +90,10 @@ function checkBrandPrizes(stores, brands){
     }
   });
   console.log(storesData);
-  getPricesFromAPI();
+  if(getPrizes === true){
+    getPricesFromAPI();
+  }
+  
 }
 
 function getCategoriesFromAPI(){
@@ -169,7 +173,7 @@ function checkAwards(awards, callback){
           awards.push({
             brand: award.brand, description: award.description,
             id: award.id, store: store.id, title: award.title,
-            validity: award.validity
+            validity: award.validity, barCode: award.barCode
           });
         }
       });
@@ -240,8 +244,8 @@ function setProfileInfo(name, email, nif){
     data = eval("(function(){return " + data + ";})()");
     console.log("set profile info second success", data ); 
     if(data !== undefined && data.user !== undefined){
-      //saveOnLocalStorage(data);
-      //setUserInfo(data.user);
+      saveOnLocalStorage(data);
+      setUserInfo(data.user);
     }
   })
   .fail(function(){ 
@@ -256,13 +260,68 @@ function changePassword(oldPassword, newPassword){
   $.ajax({ type: 'POST', url: apiUrl+"/changePassword.html", data: data, cache: false})
   .done(function(data){ 
     data = eval("(function(){return " + data + ";})()");
-    console.log("change password", data ); 
+    console.log("success change password", data ); 
     if(data !== undefined && data.user !== undefined && data.user !== null){
-      //saveOnLocalStorage(data);
-      //setUserInfo(data.user);
+      saveOnLocalStorage(data);
+      setUserInfo(data.user);
     }
     $('.settings-container').removeClass('selected');
     $('.settings-container.profile-container').addClass('selected');
+  })
+  .fail(function(){ 
+    console.log("Some error occurred. Try later"); 
+  });
+}
+
+function checkInExists(){
+  var data = {checkVal: '-', id_user: userData.user.id};
+  console.log('check in exists ', data);
+  $.ajax({ type: 'POST', url: apiUrl+"/checkInExists.html", data: data, cache: false})
+  .done(function(data){ 
+    data = eval("(function(){return " + data + ";})()");
+    console.log("success check in exists ", data ); 
+    if(data.code === 200 && data.data !== undefined ){
+      if(data.data.user === userData.user.id){
+        getCheckinList();
+        showSuccessCheckin(data.data.brand, data.data.store);
+      }
+    }
+  })
+  .fail(function(){ 
+    console.log("Some error occurred. Try later"); 
+  });
+}
+
+function getCheckinList(){
+  var data = {checkVal: '-', id_user: userData.user.id};
+  console.log('checkin list ', data);
+  $.ajax({ type: 'POST', url: apiUrl+"/getCheckinList.html", data: data, cache: false})
+  .done(function(data){ 
+    data = eval("(function(){return " + data + ";})()");
+    console.log("checkin list ", data ); 
+    if(data.code === 200){
+      checkIns = []; checkIns = data.data;
+      userData.coupzonpoints = data.coupzonpoints;
+    }
+  })
+  .fail(function(){ 
+    console.log("Some error occurred. Try later"); 
+  });
+}
+
+function prizeReclaim(prizeCode){
+  var data = {checkVal: '-', id_user: userData.user.id, prizeCode: prizeCode};
+  console.log('prize reclaim ', data);
+  $.ajax({ type: 'POST', url: apiUrl+"/prizeReclaim.html", data: data, cache: false})
+  .done(function(data){ 
+    data = eval("(function(){return " + data + ";})()");
+    console.log("success prize reclaim ", data ); 
+    if(data.code === 200){
+      cleanIntervals();
+      $('#view-award .award-detail').removeClass('selected');
+      $('#view-award .award-validated').addClass('selected');
+      // pedir lista de premios atualizada e voltar pra view da lista de premios
+    }
   })
   .fail(function(){ 
     console.log("Some error occurred. Try later"); 

@@ -3,6 +3,13 @@ var userLocation= null;
 var userData = null;
 var checkIns = [];
 var isMobile = false;
+var checkinTimeout=null;
+var awardReclaimTimeout=null;
+var updateCheckins=null;
+
+updateCheckins = setInterval(function(){
+  getCheckinList();
+}, 60000);
 
 function detectmob() { 
  if( navigator.userAgent.match(/Android/i)
@@ -82,16 +89,16 @@ function stopLoader(){
 
 var checkLoc=false;
 function checkLocation(){
-  console.log('get position ', userLocation);
   checkLoc = true;
   if(userLocation !== null){
-    getStoresFromAPI(userLocation);
+    getStoresFromAPI(userLocation, true, null);
   }else{
     // remover quando for para o telemovel
     getLocation(function(position){
+      console.log('get position ', position);
       userLocation = ( position !== null) ? {lat: position.lat, long: position.lng} : null;
       if(checkLoc === true){
-        getStoresFromAPI(userLocation);
+        getStoresFromAPI(userLocation, true, null);
       }
     });
   }
@@ -102,7 +109,7 @@ document.addEventListener("deviceready", function(){
   getLocation(function(position){
     userLocation = {lat: position.lat, long: position.lng};
     if(checkLoc === true){
-      getStoresFromAPI(userLocation);
+      getStoresFromAPI(userLocation, true, null);
     }
   });
   /*var element = document.getElementById('deviceProperties');
@@ -276,6 +283,7 @@ function setFotterMenu(id){
   $('.menu-container').removeClass('selected'); $(this).addClass('selected');
   $('.container-view').removeClass('selected'); $('.search-container.stores').css({opacity:0, top: '0px'});
   $('.stores-container').css({opacity:0});
+  cleanIntervals();
   switch(id){
     case 'menu-stores':
       $('#view-stores').addClass('selected'); $('#tab').animate({marginLeft: '40%'}, 100);
@@ -285,6 +293,7 @@ function setFotterMenu(id){
       break;
     case 'menu-qrcode':
       $('#view-qrcode').addClass('selected'); $('#tab').animate({marginLeft: '0%'}, 100);
+      startCheckinTimeout();
       break;
     case 'menu-awards':
       $('#view-awards').addClass('selected'); $('#tab').animate({marginLeft: '20%'}, 100);
@@ -398,6 +407,7 @@ $('#send-award').on('click', function(){
 });
 
 $('#award-share').on('click', function(){
+  cleanIntervals();
   $('#view-award').find($('.back')).removeClass('back-award');
   $('#view-award').find($('.back')).addClass('back-share');
   $('.body-container-big.body-selected').hide();
@@ -405,6 +415,7 @@ $('#award-share').on('click', function(){
 });
 
 $('#back-award').on('click', function(){
+  cleanIntervals();
   $('#search-input-awards').val('');
   if($(this).hasClass('back-award') === true){
     $('.container-view').removeClass('selected');
@@ -469,6 +480,7 @@ $('.settings-menu').on('click', function(){
   }else if($(this).hasClass('menu-language') === true){ $('.language-container').addClass('selected'); }
   $('#back-settings').removeClass('disable');
 });
+
 
 function setUserInfo(data){
   console.log('set user info --->', data);
@@ -540,7 +552,7 @@ function saveOnLocalStorage(data){
   if(userData !== null){ window.localStorage.clear(); }
   var dataToStore = JSON.stringify(data);
   window.localStorage.setItem('user', dataToStore);
-  console.log(window.localStorage);
+  //console.log(window.localStorage);
 }
 
 function showUserQrCode(barId){
@@ -568,6 +580,49 @@ function getLocation(callback){
   }
 
 }
+
+function cleanIntervals(){
+  if(checkinTimeout !== null){
+    clearInterval(checkinTimeout); 
+    checkinTimeout = null;
+  }
+  if(awardReclaimTimeout !== null){
+    clearInterval(awardReclaimTimeout); 
+    awardReclaimTimeout = null;
+  }
+}
+
+function startCheckinTimeout(){
+  checkInExists();
+  checkinTimeout = setInterval(function(){
+    checkInExists();
+  }, 30000);
+}
+
+function startAwardTimeout(barcode){
+  prizeReclaim(barcode);
+  awardReclaimTimeout = setInterval(function(){
+    prizeReclaim(barcode);
+  }, 30000);
+}
+
+function showSuccessCheckin(brand, store){
+  cleanIntervals();
+
+  $('#view-qrcode .qrcode-body').removeClass('selected');
+  $('#view-qrcode .qrcode-body-success').addClass('selected');
+  
+  setTimeout(function gotoStore(){
+    $('#view-qrcode .qrcode-body').addClass('selected');
+    $('#view-qrcode .qrcode-body-success').removeClass('selected');
+    setFotterMenu('menu-stores');
+    $('.container-view').removeClass('selected');
+    $('#view-store').addClass('selected');
+    showStoreDetails(store, 'stores');
+  }, 3000);
+  
+}
+
 
 /*
  * Fix for footer when the keyboard is displayed
