@@ -4,7 +4,7 @@ function storesMethods(){
 
 storesMethods.prototype.showFilteredBrands = function(container, menu, brands){
   $('.brand-container').off(); $('.store-container').off(); container.empty();
-  container.addClass('selected'); container.animate({opacity: 1}, 300);  
+  container.addClass('selected'); container.animate({opacity: 1}, 300); 
   showFilteredBrands(brands, container, menu);
 };
 
@@ -50,13 +50,23 @@ storesMethods.prototype.showSelectedStores = function(selectedCategories, select
     }
   });
   function appendStore(store, container, type, storesWidthAward, brand) {
-    if(storesWidthAward.length > 0 && storesWidthAward.indexOf(store.id) === -1){ return; }
+    if(storesWidthAward.length > 0 && storesWidthAward[store.id] === undefined){ return; }
     var categoria = getCategorieNameById(brand.categorie).toUpperCase();
-    if(type === 1){
-      container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address));
+    if(menu === 'awards'){  
+      storesWidthAward[store.id].awards.forEach(function(award){
+        if(type === 1){
+          container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address, award));
+        }else{
+          container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, award));
+        }
+      });
     }else{
-      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize));
-    }    
+      if(type === 1){
+        container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address, null));
+      }else{
+        container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, null));
+      }
+    }
   }
   if(results === 0){
     container.append('<div class="no-stores-filtered">Não existem lojas para essa Categoria ou Localidade seleccionada.</div>');
@@ -70,8 +80,12 @@ function showFilteredBrands(brands, container, menu){
   var storesWidthAward = [];
   if(menu === 'awards'){
     awardsData.forEach(function(award){
-      storesWidthAward.push(award.store);
+      if(storesWidthAward[award.store] === undefined){
+        storesWidthAward[award.store] = {awards: []};
+      }
+      storesWidthAward[award.store].awards.push(award.id);
     });
+    console.log(storesWidthAward);
   }
   var totalPrices = 0;
   var totalFavorites = 0;
@@ -86,7 +100,7 @@ function showFilteredBrands(brands, container, menu){
         brandDiv = setBrandDiv(brand.name, brand.id, brand.image, categoria);
         stores.forEach(function(store){
           if(menu === 'awards'){
-            if(storesWidthAward.indexOf(store.id) !== -1){
+            if(storesWidthAward[store.id] !== undefined){
               appendStore(store, brandDiv, 1, storesWidthAward, brand); pricesCount++;
             }
           }else if(menu === 'favorites'){
@@ -97,20 +111,20 @@ function showFilteredBrands(brands, container, menu){
             appendStore(store, brandDiv, 1, storesWidthAward, brand);
           }
         });
-        if(menu === 'favorites'){ 
-          if(favoritesCount > 0){ 
-            container.append(brandDiv); 
+        if(menu === 'favorites'){
+          if(favoritesCount > 0){
+            container.append(brandDiv);
           }
         }else if(menu === 'awards'){ 
           if(pricesCount > 0){ 
-            container.append(brandDiv); 
+            container.append(brandDiv);
           }
         }else{ 
-          container.append(brandDiv); 
+          container.append(brandDiv);
         }
       }else{
         if(menu === 'awards'){
-          if(storesWidthAward.indexOf(stores[0].id) !== -1){
+          if(storesWidthAward[stores[0].id] !== undefined){
             appendStore(stores[0], container, 2, storesWidthAward, brand); pricesCount++;
           }
         }else if(menu === 'favorites'){
@@ -134,13 +148,24 @@ function showFilteredBrands(brands, container, menu){
   }
 
   function appendStore(store, container, type, storesWidthAward, brand) {
-    if(storesWidthAward.length > 0 && storesWidthAward.indexOf(store.id) === -1){ return; }
+    if(storesWidthAward.length > 0 && storesWidthAward[store.id] === -1){ return; }
     var categoria = getCategorieNameById(brand.categorie).toUpperCase();
-    if(type === 1){
-      container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address));
+    if(menu === 'awards'){
+      storesWidthAward[store.id].awards.forEach(function(award){
+        if(type === 1){
+          container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address, award));
+        }else{
+          container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, award));
+        }
+      });
     }else{
-      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize));
-    }    
+      if(type === 1){
+        container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address, null));
+      }else{
+        container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, null));
+      }   
+    }
+    
   }
   
   addBrandListener();
@@ -154,6 +179,7 @@ function showFilteredBrands(brands, container, menu){
 function showAwardDetail(award, store){
   $('.container-view').removeClass('selected');
   $('#view-award').addClass('selected');
+  console.log(award.id, award.barCode);
   var brand = getBrandByStoreId(store.id);
   var imageUrl = (siteUrl+brand.image).toString();
   $('#view-award .title').attr('id', award.id);
@@ -162,9 +188,7 @@ function showAwardDetail(award, store){
   $('#brand-image').css({backgroundImage: 'url('+imageUrl+')'});
   $('#award-title').text(' '+award.title.toUpperCase());
   $('#award-validity').text(moment(award.validity*1000).format('YYYY-MM-DD'));
-
   var codeH = $("#award-qrcode").height();
-  console.log(award.barCode, codeH, award);
   $("#award-qrcode").barcode(award.barCode, "ean13", {barWidth: (codeH*.02), barHeight:codeH*.8+'px', fontSize: codeH*.2+'px'});
   if(award.barCode !== undefined && award.barCode !== ''){
     startAwardTimeout(award.barCode);
@@ -222,10 +246,18 @@ function addAwardListeners(menu){
   $('.store-container').on('click', function(){
     $('#view-award').find($('.back')).removeClass('back-share');
     $('#view-award').find($('.back')).addClass('back-award');
-    var id = $(this).attr('id'); id = id.substring(id.indexOf('-')+1, id.length);
-    var premio = getAwardByStoreId(id);
-    var store = getStoreById(id);
-    showAwardDetail(getAwardByStoreId(id), store);
+    var storeId = $(this).attr('id'); 
+    storeId = storeId.substring(storeId.indexOf('store-')+6, storeId.indexOf('-award'));
+    var awardId = $(this).attr('id'); 
+    awardId = awardId.substring(awardId.indexOf('award-')+6, awardId.length);
+    var store = getStoreById(storeId);
+    console.log($(this).attr('id'),' :: store id :: ', storeId,' :: award id :: ',awardId);
+    var _award = null;
+    for(var i=0; i<awardsData.length; i++){
+      if(awardsData[i].id === awardId){
+        return showAwardDetail(awardsData[i], store);
+      }
+    }
   });
 }
 
@@ -254,18 +286,18 @@ function addBrandListener(){
 function showStoreDetails(storeId, menu){
   methods.showAllBrands($('.stores-container'), menu);
   $('.body-container-big.store.body-share').hide();
-  var id = storeId; id = id.substring(id.indexOf('-')+1, id.length);
+  var id = storeId; id = id = id.substring(id.indexOf('store-')+1, id.indexOf('award'));
   var store = getStoreById(parseInt(id));
   if(!store){ return; }
   var brand = getBrandById(store.brand.toString());
   if(!brand){ return; }
-  var award = getAwardByStoreId(store.id);
+  var awards = getAwardsByStoreId(store.id);
   $('.store-title').attr('id', store.id);
   var imageUrl = (siteUrl+brand.image).toString();
   $('#store-image').css({backgroundImage: 'url('+imageUrl+')'});
   $('#store-name').text(brand.name.toUpperCase());
   $('#store-local').text((store.local !== null) ? store.local : store.address);
-  $('#store-available-awards').text((award !== null) ? '1' : '0');
+  $('#store-available-awards').text(awards.length);
   
   var checkins = getAvailableCheckinsByStore(id);
   console.log('checkins', checkins, 'store ', id);
@@ -318,8 +350,13 @@ function setBrandDiv(name, id, image, categorie){
   return brandDiv;
 }
 
-function setStoreDiv1(id, premio, local, address){
-  var storeDiv = $('<li class="store-container store1" id="store-'+id+'"></li>');
+function setStoreDiv1(id, premio, local, address, premioId){
+  var storeDiv = ();
+  if(premioId !== null){
+    storeDiv = $('<li class="store-container store1" id="store-'+id+'-award-'+premioId+'"></li>');
+  }else{
+    storeDiv = $('<li class="store-container store1" id="store-'+id+'"></li>');
+  }
     var _validity = 'Sem validade definida';
     //(premio !== null) ? _validity = 'Válido até '+moment(premio.validity*1000).format('YYYY-MM-DD') : _validity = '';
     var title = (premio !== undefined) ? premio : 'Sem prémio';
@@ -332,11 +369,11 @@ function setStoreDiv1(id, premio, local, address){
   return storeDiv;
 }
 
-function setStoreDiv2(name, id, categorie, image, premio){
+function setStoreDiv2(name, id, categorie, image, titlePremio, premioId){
   var title = '';
-  title = (premio !== undefined) ? premio : 'Sem prémio';
+  title = (titlePremio !== undefined) ? titlePremio : 'Sem prémio';
   var imageUrl = (siteUrl+image).toString();
-  var storeDiv = $('<li class="store-container store2" id="store-'+id+'">'
+  var storeDiv = $('<li class="store-container store2" id="store-'+id+'-award-'+premioId+'">'
         +'<div class="image" style="background-image: url('+imageUrl+')"></div>'
         +'<div class="body">'
           +'<div class="name">'+name.toUpperCase()+'</div>'
@@ -386,14 +423,14 @@ function getAwardById(id){
   return _award;
 }
 
-function getAwardByStoreId(id){
-  var _award=null;
+function getAwardsByStoreId(id){
+  var _awards=[];
   awardsData.forEach(function(award){
     if(id.toString() === award.store.toString()){
-      _award = award; return _award;
+      _awards.push(award); return _awards;
     }
   });
-  return _award;
+  return _awards;
 }
 
 function getAwardByStore(storeId){

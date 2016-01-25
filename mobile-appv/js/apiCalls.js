@@ -135,7 +135,7 @@ function getPricesFromAPI(callback){
   $.ajax({ type: 'POST', url: apiUrl+"/getUserPrizes.html", data: data, cache: false})
   .done(function(data){ 
     data = eval("(function(){return " + data + ";})()");
-    console.log("get prices second success", data ); 
+    console.log("get prices second success", data );
     if(data.code === 201){
       checkAwards(data.data.prizes, callback);
     }else{
@@ -143,7 +143,7 @@ function getPricesFromAPI(callback){
     }
   })
   .fail(function(){ 
-    console.log("Some error occurred. Try later"); 
+    console.log("Some error occurred. Try later");
   });
 }
 
@@ -152,7 +152,7 @@ function setStoreFavorite(storeId, value){
   $.ajax({ type: 'POST', url: apiUrl+"/setFavorite.html", data: data, cache: false})
   .done(function(data){ 
     data = eval("(function(){return " + data + ";})()");
-    console.log("set favorites second success", data ); 
+    console.log("set favorites second success", data );
     storesData.forEach(function(store){
       if(store.id === storeId){
         store.favorite = value;
@@ -183,9 +183,11 @@ function checkAwards(awards, callback){
   awardsData = [];
   awardsData = awards;
   console.log('awards', awards);
-  stopLoader();
+  
   if(callback){
     callback();
+  }else{
+    stopLoader();
   }
 }
 
@@ -203,7 +205,7 @@ function sharePrize(idPrize, number){
         $('.body-container-big.awards.body-share').hide();
         $('.body-container-big.body-selected').show();
         $('.container-view').removeClass('selected');
-        $('#view-awards').addClass('selected'); 
+        $('#view-awards').addClass('selected');
         methods.showAllBrands($('#view-awards .stores-container'), 'awards');
       });
     }
@@ -277,7 +279,7 @@ function checkInExists(){
   var data = {checkVal: '-', id_user: userData.user.id};
   console.log('check in exists ', data);
   $.ajax({ type: 'POST', url: apiUrl+"/checkInExists.html", data: data, cache: false})
-  .done(function(data){ 
+  .done(function(data){
     data = eval("(function(){return " + data + ";})()");
     console.log("success check in exists ", data ); 
     if(data.code === 200 && data.data !== undefined ){
@@ -294,33 +296,44 @@ function checkInExists(){
 
 function getCheckinList(){
   var data = {checkVal: '-', id_user: userData.user.id};
-  console.log('checkin list ', data);
   $.ajax({ type: 'POST', url: apiUrl+"/getCheckinList.html", data: data, cache: false})
   .done(function(data){ 
     data = eval("(function(){return " + data + ";})()");
-    console.log("checkin list ", data ); 
+    //console.log("checkin list ", data ); 
     if(data.code === 200){
       checkIns = []; checkIns = data.data;
       userData.coupzonpoints = data.coupzonpoints;
     }
   })
   .fail(function(){ 
-    console.log("Some error occurred. Try later"); 
+    console.log("Some error occurred. Try later");
   });
 }
 
 function prizeReclaim(prizeCode){
   var data = {checkVal: '-', id_user: userData.user.id, prizeCode: prizeCode};
-  console.log('prize reclaim ', data);
+  //console.log('prize reclaim ', prizeCode);
   $.ajax({ type: 'POST', url: apiUrl+"/prizeReclaim.html", data: data, cache: false})
   .done(function(data){ 
     data = eval("(function(){return " + data + ";})()");
-    console.log("success prize reclaim ", data ); 
+    
     if(data.code === 200){
+      console.log("success prize reclaim ", data ); 
       cleanIntervals();
       $('#view-award .award-detail').removeClass('selected');
       $('#view-award .award-validated').addClass('selected');
+
       // pedir lista de premios atualizada e voltar pra view da lista de premios
+      getPricesFromAPI(function(){
+        reclaimTimeout = setTimeout(function(){
+          $('.container-view').removeClass('selected');
+          $('#view-awards').addClass('selected');
+          $('#view-award .award-detail').addClass('selected');
+          $('#view-award .award-validated').removeClass('selected');
+          clearTimeout(reclaimTimeout); reclaimTimeout = null;
+          methods.showAllBrands($('#view-awards .stores-container'), 'awards');
+        }, 2000);  
+      });
     }
   })
   .fail(function(){ 

@@ -6,6 +6,8 @@ var isMobile = false;
 var checkinTimeout=null;
 var awardReclaimTimeout=null;
 var updateCheckins=null;
+var successCheckinTimeout=null;
+var reclaimTimeout=null;
 
 updateCheckins = setInterval(function(){
   getCheckinList();
@@ -284,6 +286,8 @@ function setFotterMenu(id){
   $('.container-view').removeClass('selected'); $('.search-container.stores').css({opacity:0, top: '0px'});
   $('.stores-container').css({opacity:0});
   cleanIntervals();
+  if(successCheckinTimeout !== null){ clearTimeout(successCheckinTimeout); successCheckinTimeout = null; }
+  if(reclaimTimeout !== null){ clearTimeout(reclaimTimeout); reclaimTimeout = null; }
   switch(id){
     case 'menu-stores':
       $('#view-stores').addClass('selected'); $('#tab').animate({marginLeft: '40%'}, 100);
@@ -612,13 +616,14 @@ function showSuccessCheckin(brand, store){
   $('#view-qrcode .qrcode-body').removeClass('selected');
   $('#view-qrcode .qrcode-body-success').addClass('selected');
   
-  setTimeout(function gotoStore(){
+  successCheckinTimeout = setTimeout(function gotoStore(){
     $('#view-qrcode .qrcode-body').addClass('selected');
     $('#view-qrcode .qrcode-body-success').removeClass('selected');
     setFotterMenu('menu-stores');
     $('.container-view').removeClass('selected');
     $('#view-store').addClass('selected');
     showStoreDetails(store, 'stores');
+    clearTimeout(successCheckinTimeout); successCheckinTimeout = null;
   }, 3000);
   
 }
@@ -629,6 +634,8 @@ function showSuccessCheckin(brand, store){
  */
 
 if(isMobile === true){
+  $('#select-number-awards').css('display', 'block');
+  $('#select-number-store').css('display', 'block');
   $(document).on('focus', 'input, textarea', function(){
     $('.footer-menu').hide();
   });
@@ -636,5 +643,8 @@ if(isMobile === true){
   $(document).on('blur', 'input, textarea', function(){
     $('.footer-menu').show();
   });
+}else{
+  $('#select-number-awards').css('display', 'none');
+  $('#select-number-store').css('display', 'none');
 }
 
