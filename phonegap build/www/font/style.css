@@ -1,0 +1,104 @@
+@font-face {
+	font-family: 'coupzon';
+	src:url('fonts/coupzon.eot?r3aghl');
+	src:url('fonts/coupzon.eot?r3aghl#iefix') format('embedded-opentype'),
+		url('fonts/coupzon.ttf?r3aghl') format('truetype'),
+		url('fonts/coupzon.woff?r3aghl') format('woff'),
+		url('fonts/coupzon.svg?r3aghl#coupzon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="coup-"], [class*=" coup-"] {
+	font-family: 'coupzon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.coup-seta-baixo:before {
+	content: "\e800";
+}
+.coup-seta-cima:before {
+	content: "\e801";
+}
+.coup-radio-check2:before {
+	content: "\e802";
+}
+.coup-world:before {
+	content: "\e803";
+}
+.coup-partilhar:before {
+	content: "\e616";
+}
+.coup-anular:before {
+	content: "\e600";
+}
+.coup-email:before {
+	content: "\e601";
+}
+.coup-faq:before {
+	content: "\e602";
+}
+.coup-favorito-pag:before {
+	content: "\e603";
+}
+.coup-morada:before {
+	content: "\e604";
+}
+.coup-password:before {
+	content: "\e605";
+}
+.coup-perfil:before {
+	content: "\e606";
+}
+.coup-pesquisa:before {
+	content: "\e607";
+}
+.coup-radio-null:before {
+	content: "\e609";
+}
+.coup-radio-redondo-check:before {
+	content: "\e60a";
+}
+.coup-radio-redondo-null:before {
+	content: "\e60b";
+}
+.coup-seta-drt:before {
+	content: "\e60c";
+}
+.coup-seta-esq:before {
+	content: "\e60d";
+}
+.coup-seta-redondo-bx:before {
+	content: "\e60e";
+}
+.coup-telefone:before {
+	content: "\e60f";
+}
+.coup-termos:before {
+	content: "\e610";
+}
+.coup-favorito:before {
+	content: "\e611";
+}
+.coup-gerir:before {
+	content: "\e612";
+}
+.coup-loja:before {
+	content: "\e613";
+}
+.coup-premio:before {
+	content: "\e614";
+}
+.coup-id-38:before {
+	content: "\e615";
+}
+

@@ -1,0 +1,293 @@
+.header-container-big{
+  height: 37%;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+}
+
+.header-container-big .app-icon-container{
+  height: 70%;
+  width: 100%;
+  display: table;
+}
+
+.header-container-big .app-icon-container .logo{
+  background-size: contain;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  height: 7rem;
+  width: auto;
+}
+
+.header-container-big .open-message,
+.header-container-big .services-message{
+  height: 30%;
+  width: 100%;
+}
+
+.header-container-big .open-message span{
+  font-size: 2rem;
+  color: #00436A;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+.header-container-big .services-message span{
+  font-size: 1.6rem;
+  color: #00436A;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+.body-container-yellow{
+  height: 63%;
+  width: 100%;
+  text-align: center;
+  background-color: #FEC134;
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 360px) {
+  .body-container-yellow,
+  .body-container-big .lists-container,
+  .qrcode-body,
+  .qrcode-body-success,
+  .body-container-big .view-menu-container,
+  .body-container-big.awards,
+  .body-store,
+  .body-container-store,
+  .body-container-big.favorites,
+  .body-container-big.settings,
+  .body-container-big.terms,
+  .body-container-big .search-container,
+  .body-container-big.store.body-share{
+    background-image: url('../assets/app/sombra@320.png');
+  }
+}
+@media (min-width: 360px) {
+  .body-container-yellow,
+  .body-container-big .lists-container,
+  .qrcode-body,
+  .qrcode-body-success,
+  .body-container-big .view-menu-container,
+  .body-container-big.awards,
+  .body-store,
+  .body-container-store,
+  .body-container-big.favorites,
+  .body-container-big.settings,
+  .body-container-big.terms,
+  .body-container-big .search-container,
+  .body-container-big.store.body-share{
+    background-image: url('../assets/app/sombra@360.png');
+  }
+}
+@media (min-width: 720px) {
+  .body-container-yellow,
+  .body-container-big .lists-container,
+  .qrcode-body,
+  .qrcode-body-success,
+  .body-container-big .view-menu-container,
+  .body-container-big.awards,
+  .body-store,
+  .body-container-store,
+  .body-container-big.favorites,
+  .body-container-big.settings,
+  .body-container-big.terms,
+  .body-container-big .search-container,
+  .body-container-big.store.body-share{
+    background-image: url('../assets/app/sombra@720.png');
+  }
+}
+@media (min-width: 1000px) {
+  .body-container-yellow,
+  .body-container-big .lists-container,
+  .qrcode-body,
+  .qrcode-body-success,
+  .body-container-big .view-menu-container,
+  .body-container-big.awards,
+  .body-store,
+  .body-container-store,
+  .body-container-big.favorites,
+  .body-container-big.settings,
+  .body-container-big.terms,
+  .body-container-big .search-container,
+  .body-container-big.store.body-share{
+    background-image: url('../assets/app/sombra@1080.png');
+  }
+}
+
+.body-container-yellow .insert-number-container,
+.body-container-yellow .insert-password-container{
+  height: 60%;
+  width: 100%;
+  display: table;
+}
+
+.body-container-yellow .insert-number-container .insert-number-title,
+.body-container-yellow .insert-password-container .insert-password-title,
+.body-container-yellow .insert-password-container .insert-password-aler{
+  font-size: 1.1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: #00436A;
+}
+
+.body-container-yellow .insert-password-container .insert-password-alert{
+  opacity: 0;
+  margin-top: .5rem;
+}
+
+.body-container-yellow .insert-number-container .number-box,
+.body-container-yellow .insert-password-container .password-box{
+  width: 80%;
+  height: 5rem;
+  background-color: white;
+  -moz-border-radius: .5rem;
+  -webkit-border-radius: .5rem;
+  border-radius: .5rem;
+  margin: 1rem auto 0 auto;
+}
+
+.body-container-yellow .insert-number-container .number-box .insert-number-icon,
+.body-container-yellow .insert-password-container .password-box .insert-password-icon{
+  width: 15%;
+  height: 100%;
+  float: left;
+  font-size: 3rem;
+  color: #00436A;
+  display: table;
+}
+
+.body-container-yellow .insert-number-container .number-box .insert-number-icon span,
+.body-container-yellow .insert-password-container .password-box .insert-password-icon span{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.body-container-yellow .insert-number-container .number-box .insert-number-input,
+.body-container-yellow .insert-password-container .password-box .insert-password-input{
+  width: 85%;
+  height: 100%;
+  float: left;
+}
+
+.body-container-yellow .insert-number-container .number-box .insert-number-input input,
+.body-container-yellow .insert-password-container .password-box .insert-password-input input{
+  height: 100%;
+  width: 100%;
+  font-size: 2rem;
+  border: none;
+  color: #B3B3B3;
+}
+
+.body-container-yellow .insert-number-container .terms-container{
+  width: 80%;
+  padding-top: 1.5rem;
+  margin: 0 auto;
+}
+
+.body-container-yellow .insert-number-container .terms-container span{
+  display: none;
+  font-size: 2rem;
+  color: white;
+}
+
+.body-container-yellow .insert-number-container .terms-container .checked{
+  background-color: #FEC134;
+  color: #00436A;
+}
+
+.body-container-yellow .insert-number-container .terms-container .notchecked{
+  background-color: #FEC134;
+  color: white;
+}
+
+.body-container-yellow .insert-number-container .terms-container span.selected{
+  display: block;
+}
+
+.body-container-yellow .insert-number-container .terms-container .check-terms{
+  background-color: white;
+  float: left;
+}
+
+.body-container-yellow .insert-number-container .terms-container .check-title{
+  text-align: left;
+  margin-left: 3rem;
+  font-size: 1.3rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: #00436A;
+}
+
+.body-container-yellow .insert-number-container .terms-container .check-title.alert,
+.body-container-yellow .insert-number-container .insert-number-title.title.alert,
+.body-container-yellow .insert-password-container .insert-password-title.alert,
+.body-container-yellow .insert-password-container .insert-password-alert,
+.body-container-yellow .message-not-received.alert,
+.body-container-yellow .insert-number-container .error{
+  color: #ED1C24;
+}
+
+
+.body-container-yellow .insert-number-container .error{
+  opacity: 0;
+  font-size: 1.1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: #ED1C24;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.body-container-yellow .login-container{
+  height: 25%;
+  width: 100%;
+}
+
+.body-container-yellow .login-container .login-box{
+  background-color: #00436A;
+  color: white;
+  width: 80%;
+  margin: 0 auto;
+  height: 5rem;
+  -moz-border-radius: .5rem;
+  -webkit-border-radius: .5rem;
+  border-radius: .5rem;
+  display: table;
+}
+
+.body-container-yellow .login-container .login-box span{
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 2rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+.body-container-yellow .change-language{
+  height: 15%;
+  width: 100%;
+  color: #00436A;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  opacity: 0;
+}
+
+.body-container-yellow .message-not-received,
+.body-container-yellow .message-sended{
+  height: 15%;
+  width: 100%;
+  color: #00436A;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.body-container-yellow .message-sended{
+  display: none;
+}

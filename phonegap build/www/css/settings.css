@@ -1,0 +1,369 @@
+.body-container-big.settings,
+.body-container-big.terms{
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+  padding-top: 7%;
+}
+
+.body-container-big.settings .settings-container {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  display: none;
+}
+
+.body-container-big.settings .settings-container.selected{
+  display: block;
+}
+
+.body-container-big.settings .settings-menu-container .settings-menu{
+  width: 100%;
+  height: 6.5rem;
+  display: table; 
+  -moz-border-bottom: solid .1rem #F2F2F2;
+  -webkit-border-bottom: solid .1rem #F2F2F2;
+  border-bottom: solid .1rem #F2F2F2;
+} 
+
+.body-container-big.settings .settings-menu-container .settings-menu.menu-language{
+  display: none;
+}
+
+.body-container-big.settings .settings-menu-container .settings-menu .icon{
+  width: 20%;
+  float: left;
+  display: table;
+  text-align: center;
+  font-size: 3rem;
+  color: #BEDEE8;
+  height: 100%;
+}
+
+.body-container-big.settings .settings-menu-container .settings-menu .title{
+  width: 60%;
+  float: left;
+  display: table;
+  color: #00436A;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  height: 100%
+}
+
+.body-container-big.settings .settings-menu-container .settings-menu .arrow{
+  width: 20%;
+  float: left;
+  display: table;
+  text-align: center;
+  font-size: 2.5rem;
+  color: #BEDEE8;
+  height: 100%
+}
+
+.body-container-big.settings .settings-menu-container .settings-menu .icon span,
+.body-container-big.settings .settings-menu-container .settings-menu .title span,
+.body-container-big.settings .settings-menu-container .settings-menu .arrow span{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.body-container-big.settings .settings-container .title,
+.body-container-big.terms .title{
+  height: 4rem;
+}
+
+.body-container-big.settings .settings-container .title .icon,
+.body-container-big.terms .title .icon{
+  font-size: 3rem;
+  color: #BEDEE8;
+  float: left;
+  width: 20%;
+  height: 100%;
+  display: table;
+}
+
+.body-container-big.settings .settings-container .title .name,
+.body-container-big.terms .title .name{
+  font-size: 1.6rem;
+  color: #00436A;
+  float: left;
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  width: 80%;
+  display: table;
+}
+
+.body-container-big.settings .settings-container .title .icon span,
+.body-container-big.settings .settings-container .title .name span,
+.body-container-big.settings .settings-container .title .logout span,
+.body-container-big.terms .title .icon span,
+.body-container-big.terms .title .name span{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.body-container-big.settings .settings-container.profile-container .title .name{
+  width: 60%;
+}
+
+.body-container-big.settings .settings-container.profile-container .title .logout{
+  width: 20%;
+  float: left;
+  color: #BEDEE8;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  display: table;
+  height: 100%;
+}
+
+.body-container-big.settings .settings-container.terms-container .terms,
+.body-container-big.terms .terms-container .terms{
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: #00436A;
+  font-size: 1.3rem;
+  padding-top: .8rem;
+}
+
+.body-container-big.settings .settings-container.profile-container,
+.body-container-big.settings .settings-container.contacts-container,
+.body-container-big.settings .settings-container.faq-container,
+.body-container-big.settings .settings-container.terms-container,
+.body-container-big.settings .settings-container.language-container,
+.body-container-big.terms,
+.body-container-big.settings .settings-container.change-password-container{
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.body-container-big.settings .settings-container.profile-container{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-y: scroll;
+  -ms-touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  -ms-scroll-chaining: none;
+}
+
+.body-container-big.settings .settings-container.faq-container,
+.body-container-big.settings .settings-container.terms-container{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-y: scroll;
+  -ms-touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  -ms-scroll-chaining: none;
+}
+
+.body-container-big.settings .settings-container.faq-container .faqs .type{
+  height: 100%;
+}
+
+.body-container-big.settings .settings-container.faq-container .faqs .type{
+  font-size: 1.6rem;
+  color: #00436A;
+  float: left;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.body-container-big.settings .settings-container.faq-container .faqs .question{
+  color: #0089C7;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  -moz-border-bottom: solid .1rem #BEDEE8;
+  -webkit-border-bottom: solid .1rem #BEDEE8;
+  border-bottom: solid .1rem #BEDEE8;
+  padding: 1rem 0 .5rem 0;
+}
+
+.body-container-big.settings .settings-container.faq-container .faqs .answer{
+  color: #00436A;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  padding-top: .5rem;
+}
+
+.body-container-big.settings .settings-container.language-container .language-select{
+  height: 30%;
+  width: 100%;
+  padding-top: 2rem;
+}
+
+.body-container-big.settings .settings-container.language-container .language-btn{
+  height: 50%;
+  width: 100%;
+}
+
+.body-container-big.settings .settings-container.language-container .language-select .language-line{
+  -moz-border-bottom: solid .1rem #F2F2F2;
+  -webkit-border-bottom: solid .1rem #F2F2F2;
+  border-bottom: solid .1rem #F2F2F2;
+  height: 4.5rem;
+  padding: 1rem 0 1rem 0;
+}
+
+.body-container-big.settings .settings-container.language-container .language-select .language-line .language-title{
+  width: 80%;
+  height: 3rem;
+  float: left;
+  padding-left: 5%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #00436A;
+}
+
+.body-container-big.settings .settings-container.language-container .language-select .language-line .language-icon{
+  width: 20%;
+  height: 3rem;
+  float: left;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #BEDEE8;
+}
+
+.body-container-big.settings .settings-container.language-container .language-select .language-line.selected .language-title,
+.body-container-big.settings .settings-container.language-container .language-select .language-line.selected .language-icon{
+  color: #E99638;
+}
+
+.body-container-big.settings .settings-container.language-container .language-btn .language-select{
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  color: white;
+  background-color: #00649A;
+  -moz-border-radius: .5rem;
+  -webkit-border-radius: .5rem;
+  border-radius: .5rem;
+  text-align: center;
+  width: 30rem;
+  margin: 30% auto 0 auto;
+  padding: 1rem;
+  height: 5rem;
+}
+
+.body-container-big.settings .settings-container.contacts-container .contact-title,
+.body-container-big.settings .settings-container.profile-container .profile-title{
+  -moz-border-bottom: solid .1rem #BEDEE8;
+  -webkit-border-bottom: solid .1rem #BEDEE8;
+  border-bottom: solid .1rem #BEDEE8;
+  color: #0089C7;
+  width: 100%;
+  height: 3.5rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  padding: 1rem 0 .2rem 0;
+}
+
+.body-container-big.settings .settings-container.profile-container .profile-title .title,
+.body-container-big.settings .settings-container.profile-container .profile-title .change{
+  width: 50%;
+  float: left;
+  font-size: 1.3rem;
+  height: 2rem;
+}
+
+.body-container-big.settings .settings-container.profile-container .profile-title .change{
+  text-align: right;
+  color: #00436A;
+}
+ 
+.body-container-big.settings .settings-container.profile-container .user-password .profile-title,
+.body-container-big.settings .settings-container.profile-container .user-password .profile-title,
+
+
+.body-container-big.settings .settings-container.contacts-container .contact-description,
+.body-container-big.settings .settings-container.profile-container .profile-description{
+  color: #00436A;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  padding-top: .3rem;
+}
+
+.body-container-big.settings .settings-container.profile-container .profile-description input{
+  border: none;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  color: #B3B3B3;
+}
+
+.body-container-big.settings .settings-container.change-password-container .pass-line{
+  width: 100%;
+  -moz-border-bottom: solid .1rem #BEDEE8;
+  -webkit-border-bottom: solid .1rem #BEDEE8;
+  border-bottom: solid .1rem #BEDEE8;
+  color: #0089C7;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  padding: 1rem 0 .2rem 0;
+  height: 3.1rem;
+  margin-top: 1rem;
+}
+
+.body-container-big.settings .settings-container.change-password-container .pass-forget{
+  width: 100%;
+  text-align: right;
+  color: #0089C7;
+  font-size: 1.1rem;
+  padding: 1rem 0 .2rem 0;
+  opacity: 0;
+}
+
+.body-container-big.settings .settings-container.change-password-container .pass-line .pass-title{
+  width: 50%;
+  float: left;
+}
+
+.body-container-big.settings .settings-container.change-password-container .pass-line .pass-alert{
+  width: 50%;
+  float: left;
+  color: #ED1C24;
+  text-align: right;
+  opacity: 0;
+}
+
+.body-container-big.settings .settings-container.change-password-container input{
+  border: none;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  color: #B3B3B3;
+  padding-top: 1rem;
+}
+
+.body-container-big.settings .settings-container.change-password-container .change-password-btn,
+.body-container-big.settings .settings-container.profile-container .profile-info-btn{
+  background-color: #007FB1;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.7rem;
+     -moz-border-radius: .5rem;
+  -webkit-border-radius: .5rem;
+          border-radius: .5rem;
+  padding: .8rem 1rem .8rem 1rem;
+  width: 30rem;
+  text-align: center;
+  margin: 1.5rem auto 0 auto;
+}
+
+.body-container-big.settings .settings-container.change-password-container .change-password-btn{
+  margin-top: 2rem;
+}

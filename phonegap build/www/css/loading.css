@@ -1,0 +1,203 @@
+html{
+  font-size: 18px; 
+  -ms-touch-action: none;
+  overflow: hidden !important;
+  -ms-user-select: none;
+}
+
+body {
+  height: 100%; width: 100%; margin: 0; padding: 0;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  line-height: 1.4;
+  font-size: 18px;
+  -ms-touch-action: none;
+  overflow: hidden !important;
+}
+
+@media (max-width: 1400px) {
+  html { font-size: 40px; }
+}
+@media (max-width: 1200px) {
+  html { font-size: 36px; }
+}
+@media (max-width: 1100px) {
+  html { font-size: 32px; }
+}
+@media (max-width: 1000px) {
+  html { font-size: 26px; }
+}
+@media (max-width: 900px) {
+  html { font-size: 20px; }
+}
+@media (max-width: 800px) {
+  html { font-size: 18px; }
+}
+@media (max-width: 700px) {
+  html { font-size: 16px; }
+}
+@media (max-width: 600px) {
+  html { font-size: 14px; }
+}
+@media (max-width: 500px) {
+  html { font-size: 12px; }
+}
+@media (max-width: 400px) {
+  html { font-size: 10px; }
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+  -webkit-touch-callout: none;
+  -webkit-tap-hightlight-color: transparent;
+  font-family: 'Open Sans', sans-serif;
+}
+
+*:not(input) {
+          user-select: none;
+      -ms-user-select: none;          
+     -moz-user-select: none;          
+   -khtml-user-select: none;
+  -webkit-user-select: none;       
+}
+
+input:focus{
+  outline: none;
+}
+
+.table-cell{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.container{
+  height: 100%;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.container .container-view{
+  height: 100%;
+  width: 100%;
+  font-size: 1rem;
+  display: none; 
+  z-index: 1;
+  opacity: 1;
+}
+
+.container .container-view.selected{
+  display: block;
+  opacity: 1;
+}
+
+.container .container-view.selected#loading-view{
+  display: table;
+}
+
+.container .container-view .loading .icon-loading{
+  background-size: contain;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  height: 7rem;
+  width: auto;
+}
+
+.container .container-view .loading .message-loading{
+  color: #00436A;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.8rem;
+  text-align: center;
+  padding-top: 2rem;
+  opacity: 0;
+  -moz-transform: scale(.5);
+   -webkit-transform: scale(.5);
+   -o-transform: scale(.5);
+   transform: scale(.5);
+}
+
+@media (max-width: 360px) {
+  .header-container-big .app-icon-container .logo,
+  .loading .icon-loading{
+    background-image: url('../assets/app/logo_loading@320.png');
+  }
+}
+@media (min-width: 360px) {
+  .header-container-big .app-icon-container .logo,
+  .loading .icon-loading{
+    background-image: url('../assets/app/logo_loading@360.png');
+  }
+}
+@media (min-width: 720px) {
+  .header-container-big .app-icon-container .logo,
+  .loading .icon-loading{
+    background-image: url('../assets/app/logo_loading@720.png');
+  }
+}
+@media (min-width: 1000px) {
+  .header-container-big .app-icon-container .logo,
+  .loading .icon-loading{
+    background-image: url('../assets/app/logo_loading@1080.png');
+  }
+}
+
+.container .container-view .loading .message-loading.show{
+  -webkit-animation: loading 3s infinite; /* Chrome, Safari, Opera */
+          animation: loading 3s infinite;
+}
+
+@keyframes loading {
+    0% {
+                opacity: 0;
+         -moz-transform: scale(.5);
+      -webkit-transform: scale(.5);
+           -o-transform: scale(.5);
+              transform: scale(.5);
+    }
+    50% {
+       -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+         -o-transform: scale(1);
+            transform: scale(1);
+              opacity: 1;
+    }
+    100% {
+                opacity: 0;
+         -moz-transform: scale(.5);
+      -webkit-transform: scale(.5);
+           -o-transform: scale(.5);
+              transform: scale(.5);
+    }
+}
+
+@-webkit-keyframes loading {
+    0% {
+                opacity: 0;
+         -moz-transform: scale(.5);
+      -webkit-transform: scale(.5);
+           -o-transform: scale(.5);
+              transform: scale(.5);
+    }
+    50% {
+       -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+         -o-transform: scale(1);
+            transform: scale(1);
+              opacity: 1;
+    }
+    100% {
+                opacity: 0;
+         -moz-transform: scale(.5);
+      -webkit-transform: scale(.5);
+           -o-transform: scale(.5);
+              transform: scale(.5);
+    }
+}
+
+/*#login-phone{
+  opacity: 0;
+}*/

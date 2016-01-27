@@ -1,0 +1,158 @@
+.header-container-little{
+  height: 12%;
+  width: 100%;
+  text-align: center;
+  display: table;
+  position: relative;
+}
+
+.header-container-little .logo{
+  background-size: contain;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  height: 3.5rem;
+}
+
+.header-container-little .back,
+.header-container-little .search-btn{
+  position: absolute;
+  top: 0;
+  height: 100%;
+  font-size: 2rem;
+  z-index: 2;
+  width: 20%;
+  display: table;
+  color: #00436A;
+}
+
+.header-container-little .search-btn{
+  right: 1rem;
+}
+
+.header-container-little .back span,
+.header-container-little .search-btn span{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.header-container-little .back.disable{
+  display: none;
+}
+
+@media (max-width: 360px) {
+  .header-container-little .logo{
+    background-image: url('../assets/app/logo-header@320.png');
+  }
+}
+@media (min-width: 360px) {
+  .header-container-little .logo{
+    background-image: url('../assets/app/logo-header@360.png');
+  }
+}
+@media (min-width: 720px) {
+  .header-container-little .logo{
+    background-image: url('../assets/app/logo-header@720.png');
+  }
+}
+@media (min-width: 1000px) {
+  .header-container-little .logo{
+    background-image: url('../assets/app/logo-header@1080.png');
+  }
+}
+
+.qrcode-body{
+  height: 88%;
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  display: none;
+}
+
+.qrcode-body.selected{
+  display: block;
+}
+
+.qrcode-body-success{
+  height: 75%;
+  width: 100%;
+  display: none;
+  background-color: white;
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.qrcode-body-success.selected{
+  display: table;
+}
+
+.qrcode-body-success .qrcode-message{
+  display: table-cell;
+  vertical-align: middle;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: #00436A;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.qrcode-body .qrcode-text-1{
+  height: 30%;
+  text-align: center;
+  width: 100%;
+  display: table;
+  color: #0089C7;
+  font-size: 1.5rem;
+}
+
+.qrcode-body .coupzon-points{
+  height: 10%;
+}
+
+.qrcode-body .coupzon-points .points{
+  background-color: #EEF3FA;
+  height: 3rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #00436A;
+  text-align: center;
+  margin-top: 1rem;
+  padding: .5rem 0 .5rem 0;
+}
+
+.qrcode-body .qrcode-text-2{
+  height: 27%;
+  text-align: center;
+  width: 100%;
+  display: table;
+  color: #0089C7;
+  font-size: 1.3rem;
+}
+
+.qrcode-body .arrow-container{
+  text-align: center;
+  font-size: 2.7rem;
+  color: #EFBD3B;
+  padding-top: 1.5rem;
+}
+
+.qrcode-body .qrcode-text-1 span{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.qrcode-body .qrcode{
+  height: 30%;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.qrcode-body .qrcode #user-qrcode{
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+  margin: 0 auto;
+}
