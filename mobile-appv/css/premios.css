@@ -259,6 +259,7 @@
   font-size: 1.3rem;
   color: #00436A;
   background-color: white;
+  display: none;
 }
 
 .body-container-big.body-share .share-number .select-number select option{

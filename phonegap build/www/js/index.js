@@ -107,7 +107,8 @@ function checkLocation(){
 }
 
 document.addEventListener("deviceready", function(){
-  isMobile = false;
+  $('#select-number-awards').css('display', 'block');
+  $('#select-number-store').css('display', 'block');
   getLocation(function(position){
     userLocation = {lat: position.lat, long: position.lng};
     if(checkLoc === true){
@@ -629,9 +630,7 @@ function showSuccessCheckin(brand, store){
  * Fix for footer when the keyboard is displayed
  */
 
-if(isMobile === true){
-  $('#select-number-awards').css('display', 'block');
-  $('#select-number-store').css('display', 'block');
+/*if(isMobile === true){
   $(document).on('focus', 'input, textarea', function(){
     $('.footer-menu').hide();
   });
@@ -639,8 +638,5 @@ if(isMobile === true){
   $(document).on('blur', 'input, textarea', function(){
     $('.footer-menu').show();
   });
-}else{
-  $('#select-number-awards').css('display', 'none');
-  $('#select-number-store').css('display', 'none');
-}
+}*/
 
