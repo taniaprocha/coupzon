@@ -51,6 +51,20 @@ $(document).ready(function() {
   
   $('#view-settings .terms').text(terms);
   $('#view-terms .terms-container .terms').text(terms);
+
+  var jqxhr = $.get( "./data/texts.json", function() {
+    console.log( "success" );
+  })
+    .done(function(data) {
+      console.log( "second success", data );
+    })
+    .fail(function() {
+      console.log( "error" );
+    })
+    .always(function(data) {
+      console.log( "finished", data.pt);
+      setLabels(data.pt)
+    });
   //window.localStorage.clear();
   userData = JSON.parse(window.localStorage.getItem('user'));
   console.log(userData);
@@ -73,6 +87,7 @@ $(document).ready(function() {
   }else{
     checkIns = userData.checkins; 
     setUserInfo(userData.user);
+
     loginUser(userData.user.password, false, userData.user.phone, function(){
       showUserQrCode(userData.user.barId);
       $('#coupzon-points').text('TEM '+userData.coupzonpoints+' PONTOS COUPZON');
@@ -81,7 +96,19 @@ $(document).ready(function() {
   }
 });
 
+function setLabels(data){
+  $('.message-loading').text(data.loader);
+  $('.open-message span').text(data.login1.title1);
+  $('#container-number .title1').text(data.login1.title2);
+  $('#container-number .title2').text(data.login1.title3);
+  $('#container-number .check-title').text(data.login1.conditions);
+  $('#container-number .error').text(data.login1.error);
+  $('#container-number .login-box span').text(data.login1.sendBtn);
+  $('#container-number .change-language').text(data.login1.sendBtn);
+  $('#container-number .insert-number-input input').attr("placeholder", data.login1.input);
+}
 function stopLoader(){
+  console.log('------------------- stopLoader');
   $('#loading').delay(2000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
     $('.container-view').removeClass('selected');
     $('#view-qrcode').addClass('selected'); setFotterMenu('menu-qrcode');
@@ -107,6 +134,7 @@ function checkLocation(){
     });
   }
 }
+
 
 document.addEventListener("deviceready", function(){
   $('#select-number-awards').css('display', 'block');
@@ -240,11 +268,12 @@ $('#phone-password').on('click', function(){
       setUserInfo(userData.user);
       checkIns = []; checkIns = userData.checkins;
       showUserQrCode(barcodeId);
+      $('#coupzon-points').text('TEM '+userData.coupzonpoints+' PONTOS COUPZON');
       $('.insert-password-alert').css('opacity', 0); $('.message-not-received').removeClass('alert');
       $('.insert-password-title').removeClass('alert'); 
-      $('.container-view').removeClass('selected');
+      /*$('.container-view').removeClass('selected');
       $('#view-qrcode').addClass('selected'); setFotterMenu('menu-qrcode');
-      $('.footer-menu').addClass('selected');
+      $('.footer-menu').addClass('selected');*/
       $('#input-password').val('');
       checkLocation();
     }else{
@@ -565,8 +594,17 @@ function saveOnLocalStorage(data){
 function showUserQrCode(barId){
   //var data = {"id":"19","name":"","phone":"351927955308","email":"","nif":"","barId":"3519526108192","password":"b3e139ee7838261437948b303472347f"};
   var codeH = ($("#view-qrcode").height()*.88)*.3;
-  console.log(barId);
-  $("#user-qrcode").barcode(barId, "ean13", {barWidth: (codeH*.02), barHeight:codeH*.8+'px', fontSize: codeH*.2+'px'});
+  var _width = (codeH*.02);
+  var _height = codeH*.8;
+  console.log(barId, _height, _width, codeH);
+  
+  $("#user-qrcode").barcode(barId, "ean13", {
+    barWidth: _width+'px', 
+    barHeight:_height+'px', 
+    fontSize: codeH*.2+'px'
+  });
+  $("#user-qrcode").css('margin-left',(-($("#user-qrcode").width()*.05))+'px');
+  $(".qrcode-middle").css('width',  ($("#user-qrcode").width())+'px');
 }
 
 function getLocation(callback){
@@ -601,13 +639,13 @@ function cleanIntervals(){
 
 function startCheckinTimeout(){
   checkinTimeout = setInterval(function(){
-    checkInExists();
+    //checkInExists();
   }, 10000);
 }
 
 function startAwardTimeout(barcode){
   awardReclaimTimeout = setInterval(function(){
-    prizeReclaim(barcode);
+    //prizeReclaim(barcode);
   }, 10000);
 }
 

@@ -5,7 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi, user-scalable=0' name='viewport" />
+
     <script src="cordova.js"></script>
     <link rel="stylesheet" href="font/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/login.css" rel="stylesheet">
@@ -25,7 +26,7 @@
         <div class="table-cell">
           <div class="loading" id="loading">
             <div class="icon-loading"></div>
-            <div class="message-loading">Um para todos!</div>
+            <div class="message-loading"></div>
           </div>
         </div>
       </div>
@@ -36,31 +37,33 @@
                 <div class="logo"></div>
               </div>
             </div>
-            <div class="open-message"><span>BEM-VINDO!</span></div>
+            <div class="open-message"><span></span></div>
         </div>
         <div class="body-container-yellow" id="container-number">
           <div class="insert-number-container">
             <div class="table-cell">
-              <div class="insert-number-title">PARA COMEÇAR A COLECIONAR VANTAGENS</div>
-              <div class="insert-number-title title">INSIRA O SEU NÚMERO DE TELEFONE</div>
+              <div class="insert-number-title title1"></div>
+              <div class="insert-number-title title2"></div>
               <div class="number-box">
                 <div class="insert-number-icon"><span class="coup-telefone"></span></div>
-                <div class="insert-number-input"><input id="input-number" type="number" placeholder="Number" name="number" value=""/></div>
+                <div class="insert-number-input">
+                  <input id="input-number" type="number" placeholder="" name="number" value=""/>
+                </div>
               </div>
               <div class="terms-container">
                 <div class="check-terms">
                   <span class="coup-radio-null notchecked"></span>
                   <span class="coup-radio-check2 checked selected"></span>
                 </div>
-                <div class="check-title" id="check-terms-title">ACEITO OS TERMOS E CONDIÇÕES</div>
+                <div class="check-title" id="check-terms-title"></div>
               </div>
-              <div class="error">Não é possivel efectuar o registo. Por favor tente mais tarde</div>
+              <div class="error"></div>
             </div>
           </div>
           <div class="login-container">
-            <div class="login-box" id="login-number"><span>ENVIAR</span></div>
+            <div class="login-box" id="login-number"><span></span></div>
           </div>
-          <div class="change-language">CHANGE LANGUAGE TO ENGLISH</div>
+          <div class="change-language"></div>
         </div>
       </div>
       <div class="container-view" id="login-password">
@@ -102,7 +105,9 @@
         <div class="qrcode-body selected">
           <div class="qrcode-text-1"><span>ESTE É O SEU CÓDIGO,<br>PASSE-O NAS LOJAS ADERENTES.</span></div>
           <div class="qrcode">
-            <div id="user-qrcode"></div>
+            <div class="qrcode-middle">
+              <div id="user-qrcode"></div>
+            </div>
           </div>
           <div class="coupzon-points"><div class="points" id="coupzon-points"></div></div>
           <div class="qrcode-text-2">

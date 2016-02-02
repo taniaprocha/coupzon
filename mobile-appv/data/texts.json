@@ -1,0 +1,37 @@
+{
+  "pt": {
+    "loader": "Um para todos!",
+    "login1": {
+      "title1": "BEM-VINDO!",
+      "title2": "PARA COMEÇAR A COLECIONAR VANTAGENS",
+      "title3": "INSIRA O SEU NÚMERO DE TELEFONE",
+      "input": "Numero",
+      "conditions": "ACEITO OS TERMOS E CONDIÇÕES",
+      "sendBtn": "ENVIAR",
+      "error": "Não é possivel efectuar o registo. Por favor tente mais tarde",
+      "language": "CHANGE LANGUAGE TO ENGLISH"
+    },
+    "login2": {
+      "title1": "Todas as vantagens no seu telemóvel,",
+      "title2": "totalmente grátis, para sempre!",
+      "title3": "INSIRA A PASSWORD QUE RECEBEU POR SMS",
+      "input": "Password",
+      "error": "PASSWORD INCORRECTA",
+      "sendBtn": "ENVIAR",
+      "title4": "NÃO RECEBEU O SMS?",
+      "title5": "PEÇA AQUI UM NOVO ENVIO.",
+      "title6": "NOVO SMS ENVIADO COM SUCESSO."
+    }
+  },
+  "en": {
+    "loader": "Um para todos!",
+    "login-1": {
+      "title-1": "BEM-VINDO!",
+      "title-2": "PARA COMEÇAR A COLECIONAR VANTAGENS",
+      "title-3": "INSIRA O SEU NÚMERO DE TELEFONE",
+      "input": "Number",
+      "conditions": "ACEITO OS TERMOS E CONDIÇÕES",
+      "send-btn": "Send"
+    }
+  }
+}
