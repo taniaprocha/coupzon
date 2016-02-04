@@ -165,7 +165,7 @@ function setStoreFavorite(storeId, value){
 }
 
 function checkAwards(awards, callback){
-  var storesFromBrand = [];
+  /*var storesFromBrand = [];
   awards.forEach(function(award, index){
     if(award.store === 'null' || award.store === null){
       storesData.forEach(function(store){
@@ -181,8 +181,8 @@ function checkAwards(awards, callback){
     }
   });
   awardsData = [];
-  awardsData = awards;
-  console.log('awards', awards);
+  awardsData = awards;*/
+  console.log('awards', awardsData);
   
   if(callback){
     callback();

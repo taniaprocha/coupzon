@@ -333,7 +333,8 @@ function setFotterMenu(id){
       break;
     case 'menu-awards':
       $('#view-awards').addClass('selected'); $('#tab').animate({marginLeft: '20%'}, 100);
-      methods.showAllBrands($('#view-awards .stores-container'), 'awards');
+      methods.showAwards($('#view-awards .stores-container'), 'awards');
+      //methods.showAllBrands($('#view-awards .stores-container'), 'awards');
       var newH = $('.body-container-big.awards').height() - $('.search-container.awards').height();
       $('#view-awards .awards-list').css('height', newH+'px');
       break;

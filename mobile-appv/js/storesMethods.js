@@ -14,6 +14,12 @@ storesMethods.prototype.showAllBrands = function(container, menu){
   showFilteredBrands(brandsData, container, menu);
 };
 
+storesMethods.prototype.showAwards = function(container, menu){
+  $('.brand-container').off(); $('.store-container').off(); container.empty();
+  container.addClass('selected'); container.animate({opacity: 1}, 300);
+  showAllAwards(brandsData, container, menu);
+};
+
 storesMethods.prototype.showSelectedStores = function(selectedCategories, selectedLocation, container, selectedPlace, selectedCat, allCat, allCities){
   $('.store-container').off(); container.empty();
   if(selectedCategories.length > 0){
@@ -66,7 +72,7 @@ storesMethods.prototype.showSelectedStores = function(selectedCategories, select
   }
 }
 
-function showFilteredBrands(brands, container, menu){
+function showAllAwards(brands, container, menu){
   var storesWidthAward = [];
   if(menu === 'awards'){
     awardsData.forEach(function(award){
@@ -78,6 +84,59 @@ function showFilteredBrands(brands, container, menu){
     console.log(storesWidthAward);
   }
   var totalPrices = 0;
+  brands.forEach(function(brand){
+    var categoria = getCategorieNameById(brand.categorie).toUpperCase();
+    var brandDiv;
+    var stores = getStoresByBrand(brand.id);
+    if(stores !== null && stores.length > 0){
+      var favoritesCount = 0;
+      var pricesCount = 0;
+      if(stores.length > 1){
+        brandDiv = setBrandDiv(brand.name, brand.id, brand.image, categoria);
+        stores.forEach(function(store){
+          if(storesWidthAward[store.id] !== undefined){
+            appendStore(store, brandDiv, 1, storesWidthAward, brand); pricesCount++;
+          }
+        });
+        if(pricesCount > 0){ 
+          container.append(brandDiv);
+        }
+      }else{
+        if(storesWidthAward[stores[0].id] !== undefined){
+          appendStore(stores[0], container, 2, storesWidthAward, brand); pricesCount++;
+        }
+      }
+    }
+    totalPrices = totalPrices + pricesCount;
+  });
+  //console.log('total prices', totalPrices);
+  if(totalPrices <= 0){ 
+    container.append('<div class="no-stores-filtered">Não existem prémios para mostrar.</div>');
+  }
+
+  function appendStore(store, container, type, storesWidthAward, brand) {
+    if(storesWidthAward.length > 0 && storesWidthAward[store.id] === undefined){ return; }
+    var categoria = getCategorieNameById(brand.categorie).toUpperCase();
+    storesWidthAward[store.id].awards.forEach(function(award){
+      if(type === 1){
+        container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address, award));
+      }else{
+        container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, award));
+      }
+    });
+    
+  }
+  
+  addBrandListener();
+  if(menu === 'stores' || menu === 'favorites'){
+    addStoreListeners(menu);
+  }else if(menu === 'awards'){
+    addAwardListeners(menu);
+  }
+}
+
+function showFilteredBrands(brands, container, menu){
+  var storesWidthAward = [];
   var totalFavorites = 0;
   brands.forEach(function(brand){
     var categoria = getCategorieNameById(brand.categorie).toUpperCase();
@@ -89,13 +148,10 @@ function showFilteredBrands(brands, container, menu){
       if(stores.length > 1){
         brandDiv = setBrandDiv(brand.name, brand.id, brand.image, categoria);
         stores.forEach(function(store){
-          if(menu === 'awards'){
-            if(storesWidthAward[store.id] !== undefined){
-              appendStore(store, brandDiv, 1, storesWidthAward, brand); pricesCount++;
-            }
-          }else if(menu === 'favorites'){
+          if(menu === 'favorites'){
             if(store.favorite === true){ 
-              appendStore(store, brandDiv, 1, storesWidthAward, brand); favoritesCount++;
+              appendStore(store, brandDiv, 1, storesWidthAward, brand); 
+              favoritesCount++;
             }
           }else{
             appendStore(store, brandDiv, 1, storesWidthAward, brand);
@@ -105,34 +161,23 @@ function showFilteredBrands(brands, container, menu){
           if(favoritesCount > 0){
             container.append(brandDiv);
           }
-        }else if(menu === 'awards'){ 
-          if(pricesCount > 0){ 
-            container.append(brandDiv);
-          }
         }else{ 
           container.append(brandDiv);
         }
       }else{
-        if(menu === 'awards'){
-          if(storesWidthAward[stores[0].id] !== undefined){
-            appendStore(stores[0], container, 2, storesWidthAward, brand); pricesCount++;
-          }
-        }else if(menu === 'favorites'){
+        if(menu === 'favorites'){
           if(stores[0].favorite === true){
-            appendStore(stores[0], container, 2, storesWidthAward, brand); favoritesCount++;
+            appendStore(stores[0], container, 2, storesWidthAward, brand); 
+            favoritesCount++;
           }
         }else{
           appendStore(stores[0], container, 2, storesWidthAward, brand);
         }
       }
     }
-    totalPrices = totalPrices + pricesCount;
     totalFavorites = totalFavorites + favoritesCount;
   });
   //console.log('total prices', totalPrices);
-  if(menu === 'awards' && totalPrices <= 0){ 
-    container.append('<div class="no-stores-filtered">Não existem prémios para mostrar.</div>');
-  }
   if(menu === 'favorites' && totalFavorites <= 0){ 
     container.append('<div class="no-stores-filtered">Não existem favoritos para mostrar.</div>');
   }
@@ -140,30 +185,21 @@ function showFilteredBrands(brands, container, menu){
   function appendStore(store, container, type, storesWidthAward, brand) {
     if(storesWidthAward.length > 0 && storesWidthAward[store.id] === undefined){ return; }
     var categoria = getCategorieNameById(brand.categorie).toUpperCase();
-    if(menu === 'awards'){
-      storesWidthAward[store.id].awards.forEach(function(award){
-        if(type === 1){
-          container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address, award));
-        }else{
-          container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, award));
-        }
-      });
+    var premio = '';
+    if(store.title_prize !== ''){
+      premio = store.title_prize;
     }else{
-      if(type === 1){
-        container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address, null));
-      }else{
-        container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, null));
-      }   
+
     }
-    
+    console.log('--------', getAwardByBrand(brand.id));
+    if(type === 1){
+      container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address, null));
+    }else{
+      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, null));
+    }   
   }
-  
   addBrandListener();
-  if(menu === 'stores' || menu === 'favorites'){
-    addStoreListeners(menu);
-  }else if(menu === 'awards'){
-    addAwardListeners(menu);
-  }
+  addStoreListeners(menu);
 }
 
 function showAwardDetail(award, store){
@@ -306,7 +342,7 @@ function showStoreDetails(storeId, menu){
   }
   
   //var validity = (award !== null) ? validity = 'Validade até: '+moment(award.validity*1000).format('YYYY-MM-DD') : validity = '';
-  $('#store-award-validity').text('Validade até: Falta validade');
+  //$('#store-award-validity').text('Validade até: Falta validade');
   $('#store-award-description').text((store.description_prize !== undefined) ? store.description_prize.toUpperCase() : '');
   $('#store-description').text(brand.description);
   if(store.favorite === true){ store.favorite = true; $('#store-favorite').addClass('favorite'); }
@@ -428,6 +464,16 @@ function getAwardsByStoreId(id){
     }
   });
   return _awards;
+}
+
+function getAwardByBrand(brandId){
+  var title="";
+  awardsData.forEach(function(award){
+    /*if(storeId.toString() === award.store.toString()){
+      title = award.title; return title;
+    }*/
+  });
+  return title;
 }
 
 function getAwardByStore(storeId){
