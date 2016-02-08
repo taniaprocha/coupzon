@@ -236,8 +236,8 @@ function getContactFields(contacts) {
     });
   } 
   if(contactsList.length > 0){
-    $('#select-contact-checkin').css('display', 'block');
-    $('#select-contact-awards').css('display', 'block');
+    $('#select-contact-checkin').css('opacity', '1');
+    $('#select-contact-awards').css('opacity', '1');
     fillContacts(contactsList);
   }
 }
@@ -275,7 +275,6 @@ function fillContacts(contacts){
 }
 
 $('#search-input-contacts').on('input',function(e){
- console.log($('#search-input-contacts').val());
  searchContacts($('#search-input-contacts').val().toLowerCase(), $('.search-contacts'));
 });
 
@@ -303,12 +302,14 @@ $('.back-from-contacts').on('click', function(){
 });
 
 $('#select-contact-awards').on('click', function(){
+  if(contactsList.length <= 0){ return; }
   $('.container-view').removeClass('selected'); 
   $('#view-contacts').addClass('selected');
   $('#view-contacts .search-contacts').attr('id', 'awards');
 });
 
 $('#select-contact-checkin').on('click', function(){
+  if(contactsList.length <= 0){ return; }
   $('.container-view').removeClass('selected'); 
   $('#view-contacts').addClass('selected');
   $('#view-contacts .search-contacts').attr('id', 'checkin');

@@ -250,7 +250,7 @@
 .body-container-big.body-share .select-from-contacts{
   color: #0089C7;
   font-size: 1.6rem;
-  display: none;
+  opacity: .3;
 }
 
 .body-container-big.body-share .share-checkins-number{
