@@ -3,11 +3,10 @@ var userLocation= null;
 var userData = null;
 var checkIns = [];
 var isMobile = false;
-var checkinTimeout=null;
-var awardReclaimTimeout=null;
 var updateCheckins=null;
 var successCheckinTimeout=null;
-var reclaimTimeout=null;
+var actualMenu= null;
+var contactsList=[];
 
 updateCheckins = setInterval(function(){
   getCheckinList();
@@ -37,9 +36,10 @@ $(document).ready(function() {
   var partialW = window.innerWidth;
   var partialH = window.innerHeight;
   $('body').css('height', partialH+'px');
-  methods = new storesMethods();
   
+  //$('#loading-view .loading-code').css('width', partialW+'px');
   var footerH = $('.footer-menu').height();
+  $('#loading-view').css({height: partialH+'px' });
   $('#view-qrcode').css({height: (partialH - footerH)+'px' });
   $('#view-stores').css({height: (partialH - footerH)+'px' });
   $('#view-awards').css({height: (partialH - footerH)+'px' });
@@ -47,27 +47,31 @@ $(document).ready(function() {
   $('#view-settings').css({height: (partialH - footerH)+'px' });
   $('#view-store').css({height: (partialH - footerH)+'px' });
   $('#view-award').css({height: (partialH - footerH)+'px' });
-  $('#loading-view').addClass('selected');
+  $('#view-contacts').css({height: (partialH - footerH)+'px' });
   
   $('#view-settings .terms').text(terms);
   $('#view-terms .terms-container .terms').text(terms);
+  methods = new storesMethods();
 
-  var jqxhr = $.get( "./data/texts.json", function() {
+  //./data/texts.json
+  var jqxhr = $.get( "data/texts.json", function() {
     console.log( "success" );
   })
     .done(function(data) {
-      console.log( "second success", data );
+      //console.log( "second success", data );
     })
     .fail(function() {
       console.log( "error" );
     })
     .always(function(data) {
-      console.log( "finished", data.pt);
-      setLabels(data.pt)
+      //console.log( "finished", data);
+      console.log(JSON.parse(data));
+      var _data = JSON.parse(data);
+      setLabels(_data.pt)
     });
   //window.localStorage.clear();
   userData = JSON.parse(window.localStorage.getItem('user'));
-  console.log(userData);
+  console.log('--------------', userData);
   setTimeout(function(){
     $('.message-loading').addClass('show');
   }, 300);
@@ -77,13 +81,12 @@ $(document).ready(function() {
   }
 
   if(userData === null){
-    $('#loading').delay(2000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
-      setTimeout(function(){
-        $('#loading-view').removeClass('selected');
-        $('#login-phone').addClass('selected');
-        $('#login-phone').animate({opacity: 1}, 300);
-      }, 200);
-    });  
+    setTimeout(function(){
+      $('.container-view').removeClass('selected');
+      $('#login-phone').addClass('selected');
+      $('#login-phone').animate({opacity: 1}, 300);
+    }, 1000);
+    
   }else{
     checkIns = userData.checkins; 
     setUserInfo(userData.user);
@@ -94,6 +97,21 @@ $(document).ready(function() {
       checkLocation();
     });
   }
+
+  /*var fakeContacts = [
+    {name: 'Tânia Rocha', number: '924414095'},
+    {name: 'Maria Inês', number: '966514444'},
+    {name: 'Teresa de Jesus Cerqueira Pereira', number: '966514095'},
+    {name: 'Julio de Matos e Silva', number: '344343434'},
+    {name: 'António Carvalho da Rocha', number: '966514095'},
+    {name: 'Margarida Matos', number: '966344495'},
+    {name: 'Ana Sofia Silva', number: '964444095'},
+    {name: 'Isabel Castro de Aguiar', number: '966514095'},
+    {name: 'Mónica Gonçalves', number: '912224095'},
+    {name: 'João Paulo Pereira', number: '966512345'}
+  ];
+  contactsList = fakeContacts;
+  fillContacts(fakeContacts);*/
 });
 
 function setLabels(data){
@@ -107,8 +125,8 @@ function setLabels(data){
   $('#container-number .change-language').text(data.login1.sendBtn);
   $('#container-number .insert-number-input input').attr("placeholder", data.login1.input);
 }
+
 function stopLoader(){
-  console.log('------------------- stopLoader');
   $('#loading').delay(2000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
     $('.container-view').removeClass('selected');
     $('#view-qrcode').addClass('selected'); setFotterMenu('menu-qrcode');
@@ -116,6 +134,40 @@ function stopLoader(){
     $('.menu-container').removeClass('selected'); 
     $('#menu-qrcode').addClass('selected');
   });
+}
+
+window.onload = function setDataSource() {
+  if (!!window.EventSource) {
+    var source = new EventSource("http://api.coupzon.tk/events.php");
+    source.addEventListener(("checkIn_"+userData.user.id), function(e) {
+      //aqui chamas a api para ir buscar a info do checkin feito
+      console.log(e);
+      checkInExists((actualMenu === 'qrcode') ? true: false);
+    }, false);
+    
+    source.addEventListener(("prizeReclaim_"+userData.user.id), function(e) {
+      //aqui chamas a api para ir buscar a info do prizeReclaim
+      console.log(e);
+      var awardId = $('#view-award .title').attr('id');
+      var award = getAwardById(awardId);
+      console.log(awardId, award);
+      prizeReclaim((actualMenu === 'awards') ? true : false, award.barCode);
+    }, false);
+    source.addEventListener("open", function(e) {
+      console.log("OPENED");
+      //efeitos de log apenas e de controlo de erros
+    }, false);
+
+    source.addEventListener("error", function(e) {
+      console.log("ERROR");
+      //efeitos de log apenas e de controlo de erros
+        if(e.readyState == EventSource.CLOSED){
+          console.log("CLOSED");
+        }
+    }, false);
+  }else{
+    //document.getElementById("notSupported").style.display = "block";
+  }
 }
 
 var checkLoc=false;
@@ -169,8 +221,8 @@ function onContactsError(contactError) {
 }
 
 function getContactFields(contacts) {
-  var contactsName = [];
-  for (var i=0; i<contacts.length; i++){
+  contactsList = [];
+  for (var i=0; i < contacts.length; i++){
     var numbers =[];
     if(contacts[i].phoneNumbers && contacts[i].phoneNumbers.length > 0){
       contacts[i].phoneNumbers.forEach(function(number){
@@ -180,30 +232,87 @@ function getContactFields(contacts) {
       });
     }
     numbers.forEach(function(number){
-      contactsName.push({name: contacts[i].displayName, number: number});
+      contactsList.push({name: contacts[i].displayName, number: number});
     });
   } 
+  if(contactsList.length > 0){
+    $('#select-contact-checkin').css('display', 'block');
+    $('#select-contact-awards').css('display', 'block');
+    fillContacts(contactsList);
+  }
+}
 
-  contactsName.forEach(function(contact){
-    $('#select-number-store').append('<option value="'+contact.number+'">'+contact.name+'</option>');
-    $('#select-number-awards').append('<option value="'+contact.number+'">'+contact.name+'</option>');
+function fillContacts(contacts){
+  $('.search-contacts .contact-container').off();
+  $('.search-contacts').empty();
+  contacts.forEach(function(contact){
+    var contactDiv = $("<div class='contact-container'>"
+      +"<div class='contact-text-container'>"
+        +"<div class='contact-name'>"+contact.name.toUpperCase()+"</div>"
+        +"<div class='contact-number'>"+contact.number+"</div>"
+      +"</div>"
+      +"<div class='check-container'>"
+        +"<div class='table-cell'>"
+          +"<span class='coup-radio-redondo-null notchecked'></span>"
+          +"<span class='coup-radio-redondo-check checked'></span>"
+        +"</div>"
+      +"</div>"
+    +"</div>");
+    $('.search-contacts').append(contactDiv);
   });
+  $('.search-contacts .contact-container').on('click', function(){
+    $('.search-contacts .contact-container').removeClass('selected');
+    $(this).addClass('selected');
+    $('.container-view').removeClass('selected');
+    if($('#view-contacts .search-contacts').attr('id') === 'awards'){
+      $('#share-award-number').val($(this).find($('.contact-number')).text());
+      $('#view-award').addClass('selected');
+    }else if($('#view-contacts .search-contacts').attr('id') === 'checkin'){
+      $('#share-checkins-phone-number').val($(this).find($('.contact-number')).text());
+      $('#view-store').addClass('selected');
+    }
+  });  
 }
 
-function onContactSelectedAwards(){
-  var value = $('#select-number-awards').find(":selected").val();
-  if(value !== ''){
-    $('#share-award-number').val(value);
+$('#search-input-contacts').on('input',function(e){
+ console.log($('#search-input-contacts').val());
+ searchContacts($('#search-input-contacts').val().toLowerCase(), $('.search-contacts'));
+});
+
+function searchContacts(searchValue, container){
+  var filteredData=[];
+  contactsList.forEach(function(contact){
+    console.log(contact.name, searchValue);
+    if( contact.name.toLowerCase().indexOf(searchValue) !== -1 ){
+      filteredData.push(contact);
+    }
+  });
+  console.log(contactsList.length, searchValue, filteredData.length);
+  if(filteredData.length > 0){
+    fillContacts(filteredData);
   }
 }
 
-function onContactSelectedStore(){
-  var value = $('#select-number-store').find(":selected").val();
-  if(value !== ''){
-    $('#share-checkins-phone-number').val(value);
+$('.back-from-contacts').on('click', function(){
+  $('.container-view').removeClass('selected');
+  if($('#view-contacts .search-contacts').attr('id') === 'awards'){
+    $('#view-award').addClass('selected');
+  }else if($('#view-contacts .search-contacts').attr('id') === 'checkin'){
+    $('#view-store').addClass('selected');
   }
-  
-}
+});
+
+$('#select-contact-awards').on('click', function(){
+  $('.container-view').removeClass('selected'); 
+  $('#view-contacts').addClass('selected');
+  $('#view-contacts .search-contacts').attr('id', 'awards');
+});
+
+$('#select-contact-checkin').on('click', function(){
+  $('.container-view').removeClass('selected'); 
+  $('#view-contacts').addClass('selected');
+  $('#view-contacts .search-contacts').attr('id', 'checkin');
+});
 
 window.onerror = function (errorMsg, url, lineNumber) {
   //alert('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber);
@@ -229,6 +338,7 @@ $('#input-number').on('click', function(){
 
 $('#input-password').on('click', function(){
   $(this).focus();
+  $('.insert-password-alert').css('opacity', 0);
 });
 
 $('#input-number').on('input', function(){
@@ -271,9 +381,8 @@ $('#phone-password').on('click', function(){
       $('#coupzon-points').text('TEM '+userData.coupzonpoints+' PONTOS COUPZON');
       $('.insert-password-alert').css('opacity', 0); $('.message-not-received').removeClass('alert');
       $('.insert-password-title').removeClass('alert'); 
-      /*$('.container-view').removeClass('selected');
-      $('#view-qrcode').addClass('selected'); setFotterMenu('menu-qrcode');
-      $('.footer-menu').addClass('selected');*/
+      $('.container-view').removeClass('selected');
+      $('#loading-view').addClass('selected'); 
       $('#input-password').val('');
       checkLocation();
     }else{
@@ -317,34 +426,35 @@ function setFotterMenu(id){
   $('.menu-container').removeClass('selected'); $(this).addClass('selected');
   $('.container-view').removeClass('selected'); $('.search-container.stores').css({opacity:0, top: '0px'});
   $('.stores-container').css({opacity:0});
-  cleanIntervals();
   if(successCheckinTimeout !== null){ clearTimeout(successCheckinTimeout); successCheckinTimeout = null; }
-  if(reclaimTimeout !== null){ clearTimeout(reclaimTimeout); reclaimTimeout = null; }
   switch(id){
     case 'menu-stores':
       $('#view-stores').addClass('selected'); $('#tab').animate({marginLeft: '40%'}, 100);
       if($('#back-store').hasClass('stores') === false){ $('#back-store').addClass('stores'); } $('#back-store').removeClass('favorites');
       $('.search-container.stores').css({height: $('.view-menu-container').height()+'px'});
       showAllStores('stores');
+      actualMenu = 'stores';
       break;
     case 'menu-qrcode':
       $('#view-qrcode').addClass('selected'); $('#tab').animate({marginLeft: '0%'}, 100);
-      startCheckinTimeout();
+      actualMenu = 'qrcode';
       break;
     case 'menu-awards':
       $('#view-awards').addClass('selected'); $('#tab').animate({marginLeft: '20%'}, 100);
       methods.showAwards($('#view-awards .stores-container'), 'awards');
-      //methods.showAllBrands($('#view-awards .stores-container'), 'awards');
       var newH = $('.body-container-big.awards').height() - $('.search-container.awards').height();
       $('#view-awards .awards-list').css('height', newH+'px');
+      actualMenu = 'awards';
       break;
     case 'menu-favorites':
       $('#view-favorites').addClass('selected'); $('#tab').animate({marginLeft: '60%'}, 100);
       if($('#back-store').hasClass('favorites') === false){ $('#back-store').addClass('favorites'); } $('#back-store').removeClass('stores');
       methods.showAllBrands($('#view-favorites .stores-container'), 'favorites');
+      actualMenu = 'favorites';
       break;
     case 'menu-settings':
       $('#view-settings').addClass('selected'); $('#tab').animate({marginLeft: '80%'}, 100);
+      actualMenu = 'settings';
       break;
   }
 }
@@ -444,7 +554,6 @@ $('#send-award').on('click', function(){
 });
 
 $('#award-share').on('click', function(){
-  cleanIntervals();
   $('#view-award').find($('.back')).removeClass('back-award');
   $('#view-award').find($('.back')).addClass('back-share');
   $('.body-container-big.body-selected').hide();
@@ -452,7 +561,6 @@ $('#award-share').on('click', function(){
 });
 
 $('#back-award').on('click', function(){
-  cleanIntervals();
   $('#search-input-awards').val('');
   if($(this).hasClass('back-award') === true){
     $('.container-view').removeClass('selected');
@@ -627,31 +735,7 @@ function getLocation(callback){
 
 }
 
-function cleanIntervals(){
-  if(checkinTimeout !== null){
-    clearInterval(checkinTimeout); 
-    checkinTimeout = null;
-  }
-  if(awardReclaimTimeout !== null){
-    clearInterval(awardReclaimTimeout); 
-    awardReclaimTimeout = null;
-  }
-}
-
-function startCheckinTimeout(){
-  checkinTimeout = setInterval(function(){
-    //checkInExists();
-  }, 10000);
-}
-
-function startAwardTimeout(barcode){
-  awardReclaimTimeout = setInterval(function(){
-    //prizeReclaim(barcode);
-  }, 10000);
-}
-
 function showSuccessCheckin(brand, store){
-  cleanIntervals();
   $('#view-qrcode .qrcode-body').removeClass('selected');
   $('#view-qrcode .qrcode-body-success').addClass('selected');
   successCheckinTimeout = setTimeout(function gotoStore(){

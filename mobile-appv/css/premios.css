@@ -188,13 +188,10 @@
 .body-container-big.body-share .award-share,
 .body-container-big.body-share .checkin-share{
   width: 100%;
-  height: 20%;
+  height: 8rem;
   width: 90%;
   margin: 0 auto;
-}
-
-.body-container-big.body-share .checkin-share{
-  height: 6rem;
+  padding-top: 2.5rem;
 }
 
 .body-container-big.body-share .award-share .share-icon,
@@ -205,13 +202,6 @@
   font-size: 2.5rem;
   text-align: center;
   height: 100%;
-  display: table;
-}
-
-.body-container-big.body-share .award-share .share-icon span,
-.body-container-big.body-share .checkin-share .share-icon span{
-  display: table-cell;
-  vertical-align: middle;
 }
 
 .body-container-big.body-share .award-share .share-title,
@@ -223,50 +213,74 @@
   font-weight: 600;
   font-size: 1.6rem;
   height: 100%;
-  display: table;
 }
 
-.body-container-big.body-share .award-share .share-title span,
-.body-container-big.body-share .checkin-share .share-title span{
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.body-container-big.body-share .share-number,
-.body-container-big.body-share .share-checkins-number{
-  width: 90%;
-  margin: .5rem auto 0 auto;
-  height: 13rem;
-}
-
-.body-container-big.body-share .share-checkins-number{
-  height: 10rem;
-}
-
-.body-container-big.body-share .share-number .select-number,
-.body-container-big.body-share .share-number .select-number{
-  width: 100%;
-  height: 3rem;
-  margin-top: 1rem;
-}
-
-.body-container-big.body-share .share-number .select-number select{
-  width: 90%;
-  -moz-border: solid .1rem #BEDEE8;
-  -webkit-border: solid .1rem #BEDEE8;
-  border: solid .1rem #BEDEE8;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1.3rem;
+.body-container-big.body-share .award-share .share-title .blue-title,
+.body-container-big.body-share .checkin-share .share-title .blue-title{
   color: #00436A;
-  background-color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.body-container-big.body-share .award-share .share-title .grey-title,
+.body-container-big.body-share .checkin-share .share-title .grey-title{
+  color: #B3B3B3;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.body-container-big.body-share .select-from-contacts,
+.body-container-big.body-share .select-from-contacts{
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  padding: 1rem 0 1rem 0;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 4rem;
+  -moz-border-bottom: solid .1rem #F2F2F2;
+  -webkit-border-bottom: solid .1rem #F2F2F2;
+  border-bottom: solid .1rem #F2F2F2;
+  -moz-border-top: solid .1rem #F2F2F2;
+  -webkit-border-top: solid .1rem #F2F2F2;
+  border-top: solid .1rem #F2F2F2;
+}
+
+.body-container-big.body-share .select-from-contacts{
+  color: #0089C7;
+  font-size: 1.6rem;
   display: none;
 }
 
-.body-container-big.body-share .share-number .select-number select option{
-  white-space: wrap;
+.body-container-big.body-share .share-checkins-number{
+  width: 90%;
+  margin: 1.5rem auto 0 auto;
+  height: 13rem;
 }
 
-.body-container-big.body-share .share-number .title,
+.body-container-big.body-share .share-input{
+  padding-top: 2rem;
+  color: #B3B3B3;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.body-container-big.body-share .share-input .title{
+  color: #0089C7;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1.7rem;
+}
+
+.body-container-big.body-share .share-input input{
+  border: none;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+}
+
 .body-container-big.body-share .share-checkins-number .title{
   -moz-border-bottom: solid .1rem #BEDEE8;
   -webkit-border-bottom: solid .1rem #BEDEE8;
@@ -278,13 +292,11 @@
   padding-bottom: 1rem;
 }
 
-.body-container-big.body-share .share-number .share-input,
 .body-container-big.body-share .share-checkins-number .checkins-input{
   padding-top: 1rem;
   color: #B3B3B3;
 }
 
-.body-container-big.body-share .share-number .share-input input,
 .body-container-big.body-share .share-checkins-number .checkins-input input{
   border: none;
   width: 100%;

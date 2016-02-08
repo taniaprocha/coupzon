@@ -63,7 +63,9 @@
   .body-container-big.settings,
   .body-container-big.terms,
   .body-container-big .search-container,
-  .body-container-big.store.body-share{
+  .body-container-big-contacts .search-container,
+  .body-container-big.store.body-share,
+  .body-container-big-contacts .search-contacts{
     background-image: url('../assets/app/sombra@320.png');
   }
 }
@@ -80,7 +82,9 @@
   .body-container-big.settings,
   .body-container-big.terms,
   .body-container-big .search-container,
-  .body-container-big.store.body-share{
+  .body-container-big.store.body-share,
+  .body-container-big-contacts .search-container,
+  .body-container-big-contacts .search-contacts{
     background-image: url('../assets/app/sombra@360.png');
   }
 }
@@ -97,7 +101,9 @@
   .body-container-big.settings,
   .body-container-big.terms,
   .body-container-big .search-container,
-  .body-container-big.store.body-share{
+  .body-container-big.store.body-share,
+  .body-container-big-contacts .search-container,
+  .body-container-big-contacts .search-contacts{
     background-image: url('../assets/app/sombra@720.png');
   }
 }
@@ -114,7 +120,9 @@
   .body-container-big.settings,
   .body-container-big.terms,
   .body-container-big .search-container,
-  .body-container-big.store.body-share{
+  .body-container-big.store.body-share,
+  .body-container-big-contacts .search-container,
+  .body-container-big-contacts .search-contacts{
     background-image: url('../assets/app/sombra@1080.png');
   }
 }

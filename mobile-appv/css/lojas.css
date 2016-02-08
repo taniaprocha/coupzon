@@ -185,7 +185,8 @@
   list-style-type: none;
 }
 
-.body-container-big .stores-container .store-container.store1{
+.body-container-big .stores-container .store-container.store1,
+.body-container-big .stores-container .store-container.store3{
   display: none;
   background-color: #F1F6FC;
   margin-bottom: .2rem;

@@ -92,13 +92,20 @@ input:focus{
 .container .container-view.selected{
   display: block;
   opacity: 1;
+  height: 100%;
+  width: 100%;
 }
 
-.container .container-view.selected#loading-view{
-  display: table;
+.container .container-view .loading{
+  margin-top: 45%;
 }
 
-.container .container-view .loading .icon-loading{
+.container .container-view .loading .loading-anim{
+  position: relative;
+  height: 7rem;
+}
+
+.container .container-view .loading .loading-anim .icon-loading{
   background-size: contain;
   background-position: bottom center;
   background-repeat: no-repeat;
@@ -106,18 +113,65 @@ input:focus{
   width: auto;
 }
 
+.container .container-view .loading .loading-anim .loading-code{
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url('../assets/app/Coupzon_interface_3-90.png');
+  height: 15rem;
+  width: 100%;
+  position: absolute;
+  top: -4rem;
+  left: 100%;
+}
+
+.container .container-view .loading .loading-anim .loading-code.animation{
+  -webkit-animation: loadingCode 10s infinite ease-in; /* Chrome, Safari, Opera */
+          animation: loadingCode 10s infinite ease-in;
+}
+
+@keyframes loadingCode {
+  0% {
+    left: -80%;
+  }
+  50% {
+    left: 80%;
+  }
+  100% {
+    left: -80%;          
+  }
+}
+
+@-webkit-keyframes loadingCode {
+  0% {
+    left: -80%;
+  }
+  50% {
+    left: 80%;
+  }
+  100% {
+    left: -80%;          
+  }
+}
+
+
 .container .container-view .loading .message-loading{
   color: #00436A;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 1.8rem;
   text-align: center;
-  padding-top: 2rem;
-  opacity: 0;
+  padding-top: 4rem;
+  -webkit-transition: opacity .25s ease-in;
+     -moz-transition: opacity .25s ease-in;
+      -ms-transition: opacity .25s ease-in;
+       -o-transition: opacity .25s ease-in;
+          transition: opacity .25s ease-in;
+  /*opacity: 0;
   -moz-transform: scale(.5);
    -webkit-transform: scale(.5);
    -o-transform: scale(.5);
-   transform: scale(.5);
+   transform: scale(.5);*/
 }
 
 @media (max-width: 360px) {
@@ -145,10 +199,10 @@ input:focus{
   }
 }
 
-.container .container-view .loading .message-loading.show{
-  -webkit-animation: loading 3s infinite; /* Chrome, Safari, Opera */
+/*.container .container-view .loading .message-loading.show{
+  -webkit-animation: loading 3s infinite;
           animation: loading 3s infinite;
-}
+}*/
 
 @keyframes loading {
     0% {

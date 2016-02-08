@@ -9,8 +9,8 @@
 
     <script src="cordova.js"></script>
     <link rel="stylesheet" href="font/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/login.css" rel="stylesheet">
     <link rel="stylesheet" href="css/loading.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/login.css" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css" rel="stylesheet">
     <link rel="stylesheet" href="css/lojas.css" rel="stylesheet">
     <link rel="stylesheet" href="css/qrcode.css" rel="stylesheet">
@@ -18,16 +18,18 @@
     <link rel="stylesheet" href="css/store.css" rel="stylesheet">
     <link rel="stylesheet" href="css/favorites.css" rel="stylesheet">
     <link rel="stylesheet" href="css/settings.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/contacts.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <div class="container" id="container">
-      <div class="container-view" id="loading-view">
-        <div class="table-cell">
-          <div class="loading" id="loading">
+      <div class="container-view selected" id="loading-view">
+        <div class="loading" id="loading">
+          <div class="loading-anim">
             <div class="icon-loading"></div>
-            <div class="message-loading"></div>
+            <div class="loading-code animation"></div>
           </div>
+          <div class="message-loading"></div>
         </div>
       </div>
       <div class="container-view" id="login-phone">
@@ -218,21 +220,16 @@
         <div class="body-container-big awards body-share">
           <div class="award-share">
             <div class="share-icon"><span class="coup-partilhar"></span></div>
-            <div class="share-title"><span>PARTILHAR PRÉMIO</span></div>          
+            <div class="share-title">
+              <div class="blue-title">PARTILHAR PRÉMIO</div>
+              <div class="grey-title">NÚMERO DE TELEFONE DA PESSOA</div>
+              <div class="grey-title">PARA QUEM QUER ENVIAR O SEU PRÉMIO</div>
+            </div>
           </div>
-          <div class="share-number">
-            <div class="title">
-              <div>NÚMERO DE TELEFONE DA PESSOA</div>
-              <div>PARA QUEM QUER ENVIAR O SEU PRÉMIO</div>
-            </div>
-            <div class="share-input">
-              <input id="share-award-number" type="number" placeholder="Número de telefone" name="number" value=""/>
-            </div>
-            <div class="select-number">
-              <select id="select-number-awards" class='select-number-awards' onchange="onContactSelectedAwards()">
-                <option value="">Seleccione o contacto</option>
-              </select>
-            </div>
+          <div class="select-from-contacts" id="select-contact-awards">PROCURAR NOS MEUS CONTACTOS</div>
+          <div class="share-input">
+            <div class="title">INSERIR NÚMERO</div>
+            <input id="share-award-number" type="number" placeholder="Número de telefone" name="number" value=""/>
           </div>
           <div class="send-area">
             <div class="table-cell">
@@ -477,21 +474,16 @@
         <div class="body-container-big store body-share">
           <div class="checkin-share">
             <div class="share-icon"><span class="coup-partilhar"></span></div>
-            <div class="share-title"><span>PARTILHAR CHECK-INS</span></div>          
+            <div class="share-title">
+              <div class="blue-title">PARTILHAR CHECK-INS</div>
+              <div class="grey-title">NÚMERO DE TELEFONE DA PESSOA</div>
+              <div class="grey-title">COM QUEM QUER PARTILHAR OS SEUS CHECK-INS</div>
+            </div>          
           </div>
-          <div class="share-number">
-            <div class="title">
-              <div>NÚMERO DE TELEFONE DA PESSOA</div>
-              <div>COM QUEM QUER PARTILHAR OS SEUS CHECK-INS</div>
-            </div>
-            <div class="share-input">
-              <input type="text" id='share-checkins-phone-number' placeholder="Número de telefone" name="number" value=""/>
-            </div>
-            <div class="select-number">
-              <select id="select-number-store" class="select-number-store" onchange="onContactSelectedStore()">
-                <option value="">Seleccione o contacto</option>
-              </select>
-            </div>
+          <div class="select-from-contacts" id="select-contact-checkin">PROCURAR NOS MEUS CONTACTOS</div>
+          <div class="share-input">
+            <div class="title">INSERIR NÚMERO</div>
+            <input type="text" id='share-checkins-phone-number' placeholder="Número de telefone" name="number" value=""/>
           </div>
           <div class="share-checkins-number">
             <div class="title">
@@ -503,6 +495,23 @@
             </div>
           </div>
           <div class="share-checkins-btn" id="share-checkins">PARTILHAR CHECK-INS</div>
+        </div>
+      </div>
+      <div class="container-view" id="view-contacts">
+        <div class="header-container-little">
+          <div class="table-cell">
+            <div class="logo"></div>
+            <div class="back back-from-contacts"><span class="coup-seta-esq"></span></div>
+          </div>
+        </div>
+        <div class="body-container-big-contacts">
+          <div class="search-container">
+            <input id="search-input-contacts" type="text" placeholder="Pesquisar contactos" name="search" value=""/>
+            <div class="search-btn contacts">
+              <span class="coup-pesquisa"></span>
+            </div>
+          </div>
+          <div class="search-contacts"></div>
         </div>
       </div>
       <div class="footer-menu">
@@ -531,6 +540,7 @@
         </div>
       </div>
     </div>
+    <!--<script src="js/jquery-1.11.3.min.js"></script>-->
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>

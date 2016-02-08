@@ -61,7 +61,7 @@ storesMethods.prototype.showSelectedStores = function(selectedCategories, select
     if(type === 1){
       container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address, null));
     }else{
-      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, null));
+      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, award));
     }
   }
   if(results === 0){
@@ -74,20 +74,36 @@ storesMethods.prototype.showSelectedStores = function(selectedCategories, select
 
 function showAllAwards(brands, container, menu){
   var storesWidthAward = [];
-  if(menu === 'awards'){
-    awardsData.forEach(function(award){
-      if(storesWidthAward[award.store] === undefined){
-        storesWidthAward[award.store] = {awards: []};
-      }
-      storesWidthAward[award.store].awards.push(award.id);
-    });
-    console.log(storesWidthAward);
+  awardsData.forEach(function(award){
+    console.log(award);
+    var brand = getBrandById(award.brand);
+    var categoria = getCategorieNameById(brand.categorie).toUpperCase();
+    if(award.store !== null && award.store !== 'null'){
+      var store = getStoreById(award.store);
+      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, award.id));
+    }else{
+      var brandDiv = setBrandDiv(brand.name, brand.id, brand.image, categoria);
+      brandDiv.append(setStoreDivAll(award.description, award.id));
+      container.append(brandDiv);
+      //container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, award));
+    }
+  });
+  if(awardsData.length <= 0){ 
+    container.append('<div class="no-stores-filtered">Não existem prémios para mostrar.</div>');
   }
+  /*awardsData.forEach(function(award){
+    if(storesWidthAward[award.store] === undefined){
+      storesWidthAward[award.store] = {store: award.store, brand: award.brand, awards: []};
+    }
+    storesWidthAward[award.store].awards.push(award.id);
+  });
+  console.log(storesWidthAward);
   var totalPrices = 0;
   brands.forEach(function(brand){
     var categoria = getCategorieNameById(brand.categorie).toUpperCase();
     var brandDiv;
     var stores = getStoresByBrand(brand.id);
+
     if(stores !== null && stores.length > 0){
       var favoritesCount = 0;
       var pricesCount = 0;
@@ -125,14 +141,10 @@ function showAllAwards(brands, container, menu){
       }
     });
     
-  }
+  }*/
   
   addBrandListener();
-  if(menu === 'stores' || menu === 'favorites'){
-    addStoreListeners(menu);
-  }else if(menu === 'awards'){
-    addAwardListeners(menu);
-  }
+  addAwardListeners(menu);
 }
 
 function showFilteredBrands(brands, container, menu){
@@ -206,18 +218,19 @@ function showAwardDetail(award, store){
   $('.container-view').removeClass('selected');
   $('#view-award').addClass('selected');
   console.log(award.id, award.barCode);
-  var brand = getBrandByStoreId(store.id);
+  //var brand = getBrandByStoreId(store.id);
+  var brand = getBrandById(award.brand);
   var imageUrl = (siteUrl+brand.image).toString();
   $('#view-award .title').attr('id', award.id);
   $('#brand-title').text(brand.name.toUpperCase());
-  $('#brand-local').text(store.local);
+  $('#brand-local').text((store !== null) ? store.local : 'Todas as lojas');
   $('#brand-image').css({backgroundImage: 'url('+imageUrl+')'});
   $('#award-title').text(' '+award.title.toUpperCase());
   $('#award-validity').text(moment(award.validity*1000).format('YYYY-MM-DD'));
   var codeH = $("#award-qrcode").height();
   $("#award-qrcode").barcode(award.barCode, "ean13", {barWidth: (codeH*.02), barHeight:codeH*.8+'px', fontSize: codeH*.2+'px'});
   if(award.barCode !== undefined && award.barCode !== ''){
-    startAwardTimeout(award.barCode);
+    //startAwardTimeout(award.barCode);
   }
 }
 
@@ -277,10 +290,11 @@ function addAwardListeners(menu){
     var awardId = $(this).attr('id'); 
     awardId = awardId.substring(awardId.indexOf('award-')+6, awardId.length);
     var store = getStoreById(storeId);
-    console.log($(this).attr('id'),' :: store id :: ', storeId,' :: award id :: ',awardId);
+    console.log($(this).attr('id'),' :: store id :: ', storeId,' :: award id :: ', awardId);
     var _award = null;
     for(var i=0; i<awardsData.length; i++){
       if(awardsData[i].id === awardId){
+        console.log(awardsData[i], store);
         return showAwardDetail(awardsData[i], store);
       }
     }
@@ -415,6 +429,17 @@ function setStoreDiv2(name, id, categorie, image, titlePremio, premioId){
           +'<div class="award">'+title+'</div>'
         +'</div>'
       +'<div class="arrow"><span class="coup-seta-drt"></span></div>'));
+  return storeDiv;
+}
+
+function setStoreDivAll(premio, premioId){
+  var storeDiv;
+  storeDiv = $('<li class="store-container store3" id="store-all-award-'+premioId+'"></li>');
+  storeDiv.append($('<div class="body">'
+    +'<div class="local">Todas as lojas da marca</div>'
+    +'<div class="description">'+premio+'</div>'
+  +'</div>'
+  +'<div class="arrow"><span class="coup-seta-drt"></span></div>'));
   return storeDiv;
 }
 

@@ -179,9 +179,9 @@ function checkAwards(awards, callback){
       });
       awards.splice(index, 1);
     }
-  });
+  });*/
   awardsData = [];
-  awardsData = awards;*/
+  awardsData = awards;
   console.log('awards', awardsData);
   
   if(callback){
@@ -275,7 +275,7 @@ function changePassword(oldPassword, newPassword){
   });
 }
 
-function checkInExists(){
+function checkInExists(redirect){
   var data = {checkVal: '-', id_user: userData.user.id};
   console.log('check in exists ', data);
   $.ajax({ type: 'POST', url: apiUrl+"/checkInExists.html", data: data, cache: false})
@@ -285,7 +285,9 @@ function checkInExists(){
     if(data.code === 200 && data.data !== undefined ){
       if(data.data.user === userData.user.id){
         getCheckinList();
-        showSuccessCheckin(data.data.brand, data.data.store);
+        if(redirect === true){
+          showSuccessCheckin(data.data.brand, data.data.store);
+        }
       }
     }
   })
@@ -310,7 +312,7 @@ function getCheckinList(){
   });
 }
 
-function prizeReclaim(prizeCode){
+function prizeReclaim(redirect, prizeCode){
   var data = {checkVal: '-', id_user: userData.user.id, prizeCode: prizeCode};
   //console.log('prize reclaim ', prizeCode);
   $.ajax({ type: 'POST', url: apiUrl+"/prizeReclaim.html", data: data, cache: false})
@@ -319,20 +321,21 @@ function prizeReclaim(prizeCode){
     
     if(data.code === 200){
       console.log("success prize reclaim ", data ); 
-      cleanIntervals();
       $('#view-award .award-detail').removeClass('selected');
       $('#view-award .award-validated').addClass('selected');
 
       // pedir lista de premios atualizada e voltar pra view da lista de premios
       getPricesFromAPI(function(){
-        reclaimTimeout = setTimeout(function(){
-          $('.container-view').removeClass('selected');
-          $('#view-awards').addClass('selected');
-          $('#view-award .award-detail').addClass('selected');
-          $('#view-award .award-validated').removeClass('selected');
-          clearTimeout(reclaimTimeout); reclaimTimeout = null;
-          methods.showAllBrands($('#view-awards .stores-container'), 'awards');
-        }, 2000);  
+        if(redirect === true){
+          reclaimTimeout = setTimeout(function(){
+            $('.container-view').removeClass('selected');
+            $('#view-awards').addClass('selected');
+            $('#view-award .award-detail').addClass('selected');
+            $('#view-award .award-validated').removeClass('selected');
+            clearTimeout(reclaimTimeout); reclaimTimeout = null;
+            methods.showAwards($('#view-awards .stores-container'), 'awards');
+          }, 2000); 
+        } 
       });
     }
   })
