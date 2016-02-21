@@ -57,7 +57,6 @@ function loginUser(password, md5, number, callback){
 
 function getStoresFromAPI(location, getPrizes){
   var data = { lat: (location && location.lat) ? location.lat : '0', long: (location && location.long) ? location.long : '0', category: -1, city: -1, checkVal: '-', radius: 30, id_user: userData.user.id };
-  console.log(data);
   $.ajax({ type: 'POST', url: apiUrl+"/getCloseStores.html", data: data, cache: false})
   .done(function(data){ 
     data = eval("(function(){return " + data + ";})()");
@@ -73,6 +72,8 @@ function getStoresFromAPI(location, getPrizes){
   });
   getCategoriesFromAPI();
   getLocationsFromAPI();
+  activityCount(); 
+  activityList();
 }
 
 function checkBrandPrizes(stores, brands, getPrizes){
@@ -256,7 +257,6 @@ function setProfileInfo(name, email, nif){
 }
 
 function changePassword(oldPassword, newPassword){
-
   var data = {checkVal: '-', id_user: userData.user.id, pass: md5converter(newPassword), previous_pass: md5converter(oldPassword)};
   console.log('change password : old: ', oldPassword ,' new: ', newPassword, data);
   $.ajax({ type: 'POST', url: apiUrl+"/changePassword.html", data: data, cache: false})
@@ -287,6 +287,8 @@ function checkInExists(redirect){
         getCheckinList();
         if(redirect === true){
           showSuccessCheckin(data.data.brand, data.data.store);
+        }else{
+          showNotification(1, 'menu-settings');
         }
       }
     }
@@ -335,6 +337,8 @@ function prizeReclaim(redirect, prizeCode){
             clearTimeout(reclaimTimeout); reclaimTimeout = null;
             methods.showAwards($('#view-awards .stores-container'), 'awards');
           }, 2000); 
+        }else{
+          showNotification(1, 'menu-settings');
         } 
       });
     }
@@ -344,19 +348,62 @@ function prizeReclaim(redirect, prizeCode){
   });
 }
 
-/*
-  sharePrize tb ta feito
-  $_POST['idPrize']="1";
-  $_POST['tlmv']="966514095";
-  $_POST['idUser']="17";
-  $_POST['checkVal']="as";
-*/
+function activityCount(){
+  var data = {checkVal: '-', id_user: userData.user.id};
+  console.log('activity count ');
+  $.ajax({ type: 'POST', url: apiUrl+"/activityCount.html", data: data, cache: false})
+  .done(function(data){ 
+    data = eval("(function(){return " + data + ";})()");
+    if(data.code === 200){
+      var activities = data.data; 
+      if(activities > 0){
+        showNotification(activities, 'menu-settings');
+      }
+      console.log('activities ', activities);
+    }
+  })
+  .fail(function(){ 
+    console.log("Some error occurred. Try later"); 
+  });
+}
 
-/*
-  shareCheckIn
-  $_POST['idUser']="17";
-  $_POST['tlmv']="966514095";
-  $_POST['nCheckins']="2";
-  $_POST['checkVal']="as";
-  $_POST['idStore']=2;
-*/
+function activityList(){
+  var data = {checkVal: '-', id_user: userData.user.id};
+  console.log('activity list ');
+  $.ajax({ type: 'POST', url: apiUrl+"/activityList.html", data: data, cache: false})
+  .done(function(data){ 
+    data = eval("(function(){return " + data + ";})()");
+    console.log('activity list ', data);
+    if(data.code === 200){
+      var list = data.data;
+      if(list.length > 0){
+        $('#view-settings .list-container').empty();
+        for(var i = 0 ; i < 50; i++){
+          var element =  list[i];
+          var description = '';
+          if(element.descr.toLowerCase() === 'checkin'){
+            var loja = getStoreById(element.store);
+            var brand = getBrandById(element.brand);
+            console.log(element, brand);
+            if(brand !== undefined){
+              description = 'Checkin efectuado na loja '+brand.name;
+            }
+          }else{
+            description = element.descr;
+          }
+          if(description !== ''){
+            var div = $('<div class="actitvity-element">'
+              +'<div class="actitvity-title">'+description+'</div>'
+              +'<div class="actitvity-date">'+element.dt+'</div>'
+            +'</div>');
+            $('#view-settings .list-container').append(div);  
+          }
+        
+        }
+      }
+    }
+  })
+  .fail(function(){ 
+    console.log("Some error occurred. Try later"); 
+  });
+}

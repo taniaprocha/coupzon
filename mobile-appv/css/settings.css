@@ -46,8 +46,8 @@
   display: table;
   color: #00436A;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  font-size: 1.6rem;
+  font-weight: 600;
+  font-size: 1.5rem;
   height: 100%
 }
 
@@ -71,6 +71,37 @@
 .body-container-big.settings .settings-container .title,
 .body-container-big.terms .title{
   height: 4rem;
+}
+
+.body-container-big.settings .settings-container.activity-container .title{
+  height: 15%;
+  width: 100%;
+}
+
+.body-container-big.settings .settings-container.activity-container .list-container{
+  height: 85%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-y: scroll;
+  -ms-touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  -ms-scroll-chaining: none;
+}
+
+.body-container-big.settings .settings-container.activity-container .list-container .actitvity-element{
+  height: 4rem;
+  width: 100%;
+}
+
+.body-container-big.settings .settings-container.activity-container .list-container .actitvity-element .actitvity-title{
+  color: #00436A;
+  font-size: 1.3rem;
+}
+
+.body-container-big.settings .settings-container.activity-container .list-container .actitvity-element .actitvity-date{
+  color: #B3B3B3;
+  font-size: 1.1rem;
 }
 
 .body-container-big.settings .settings-container .title .icon,
@@ -133,6 +164,7 @@
 .body-container-big.settings .settings-container.faq-container,
 .body-container-big.settings .settings-container.terms-container,
 .body-container-big.settings .settings-container.language-container,
+.body-container-big.settings .settings-container.activity-container,
 .body-container-big.terms,
 .body-container-big.settings .settings-container.change-password-container{
   width: 90%;

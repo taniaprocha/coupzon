@@ -532,7 +532,7 @@ function getLocationNameById(id){
 }
 
 function getBrandById(id){
-  var returnedBrand = "";
+  var returnedBrand = undefined;
   brandsData.forEach(function(brand){
     if(brand.id.toString() === id.toString()){
       returnedBrand = brand; return returnedBrand;
