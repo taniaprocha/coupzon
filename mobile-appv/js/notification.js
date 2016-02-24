@@ -20,6 +20,8 @@ window.onload = function setDataSource() {
     source.addEventListener(("newactivity_"+userData.user.id), function(e) {
       //aqui chamas a api para ir buscar a info do prizeReclaim
       console.log('newactivity', e);
+      showNotification(1, 'menu-settings');
+      activityList();
     }, false);
 
     source.addEventListener("open", function(e) {

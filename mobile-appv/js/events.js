@@ -297,6 +297,12 @@ $('.settings-menu').on('click', function(){
     $('.language-container').addClass('selected'); 
   }else if($(this).hasClass('menu-activity') === true){ 
     $('.activity-container').addClass('selected'); 
+    $('#view-settings .list-container .list-scroll .actitvity-element').each(function(index){
+      var height = $(this).find($('.actitvity-title')).height() + $(this).find($('.actitvity-date')).height();
+      if(index === ($('#view-settings .list-container .list-scroll .actitvity-element').length - 1) ){
+        $(this).css('height', (height*1.5)+'px');
+      }else{ $(this).css('height', (height*1.1)+'px');}
+    });
   }
   $('#back-settings').removeClass('disable');
 });

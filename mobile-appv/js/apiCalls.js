@@ -376,34 +376,84 @@ function activityList(){
     console.log('activity list ', data);
     if(data.code === 200){
       var list = data.data;
-      if(list.length > 0){
-        $('#view-settings .list-container').empty();
-        for(var i = 0 ; i < 50; i++){
-          var element =  list[i];
-          var description = '';
-          if(element.descr.toLowerCase() === 'checkin'){
-            var loja = getStoreById(element.store);
-            var brand = getBrandById(element.brand);
-            console.log(element, brand);
-            if(brand !== undefined){
-              description = 'Checkin efectuado na loja '+brand.name;
-            }
-          }else{
-            description = element.descr;
-          }
-          if(description !== ''){
-            var div = $('<div class="actitvity-element">'
-              +'<div class="actitvity-title">'+description+'</div>'
-              +'<div class="actitvity-date">'+element.dt+'</div>'
-            +'</div>');
-            $('#view-settings .list-container').append(div);  
-          }
-        
-        }
-      }
+      fillActivity(list);
     }
   })
   .fail(function(){ 
     console.log("Some error occurred. Try later"); 
   });
+}
+
+function fillActivity(activityList){
+  if(activityList.length > 0){
+    $('#view-settings .list-container .list-scroll').iscroll();
+    $('#view-settings .list-container .list-scroll').empty();
+    for(var i = 0 ; i < activityList.length; i++){
+      var element =  activityList[i];
+      activityList[i].description = '';
+      var date = new Date(element.dt);
+      activityList[i].timestamp = date.getTime();
+      if(element.descr.toLowerCase() === 'checkin'){
+        var lojas = getStoresByBrand(element.brand);
+        var brand = getBrandById(element.brand);
+        if(brand !== undefined){
+          if(lojas.length > 1){
+            var loja = getStoreById(element.store);
+            if(loja !== null){
+              activityList[i].description = 'Checkin efectuado na loja '+brand.name+' ('+loja.local+')';
+            }
+          }else{
+            activityList[i].description = 'Checkin efectuado na loja '+brand.name;
+          }
+        }
+      }else if(element.descr.toLowerCase() === 'prize redeemed'){
+        var lojas = getStoresByBrand(element.brand);
+        var brand = getBrandById(element.brand);
+        if(brand !== undefined){
+          if(lojas.length > 1){
+            var loja = getStoreById(element.store);
+            if(loja !== null){
+              activityList[i].description = 'Prémio redimido na loja '+brand.name+' ('+loja.local+')';
+            }
+          }else{
+            activityList[i].description = 'Prémio redimido na loja '+brand.name;
+          }
+        }
+      }else if(element.descr.toLowerCase() === 'prize gain'){
+        var brand = getBrandById(element.brand);
+        //console.log('prize gain ', element);
+        activityList[i].description = 'Ganhou um prémio na loja '+((brand !== undefined) ? brand.name : '');
+      }else if(element.descr.toLowerCase() === 'shareprize'){
+        //console.log('shareprize ', element);
+        activityList[i].description = element.phone+' partilhou um prémio consigo';
+      }else if(element.descr.toLowerCase() === 'sharecheckins'){
+        //console.log('sharecheckins', element);
+        activityList[i].description = element.phone+' partilhou um checkin consigo';
+      }else{
+        activityList[i].description = element.descr;
+      }
+    }
+    activityList.sort(function(obj1, obj2) {
+      return obj1.timestamp - obj2.timestamp;
+    });
+    activityList.reverse();
+    for(var i = 0 ; i < activityList.length; i++){
+      if(activityList[i].description !== ''){
+        var div = $('<div class="actitvity-element">'
+          +'<div class="actitvity-title"><span>'+activityList[i].description+'</span></div>'
+          +'<div class="actitvity-date"><span>'+activityList[i].dt+'</span></div>'
+        +'</div>');
+        $('#view-settings .list-container .list-scroll').append(div);             
+      }
+
+    }
+    if($('#view-settings .activity-container').hasClass('selected') === true){
+      $('#view-settings .list-container .list-scroll .actitvity-element').each(function(index){
+        var height = $(this).find($('.actitvity-title')).height() + $(this).find($('.actitvity-date')).height();
+        if(index === ($('#view-settings .list-container .list-scroll .actitvity-element').length - 1) ){
+          $(this).css('height', (height*1.5)+'px');
+        }else{ $(this).css('height', (height*1.1)+'px');}
+      });
+    }
+  }
 }

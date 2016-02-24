@@ -90,18 +90,19 @@
 }
 
 .body-container-big.settings .settings-container.activity-container .list-container .actitvity-element{
-  height: 4rem;
+  height: 6rem;
   width: 100%;
+  margin-top: .5rem;
 }
 
-.body-container-big.settings .settings-container.activity-container .list-container .actitvity-element .actitvity-title{
+.body-container-big.settings .settings-container.activity-container .list-container .actitvity-element .actitvity-title span{
   color: #00436A;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
-.body-container-big.settings .settings-container.activity-container .list-container .actitvity-element .actitvity-date{
+.body-container-big.settings .settings-container.activity-container .list-container .actitvity-element .actitvity-date span{
   color: #B3B3B3;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .body-container-big.settings .settings-container .title .icon,
