@@ -92,9 +92,8 @@ function checkBrandPrizes(stores, brands, getPrizes){
   });
   console.log(storesData);
   if(getPrizes === true){
-    getPricesFromAPI();
+    getPricesFromAPI(null, 'loader');
   }
-  
 }
 
 function getCategoriesFromAPI(){
@@ -131,14 +130,23 @@ function getLocationsFromAPI(){
   });
 }
 
-function getPricesFromAPI(callback){
+function getPricesFromAPI(callback, type){
   var data = {checkVal: '-', id_user: userData.user.id};
   $.ajax({ type: 'POST', url: apiUrl+"/getUserPrizes.html", data: data, cache: false})
   .done(function(data){ 
     data = eval("(function(){return " + data + ";})()");
     console.log("get prices second success", data );
     if(data.code === 201){
-      checkAwards(data.data.prizes, callback);
+      awardsData = [];
+      awardsData = data.data.prizes; 
+      console.log('awards', awardsData); 
+      if(callback !== null && typeof(callback) === 'function'){
+        callback();
+      }else if(type === 'loader'){
+        stopLoader();
+      }else if(type === 'update'){
+        methods.showAwards($('#view-awards .stores-container'), 'awards');
+      }
     }else{
       console.log("Error", data.error );
     }
@@ -165,33 +173,6 @@ function setStoreFavorite(storeId, value){
   });
 }
 
-function checkAwards(awards, callback){
-  /*var storesFromBrand = [];
-  awards.forEach(function(award, index){
-    if(award.store === 'null' || award.store === null){
-      storesData.forEach(function(store){
-        if(store.brand === award.brand){
-          awards.push({
-            brand: award.brand, description: award.description,
-            id: award.id, store: store.id, title: award.title,
-            validity: award.validity, barCode: award.barCode
-          });
-        }
-      });
-      awards.splice(index, 1);
-    }
-  });*/
-  awardsData = [];
-  awardsData = awards;
-  console.log('awards', awardsData);
-  
-  if(callback){
-    callback();
-  }else{
-    stopLoader();
-  }
-}
-
 function sharePrize(idPrize, number){
   var data = {checkVal: '-', id_user: userData.user.id, idPrize: idPrize, tlmv: number};
   console.log('share prize ', data);
@@ -207,8 +188,8 @@ function sharePrize(idPrize, number){
         $('.body-container-big.body-selected').show();
         $('.container-view').removeClass('selected');
         $('#view-awards').addClass('selected');
-        methods.showAllBrands($('#view-awards .stores-container'), 'awards');
-      });
+        methods.showAwards($('#view-awards .stores-container'), 'awards');
+      }, '');
     }
   })
   .fail(function(){ 
@@ -287,8 +268,6 @@ function checkInExists(redirect){
         getCheckinList();
         if(redirect === true){
           showSuccessCheckin(data.data.brand, data.data.store);
-        }else{
-          showNotification(1, 'menu-settings');
         }
       }
     }
@@ -314,9 +293,8 @@ function getCheckinList(){
   });
 }
 
-function prizeReclaim(redirect, prizeCode){
+function prizeReclaim(prizeCode){
   var data = {checkVal: '-', id_user: userData.user.id, prizeCode: prizeCode};
-  //console.log('prize reclaim ', prizeCode);
   $.ajax({ type: 'POST', url: apiUrl+"/prizeReclaim.html", data: data, cache: false})
   .done(function(data){ 
     data = eval("(function(){return " + data + ";})()");
@@ -328,19 +306,15 @@ function prizeReclaim(redirect, prizeCode){
 
       // pedir lista de premios atualizada e voltar pra view da lista de premios
       getPricesFromAPI(function(){
-        if(redirect === true){
-          reclaimTimeout = setTimeout(function(){
-            $('.container-view').removeClass('selected');
-            $('#view-awards').addClass('selected');
-            $('#view-award .award-detail').addClass('selected');
-            $('#view-award .award-validated').removeClass('selected');
-            clearTimeout(reclaimTimeout); reclaimTimeout = null;
-            methods.showAwards($('#view-awards .stores-container'), 'awards');
-          }, 2000); 
-        }else{
-          showNotification(1, 'menu-settings');
-        } 
-      });
+        reclaimTimeout = setTimeout(function(){
+          $('.container-view').removeClass('selected');
+          $('#view-awards').addClass('selected');
+          $('#view-award .award-detail').addClass('selected');
+          $('#view-award .award-validated').removeClass('selected');
+          clearTimeout(reclaimTimeout); reclaimTimeout = null;
+          methods.showAwards($('#view-awards .stores-container'), 'awards');
+        }, 2000); 
+      }, '');
     }
   })
   .fail(function(){ 
@@ -350,7 +324,6 @@ function prizeReclaim(redirect, prizeCode){
 
 function activityCount(){
   var data = {checkVal: '-', id_user: userData.user.id};
-  console.log('activity count ');
   $.ajax({ type: 'POST', url: apiUrl+"/activityCount.html", data: data, cache: false})
   .done(function(data){ 
     data = eval("(function(){return " + data + ";})()");
@@ -367,16 +340,16 @@ function activityCount(){
   });
 }
 
+var _activityList = [];
 function activityList(){
   var data = {checkVal: '-', id_user: userData.user.id};
-  console.log('activity list ');
   $.ajax({ type: 'POST', url: apiUrl+"/activityList.html", data: data, cache: false})
   .done(function(data){ 
     data = eval("(function(){return " + data + ";})()");
     console.log('activity list ', data);
     if(data.code === 200){
-      var list = data.data;
-      fillActivity(list);
+      _activityList = data.data;
+      fillActivity(_activityList);
     }
   })
   .fail(function(){ 
@@ -384,15 +357,21 @@ function activityList(){
   });
 }
 
+var start = 15;
+var list =[];
+var count = 0;
 function fillActivity(activityList){
   if(activityList.length > 0){
-    $('#view-settings .list-container .list-scroll').iscroll();
+    $('#view-settings .list-container').off();
     $('#view-settings .list-container .list-scroll').empty();
+    count = 0;
+    list =[];
+    start = 15;
+    console.log('user', language, userData);
     for(var i = 0 ; i < activityList.length; i++){
       var element =  activityList[i];
-      activityList[i].description = '';
-      var date = new Date(element.dt);
-      activityList[i].timestamp = date.getTime();
+      var description = '';
+      var date = element.dt;
       if(element.descr.toLowerCase() === 'checkin'){
         var lojas = getStoresByBrand(element.brand);
         var brand = getBrandById(element.brand);
@@ -400,11 +379,18 @@ function fillActivity(activityList){
           if(lojas.length > 1){
             var loja = getStoreById(element.store);
             if(loja !== null){
-              activityList[i].description = 'Checkin efectuado na loja '+brand.name+' ('+loja.local+')';
+              if(language === 'en'){
+                description = 'Checkin performed in the store '+brand.name+' ('+loja.local+')';
+              }else{
+                description = 'Checkin efectuado na loja '+brand.name+' ('+loja.local+')';
+              }
             }
           }else{
-            activityList[i].description = 'Checkin efectuado na loja '+brand.name;
-          }
+            if(language === 'en'){
+              description = 'Checkin performed in the store '+brand.name;
+            }else{
+              description = 'Checkin efectuado na loja '+brand.name;
+            }          }
         }
       }else if(element.descr.toLowerCase() === 'prize redeemed'){
         var lojas = getStoresByBrand(element.brand);
@@ -413,47 +399,95 @@ function fillActivity(activityList){
           if(lojas.length > 1){
             var loja = getStoreById(element.store);
             if(loja !== null){
-              activityList[i].description = 'Prémio redimido na loja '+brand.name+' ('+loja.local+')';
+              if(language === 'en'){
+                description = 'Prize redeemed in store '+brand.name+' ('+loja.local+')';
+              }else{
+                description = 'Prémio redimido na loja '+brand.name+' ('+loja.local+')';
+              }  
             }
           }else{
-            activityList[i].description = 'Prémio redimido na loja '+brand.name;
+            if(language === 'en'){
+              description = 'Prize redeemed in store '+brand.name;
+            }else{
+              description = 'Prémio redimido na loja '+brand.name;
+            }  
           }
         }
       }else if(element.descr.toLowerCase() === 'prize gain'){
         var brand = getBrandById(element.brand);
         //console.log('prize gain ', element);
-        activityList[i].description = 'Ganhou um prémio na loja '+((brand !== undefined) ? brand.name : '');
+        if(language === 'en'){
+          description = 'You won a prize in the store '+((brand !== undefined) ? brand.name : '');
+        }else{
+          description = 'Ganhou um prémio na loja '+((brand !== undefined) ? brand.name : '');
+        }
       }else if(element.descr.toLowerCase() === 'shareprize'){
         //console.log('shareprize ', element);
-        activityList[i].description = element.phone+' partilhou um prémio consigo';
+        var info = JSON.parse(element.info);
+        var award = getAwardById(info.prize);
+        if(award !== null){
+          if(language === 'en'){
+            description = element.phone+" shared a prize '"+award.title+"' "+((userData.user.name !== "") ? ("with "+userData.user.name) : "you");
+          }else{
+            description = element.phone+" partilhou o prémio '"+award.title+"' "+((userData.user.name !== "") ? ("com "+userData.user.name) : "consigo");
+          }
+        }else{
+          if(language === 'en'){
+            description =  element.phone+" shared a prize "+((userData.user.name !== "") ? ("with "+userData.user.name) : "you");
+          }else{
+            description =  element.phone+" partilhou um prémio "+((userData.user.name !== "") ? ("com "+userData.user.name) : "consigo");
+          }
+        }
       }else if(element.descr.toLowerCase() === 'sharecheckins'){
         //console.log('sharecheckins', element);
-        activityList[i].description = element.phone+' partilhou um checkin consigo';
-      }else{
-        activityList[i].description = element.descr;
+        var info = JSON.parse(element.info);
+        if(language === 'en'){
+          description = element.phone+" shared "+((info.nCheckins == 1) ? info.nCheckins+" checkin" : info.nCheckins+" checkin's")+" "+((userData.user.name !== "") ? ("with "+userData.user.name) : "you");
+        }else{
+          description = element.phone+" partilhou "+((info.nCheckins == 1) ? info.nCheckins+" checkin" : info.nCheckins+" checkin's")+" "+((userData.user.name !== "") ? ("com "+userData.user.name) : "consigo");
+        }
       }
+      if(description !== ''){
+        var _date = new Date(element.dt);
+        list.push({index: count, description: description, date: element.dt, timestamp: _date.getTime()});
+        count++;
+      }
+      
     }
-    activityList.sort(function(obj1, obj2) {
+    list.sort(function(obj1, obj2) {
       return obj1.timestamp - obj2.timestamp;
     });
-    activityList.reverse();
-    for(var i = 0 ; i < activityList.length; i++){
-      if(activityList[i].description !== ''){
-        var div = $('<div class="actitvity-element">'
-          +'<div class="actitvity-title"><span>'+activityList[i].description+'</span></div>'
-          +'<div class="actitvity-date"><span>'+activityList[i].dt+'</span></div>'
-        +'</div>');
-        $('#view-settings .list-container .list-scroll').append(div);             
+    list.reverse();
+    console.log('length ', list.length);
+    appendElements(0, start);
+    function appendElements(start, end){
+      var end = (list.length > end) ? end : list.length;
+      for(var i = start; i < end; i++){ 
+        if(list[i].description !== ''){
+          var div = $('<div class="actitvity-element" id="activity-'+list[i].index+'">'         
+            +'<div class="actitvity-title"><span>'+list[i].description+'</span></div>'
+            +'<div class="actitvity-date"><span>'+list[i].date+'</span></div>'
+          +'</div>');
+          $('#view-settings .list-container .list-scroll').append(div);             
+        }
       }
-
     }
-    if($('#view-settings .activity-container').hasClass('selected') === true){
+    var scrollHeight= 0;
+    $('#view-settings .list-container').scroll(function(){
+      scrollHeight = $('#view-settings .list-container .list-scroll').height() - $('#view-settings .list-container').height();
+      if($(this).scrollTop() > scrollHeight){
+        var end = start + 15;
+        appendElements(start, end);
+        start = end;
+      }
+    });
+    /*if($('#view-settings .activity-container').hasClass('selected') === true){
       $('#view-settings .list-container .list-scroll .actitvity-element').each(function(index){
         var height = $(this).find($('.actitvity-title')).height() + $(this).find($('.actitvity-date')).height();
         if(index === ($('#view-settings .list-container .list-scroll .actitvity-element').length - 1) ){
           $(this).css('height', (height*1.5)+'px');
         }else{ $(this).css('height', (height*1.1)+'px');}
       });
-    }
+    }*/
   }
 }

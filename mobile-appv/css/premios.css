@@ -26,6 +26,9 @@
 .body-container-big.awards .awards-list{
   height: 92%;
   width: 100%;
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
   overflow-x: hidden;
   overflow-y: scroll;
   -ms-overflow-y: scroll;

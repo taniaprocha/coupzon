@@ -82,7 +82,11 @@ $('#phone-password').on('click', function(){
       setUserInfo(userData.user);
       checkIns = []; checkIns = userData.checkins;
       showUserQrCode(barcodeId);
-      $('#coupzon-points').text('TEM '+userData.coupzonpoints+' PONTOS COUPZON');
+      if(language === 'pt'){
+        $('#coupzon-points').text('TEM '+userData.coupzonpoints+' PONTOS COUPZON');
+      }else{
+        $('#coupzon-points').text('HAVE '+userData.coupzonpoints+' COUPZON POINTS');
+      }
       $('.insert-password-alert').css('opacity', 0); $('.message-not-received').removeClass('alert');
       $('.insert-password-title').removeClass('alert'); 
       $('.container-view').removeClass('selected');
@@ -160,7 +164,12 @@ $('.share-checkin-button').on('click', function(){
     $('.body-container-store').hide();
     $('.body-container-big.store.body-share').show();
     var number = $('#store-check-ins').text();
-    $('.share-checkins-number .title .check').text('TEM '+number+' CHECK-IN ACUMULADOS.');
+    var check = (number < 2) ? 'CHECK-IN' : 'CHECK-INS';
+    if(language === 'pt'){
+      $('.share-checkins-number .title .check').text('TEM '+number+' '+check+' ACUMULADOS.');
+    }else{
+      $('.share-checkins-number .title .check').text('HAVE '+number+' ACCUMULATED '+check+'.');
+    }
   }
 });
 
@@ -297,12 +306,7 @@ $('.settings-menu').on('click', function(){
     $('.language-container').addClass('selected'); 
   }else if($(this).hasClass('menu-activity') === true){ 
     $('.activity-container').addClass('selected'); 
-    $('#view-settings .list-container .list-scroll .actitvity-element').each(function(index){
-      var height = $(this).find($('.actitvity-title')).height() + $(this).find($('.actitvity-date')).height();
-      if(index === ($('#view-settings .list-container .list-scroll .actitvity-element').length - 1) ){
-        $(this).css('height', (height*1.5)+'px');
-      }else{ $(this).css('height', (height*1.1)+'px');}
-    });
+    hideNotification();
   }
   $('#back-settings').removeClass('disable');
 });
@@ -345,7 +349,6 @@ $('.stores-filter').on('click', function(){
   $('.stores-container').addClass('selected'); $('.stores-container').animate({opacity: 1}, 300);
 });
 
-
 $(document).ready(function() {
   var partialW = window.innerWidth;
   var partialH = window.innerHeight;
@@ -363,27 +366,11 @@ $(document).ready(function() {
   $('#view-award').css({height: (partialH - footerH)+'px' });
   $('#view-contacts').css({height: (partialH - footerH)+'px' });
   
-  $('#view-settings .terms').text(terms);
+  //$('#view-settings .terms').text(terms);
   $('#view-terms .terms-container .terms').text(terms);
   methods = new storesMethods();
-
-  //./data/texts.json
-  /*var jqxhr = $.get( "data/texts.json", function() {
-    console.log( "success" );
-  })
-    .done(function(data) {
-      //console.log( "second success", data );
-    })
-    .fail(function() {
-      console.log( "error" );
-    })
-    .always(function(data) {
-      //console.log( "finished", data);
-      console.log(JSON.parse(data));
-      var _data = JSON.parse(data);
-      setLabels(_data.pt)
-    });*/
   //window.localStorage.clear();
+  
   userData = JSON.parse(window.localStorage.getItem('user'));
   setTimeout(function(){
     $('.message-loading').addClass('show');
@@ -406,11 +393,15 @@ $(document).ready(function() {
 
     loginUser(userData.user.password, false, userData.user.phone, function(){
       showUserQrCode(userData.user.barId);
-      $('#coupzon-points').text('TEM '+userData.coupzonpoints+' PONTOS COUPZON');
+      if(language === 'pt'){
+        $('#coupzon-points').text('TEM '+userData.coupzonpoints+' PONTOS COUPZON');
+      }else{
+        $('#coupzon-points').text('HAVE '+userData.coupzonpoints+' COUPZON POINTS');
+      }
       checkLocation();
     });
   }
-
+  
   /*var fakeContacts = [
     {name: 'Tânia Rocha', number: '924414095'},
     {name: 'Maria Inês', number: '966514444'},
@@ -434,4 +425,44 @@ $(document).ready(function() {
   ];
   contactsList = fakeContacts;
   fillContacts(fakeContacts);*/
+  console.log(languageJson);
+  setLabels(languageJson.pt);
+  $('.language-line.line-portuguese .language-icon span').removeClass();
+  if(language === 'pt'){
+    $('.language-line.line-portuguese').addClass('selected');
+    $('.language-line.line-portuguese .language-icon span').addClass('coup-radio-redondo-check');
+  }else{
+    $('.language-line.line-english').addClass('selected');
+    $('.language-line.line-english .language-icon span').addClass('coup-radio-redondo-check');
+  }
+  
 });
+
+$('.language-line').on('click', function(){
+  $('.language-line').removeClass('selected');
+  $('.language-line .language-icon span').removeClass();
+  $(this).addClass('selected');
+  if(language === 'pt'){
+    language = 'en';
+    $('.language-line.line-portuguese .language-icon span').addClass('coup-radio-redondo-null');
+    $('.language-line.line-english .language-icon span').addClass('coup-radio-redondo-check');
+    setLabels(languageJson.en);
+
+  }else{
+    language = 'pt';
+    $('.language-line.line-english .language-icon span').addClass('coup-radio-redondo-null');
+    $('.language-line.line-portuguese .language-icon span').addClass('coup-radio-redondo-check');
+    setLabels(languageJson.pt);
+  }
+});
+
+$("#change-language-btn").on('click', function(){
+  if(language === 'pt'){
+    language = 'en';
+    setLabels(languageJson.en); 
+  }else{
+    language = 'pt';
+    setLabels(languageJson.pt); 
+  }
+});
+

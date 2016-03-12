@@ -1,3 +1,6 @@
+.body-container-big{
+  position: relative;
+}
 .body-container-big.settings,
 .body-container-big.terms{
   background-size: contain;
@@ -6,15 +9,42 @@
   padding-top: 7%;
 }
 
-.body-container-big.settings .settings-container {
+.body-container-big.settings .settings-container{
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  z-index: -1;
+  position: relative;
 }
 
-.body-container-big.settings .settings-container.selected{
-  display: block;
+.body-container-big.settings .settings-container.settings-menu-container.selected{
+  visibility: visible;
+  opacity: 1;
+  z-index: 100;
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+}
+
+.body-container-big.settings .settings-container.profile-container.selected,
+.body-container-big.settings .settings-container.activity-container.selected,
+.body-container-big.settings .settings-container.contacts-container.selected,
+.body-container-big.settings .settings-container.faq-container.selected,
+.body-container-big.settings .settings-container.terms-container.selected,
+.body-container-big.settings .settings-container.language-container.selected,
+.body-container-big.settings .settings-container.change-password-container.selected{
+  visibility: visible;
+  padding-top: .5rem;
+  opacity: 1;
+  z-index: 2;
+  position: absolute;
+  top: 0rem;
+  left: 2rem;
+  transition: visibility 0s, opacity .25s ease-in;
+  -moz-transition: visibility 0s, opacity .25s ease-in;
+  -webkit-transition: visibility 0s, opacity .25s ease-in;
 }
 
 .body-container-big.settings .settings-menu-container .settings-menu{
@@ -24,10 +54,6 @@
   -moz-border-bottom: solid .1rem #F2F2F2;
   -webkit-border-bottom: solid .1rem #F2F2F2;
   border-bottom: solid .1rem #F2F2F2;
-} 
-
-.body-container-big.settings .settings-menu-container .settings-menu.menu-language{
-  display: none;
 }
 
 .body-container-big.settings .settings-menu-container .settings-menu .icon{
@@ -93,16 +119,19 @@
   height: 6rem;
   width: 100%;
   margin-top: .5rem;
+  height: auto;
 }
 
 .body-container-big.settings .settings-container.activity-container .list-container .actitvity-element .actitvity-title span{
   color: #00436A;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  height: auto;
 }
 
 .body-container-big.settings .settings-container.activity-container .list-container .actitvity-element .actitvity-date span{
   color: #B3B3B3;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  height: 1.3rem;
 }
 
 .body-container-big.settings .settings-container .title .icon,
@@ -160,6 +189,35 @@
   padding-top: .8rem;
 }
 
+.body-container-big.settings .settings-container.terms-container .terms .title{
+  color: #0089C7;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  -moz-border-bottom: solid .1rem #BEDEE8;
+  -webkit-border-bottom: solid .1rem #BEDEE8;
+  border-bottom: solid .1rem #BEDEE8;
+  padding: 1rem 0 .5rem 0;
+  height: auto;
+}
+
+.body-container-big.settings .settings-container.terms-container .terms .description{
+  color: #00436A;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  padding-top: .5rem;
+}
+
+.body-container-big.settings .settings-container.terms-container .terms .item{
+  color: #00436A;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  padding-top: .5rem;
+  padding-left: .3rem;
+}
+
 .body-container-big.settings .settings-container.profile-container,
 .body-container-big.settings .settings-container.contacts-container,
 .body-container-big.settings .settings-container.faq-container,
@@ -190,6 +248,11 @@
   -ms-touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
   -ms-scroll-chaining: none;
+}
+
+.body-container-big.settings .settings-container.faq-container .faqs,
+.body-container-big.settings .settings-container.terms-container .terms{
+  margin-bottom: 2rem;
 }
 
 .body-container-big.settings .settings-container.faq-container .faqs .type{
@@ -394,7 +457,7 @@
   padding: .8rem 1rem .8rem 1rem;
   width: 30rem;
   text-align: center;
-  margin: 1.5rem auto 0 auto;
+  margin: 1.5rem auto 1.5rem auto;
 }
 
 .body-container-big.settings .settings-container.change-password-container .change-password-btn{
