@@ -12,6 +12,7 @@
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
+  top:-5rem;
   opacity: 0;
   display: none;
 }

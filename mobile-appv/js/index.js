@@ -60,14 +60,23 @@ function hideNotification(){
 
 function stopLoader(){
   console.log('stop loader');
-  $('#loading').delay(2000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
+  /*$('#loading').delay(2000).animate({marginTop: '-20rem', opacity: 0}, 150, function(){
     $('.container-view').removeClass('selected');
     $('#view-qrcode').addClass('selected'); 
     setFotterMenu('menu-qrcode');
     $('.footer-menu').addClass('selected');
     $('.menu-container').removeClass('selected'); 
     $('#menu-qrcode').addClass('selected');
-  });
+    $('#loading').css({marginTop: '45%', opacity: 1});
+  });*/
+  setTimeout(function(){
+    $('.container-view').removeClass('selected');
+    $('#view-qrcode').addClass('selected'); 
+    setFotterMenu('menu-qrcode');
+    $('.footer-menu').addClass('selected');
+    $('.menu-container').removeClass('selected'); 
+    $('#menu-qrcode').addClass('selected');
+  }, 3000);
 }
 
 window.onerror = function (errorMsg, url, lineNumber) {
@@ -245,10 +254,9 @@ function setLabels(data){
   $('#view-stores .categories-menu .table-cell').text(data.stores.category);
   $('#view-stores .all-menu .table-cell').text(data.stores.all);
   $('#view-stores .locations-menu .table-cell').text(data.stores.local);
-  $('#view-stores .search-input-container input').attr('placeholder', data.prizes.search);
+  $('#view-stores .search-input-container input').attr('placeholder', data.stores.search);
   $('#view-stores .categories-container .stores-filter').text(data.stores.filter);
   $('#view-stores .locations-container .stores-filter').text(data.stores.filter);
-
   $('#view-store .available-check-ins .title').text(data.stores.checkinTitle);
   $('#view-store .available-awards .title').text(data.stores.availablePrizes);
   $('#view-store .favorite-button .title').text(data.stores.favorites);
@@ -302,68 +310,68 @@ function setLabels(data){
   
   fillActivity(_activityList);
   
-  $('#view-settings .terms-container .terms .introduction').html(data.terms.introduction);
+  $('.terms-container .terms .introduction').html(data.terms.introduction);
 
-  $('#view-settings .terms-container .terms .title.1').text(data.terms.title1);
-  $('#view-settings .terms-container .terms .description.11').text(data.terms.description11);
-  $('#view-settings .terms-container .terms .description.12').text(data.terms.description12);
-  $('#view-settings .terms-container .terms .title.2').text(data.terms.title1);
-  $('#view-settings .terms-container .terms .description.21').text(data.terms.description21);
-  $('#view-settings .terms-container .terms .description.22').text(data.terms.description22);
-  $('#view-settings .terms-container .terms .description.23').text(data.terms.description23);
-  $('#view-settings .terms-container .terms .title.3').text(data.terms.title3);
-  $('#view-settings .terms-container .terms .description.31').text(data.terms.description31);
-  $('#view-settings .terms-container .terms .description.32').text(data.terms.description32);
-  $('#view-settings .terms-container .terms .title.4').text(data.terms.title4);
-  $('#view-settings .terms-container .terms .description.41').text(data.terms.description41);
-  $('#view-settings .terms-container .terms .description.42').text(data.terms.description42);
-  $('#view-settings .terms-container .terms .item.41').text(data.terms.item41);
-  $('#view-settings .terms-container .terms .item.42').text(data.terms.item42);
-  $('#view-settings .terms-container .terms .item.43').text(data.terms.item43);
-  $('#view-settings .terms-container .terms .item.44').text(data.terms.item44);
-  $('#view-settings .terms-container .terms .title.6').text(data.terms.title6);
-  $('#view-settings .terms-container .terms .description.61').text(data.terms.description61);
-  $('#view-settings .terms-container .terms .description.62').text(data.terms.description62);
-  $('#view-settings .terms-container .terms .description.63').text(data.terms.description63);
-  $('#view-settings .terms-container .terms .title.7').text(data.terms.title7);
-  $('#view-settings .terms-container .terms .description.71').text(data.terms.description71);
-  $('#view-settings .terms-container .terms .description.72').text(data.terms.description72);
-  $('#view-settings .terms-container .terms .title.9').text(data.terms.title9);
-  $('#view-settings .terms-container .terms .description.91').text(data.terms.description91);
-  $('#view-settings .terms-container .terms .description.92').text(data.terms.description92);
-  $('#view-settings .terms-container .terms .title.10').text(data.terms.title10);
-  $('#view-settings .terms-container .terms .description.10').html(data.terms.description10);
-  $('#view-settings .terms-container .terms .title.11').text(data.terms.title11);
-  $('#view-settings .terms-container .terms .description.11').html(data.terms.description11);
-  $('#view-settings .terms-container .terms .title.12').text(data.terms.title12);
-  $('#view-settings .terms-container .terms .description.12').html(data.terms.description12);
-  $('#view-settings .terms-container .terms .title.13').text(data.terms.title13);
-  $('#view-settings .terms-container .terms .description.13').html(data.terms.description13);
-  $('#view-settings .terms-container .terms .title.14').text(data.terms.title14);
-  $('#view-settings .terms-container .terms .description.14').html(data.terms.description14);
-  $('#view-settings .terms-container .terms .title.15').text(data.terms.title15);
-  $('#view-settings .terms-container .terms .description.15').html(data.terms.description15);
-  $('#view-settings .terms-container .terms .title.16').text(data.terms.title16);
-  $('#view-settings .terms-container .terms .description.16').html(data.terms.description16);
-  $('#view-settings .terms-container .terms .title.17').text(data.terms.title17);
-  $('#view-settings .terms-container .terms .description.17').html(data.terms.description17);
-  $('#view-settings .terms-container .terms .title.18').text(data.terms.title18);
-  $('#view-settings .terms-container .terms .description.18').html(data.terms.description18);
-  $('#view-settings .terms-container .terms .title.19').text(data.terms.title19);
-  $('#view-settings .terms-container .terms .description.19').html(data.terms.description19);
-  $('#view-settings .terms-container .terms .title.20').text(data.terms.title20);
-  $('#view-settings .terms-container .terms .description.20').html(data.terms.description20);
-  $('#view-settings .terms-container .terms .title.21').text(data.terms.title21);
-  $('#view-settings .terms-container .terms .description.21').html(data.terms.description21);
-  $('#view-settings .terms-container .terms .title.22').text(data.terms.title22);
-  $('#view-settings .terms-container .terms .description.22').html(data.terms.description22);
-  $('#view-settings .terms-container .terms .title.23').text(data.terms.title23);
-  $('#view-settings .terms-container .terms .description.23').html(data.terms.description23);
-  $('#view-settings .terms-container .terms .title.24').text(data.terms.title24);
-  $('#view-settings .terms-container .terms .description.24').html(data.terms.description24);
-  $('#view-settings .terms-container .terms .title.25').text(data.terms.title25);
-  $('#view-settings .terms-container .terms .description.25').html(data.terms.description25);
-  $('#view-settings .terms-container .terms .title.26').text(data.terms.title26);
-  $('#view-settings .terms-container .terms .description.26').html(data.terms.description26);
-  $('#view-settings .terms-container .terms .description.27').html(data.terms.description27);
+  $('.terms-container .terms .title.1').text(data.terms.title1);
+  $('.terms-container .terms .description.11').text(data.terms.description11);
+  $('.terms-container .terms .description.12').text(data.terms.description12);
+  $('.terms-container .terms .title.2').text(data.terms.title2);
+  $('.terms-container .terms .description.21').text(data.terms.description21);
+  $('.terms-container .terms .description.22').text(data.terms.description22);
+  $('.terms-container .terms .description.23').text(data.terms.description23);
+  $('.terms-container .terms .title.3').text(data.terms.title3);
+  $('.terms-container .terms .description.31').text(data.terms.description31);
+  $('.terms-container .terms .description.32').text(data.terms.description32);
+  $('.terms-container .terms .title.4').text(data.terms.title4);
+  $('.terms-container .terms .description.41').text(data.terms.description41);
+  $('.terms-container .terms .description.42').text(data.terms.description42);
+  $('.terms-container .terms .item.41').text(data.terms.item41);
+  $('.terms-container .terms .item.42').text(data.terms.item42);
+  $('.terms-container .terms .item.43').text(data.terms.item43);
+  $('.terms-container .terms .item.44').text(data.terms.item44);
+  $('.terms-container .terms .title.6').text(data.terms.title6);
+  $('.terms-container .terms .description.61').text(data.terms.description61);
+  $('.terms-container .terms .description.62').text(data.terms.description62);
+  $('.terms-container .terms .description.63').text(data.terms.description63);
+  $('.terms-container .terms .title.7').text(data.terms.title7);
+  $('.terms-container .terms .description.71').text(data.terms.description71);
+  $('.terms-container .terms .description.72').text(data.terms.description72);
+  $('.terms-container .terms .title.9').text(data.terms.title9);
+  $('.terms-container .terms .description.91').text(data.terms.description91);
+  $('.terms-container .terms .description.92').text(data.terms.description92);
+  $('.terms-container .terms .title.10').text(data.terms.title10);
+  $('.terms-container .terms .description.10').html(data.terms.description10);
+  $('.terms-container .terms .title.11').text(data.terms.title11);
+  $('.terms-container .terms .description.11').html(data.terms.description11);
+  $('.terms-container .terms .title.12').text(data.terms.title12);
+  $('.terms-container .terms .description.12').html(data.terms.description12);
+  $('.terms-container .terms .title.13').text(data.terms.title13);
+  $('.terms-container .terms .description.13').html(data.terms.description13);
+  $('.terms-container .terms .title.14').text(data.terms.title14);
+  $('.terms-container .terms .description.14').html(data.terms.description14);
+  $('.terms-container .terms .title.15').text(data.terms.title15);
+  $('.terms-container .terms .description.15').html(data.terms.description15);
+  $('.terms-container .terms .title.16').text(data.terms.title16);
+  $('.terms-container .terms .description.16').html(data.terms.description16);
+  $('.terms-container .terms .title.17').text(data.terms.title17);
+  $('.terms-container .terms .description.17').html(data.terms.description17);
+  $('.terms-container .terms .title.18').text(data.terms.title18);
+  $('.terms-container .terms .description.18').html(data.terms.description18);
+  $('.terms-container .terms .title.19').text(data.terms.title19);
+  $('.terms-container .terms .description.19').html(data.terms.description19);
+  $('.terms-container .terms .title.20').text(data.terms.title20);
+  $('.terms-container .terms .description.20').html(data.terms.description20);
+  $('.terms-container .terms .title.21').text(data.terms.title21);
+  $('.terms-container .terms .description.21').html(data.terms.description21);
+  $('.terms-container .terms .title.22').text(data.terms.title22);
+  $('.terms-container .terms .description.22').html(data.terms.description22);
+  $('.terms-container .terms .title.23').text(data.terms.title23);
+  $('.terms-container .terms .description.23').html(data.terms.description23);
+  $('.terms-container .terms .title.24').text(data.terms.title24);
+  $('.terms-container .terms .description.24').html(data.terms.description24);
+  $('.terms-container .terms .title.25').text(data.terms.title25);
+  $('.terms-container .terms .description.25').html(data.terms.description25);
+  $('.terms-container .terms .title.26').text(data.terms.title26);
+  $('.terms-container .terms .description.26').html(data.terms.description26);
+  $('.terms-container .terms .description.27').html(data.terms.description27);
 }

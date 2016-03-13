@@ -61,7 +61,7 @@ storesMethods.prototype.showSelectedStores = function(selectedCategories, select
     if(type === 1){
       container.append(setStoreDiv1(store.id, store.title_prize, store.local, store.address, null));
     }else{
-      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, award));
+      container.append(setStoreDiv2(brand.name, store.id, categoria, brand.image, store.title_prize, null));
     }
   }
   if(results === 0){
@@ -246,6 +246,7 @@ function addAwardListeners(menu){
     storeId = storeId.substring(storeId.indexOf('store-')+6, storeId.indexOf('-award'));
     var awardId = $(this).attr('id'); 
     awardId = awardId.substring(awardId.indexOf('award-')+6, awardId.length);
+    //console.log('.....', storeId, awardId);
     var store = getStoreById(storeId);
     var _award = null;
     for(var i=0; i<awardsData.length; i++){

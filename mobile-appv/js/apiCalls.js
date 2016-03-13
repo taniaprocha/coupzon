@@ -1,6 +1,5 @@
 var apiUrl = 'http://api.coupzon.tk';
 var siteUrl = 'http://www.coupzon.tk';
-var terms = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut tempor quam. Praesent suscipit erat vel dolor sodales pharetra. Morbi quis ipsum vulputate, placerat purus viverra, facilisis sem. Vestibulum imperdiet ac risus vel cursus. Curabitur interdum elementum vehicula. Curabitur fermentum, urna eu aliquet ultrices, sem lectus pretium urna, vel rhoncus nunc arcu quis justo. Mauris massa turpis, vulputate sit amet feugiat ut, cursus ut quam. Pellentesque vel nisl in lectus pretium lacinia in ut massa. Sed augue felis, tristique viverra imperdiet ac, sollicitudin nec elit. Curabitur a odio quis lacus tincidunt suscipit ut eu sapien. Vivamus eget nisl et lacus posuere pretium sit amet vel orci. Quisque eu dapibus dui, lacinia ornare neque.';
 var brandsData =[];
 var storesData = [];
 var awardsData = [];
@@ -44,8 +43,11 @@ function loginUser(password, md5, number, callback){
   $.ajax({ type: 'POST', url: apiUrl+"/loginUser.html", data: data, cache: false})
   .done(function(data) {
     console.log("login user second success", data );
-    if(data.code === undefined){ data = data = eval("(function(){return " + data + ";})()"); }
-    if(data.code === 403){ callback(false);
+    if(data.code === undefined){ 
+      data = data = eval("(function(){return " + data + ";})()"); 
+    }
+    if(data.code === 403){ 
+      callback(false);
     }else if(data.code === 200){
       data.data.coupzonpoints = data.coupzonpoints;
       saveOnLocalStorage(data.data);

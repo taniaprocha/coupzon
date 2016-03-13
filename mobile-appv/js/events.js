@@ -23,7 +23,8 @@ $('#select-contact-checkin').on('click', function(){
 });
 
 $('#check-terms-title').on('click', function(){
-  $('.container-view').removeClass('selected'); $('#view-terms').addClass('selected');
+  $('.container-view').removeClass('selected'); 
+  $('#view-terms').addClass('selected');
 });
 
 $('.check-terms').on('click', function(){
@@ -87,7 +88,8 @@ $('#phone-password').on('click', function(){
       }else{
         $('#coupzon-points').text('HAVE '+userData.coupzonpoints+' COUPZON POINTS');
       }
-      $('.insert-password-alert').css('opacity', 0); $('.message-not-received').removeClass('alert');
+      $('.insert-password-alert').css('opacity', 0); 
+      $('.message-not-received').removeClass('alert');
       $('.insert-password-title').removeClass('alert'); 
       $('.container-view').removeClass('selected');
       $('#loading-view').addClass('selected'); 
@@ -107,12 +109,13 @@ $('#logout').on('click', function(){
 });
 
 $('#view-stores .search-btn').on('click', function(){
-  $('#search-input').val(''); $('.search-container.stores').show();
-  $('#view-stores .search-container.stores').animate({opacity:1, top: $('.view-menu-container').offset().top+'px'}, 200);
+  $('#search-input').val(''); 
+  $('.search-container.stores').css({display: 'block', top: '-5rem'})
+  $('#view-stores .search-container.stores').animate({opacity:1, top: '0'}, 200);
 });
 
 $('.close-search-btn').on('click', function(){
-  $('.search-container.stores').animate({opacity:0, top: '0px'}, 200, function(){
+  $('.search-container.stores').animate({opacity:0, top: '-5rem'}, 200, function(){
     $('.search-container.stores').hide();
   });
 });
@@ -367,7 +370,7 @@ $(document).ready(function() {
   $('#view-contacts').css({height: (partialH - footerH)+'px' });
   
   //$('#view-settings .terms').text(terms);
-  $('#view-terms .terms-container .terms').text(terms);
+  //$('#view-terms .terms-container .terms').text(terms);
   methods = new storesMethods();
   //window.localStorage.clear();
   
@@ -454,15 +457,26 @@ $('.language-line').on('click', function(){
     $('.language-line.line-portuguese .language-icon span').addClass('coup-radio-redondo-check');
     setLabels(languageJson.pt);
   }
+  $('.settings-container').removeClass('selected');
+  $('#back-settings').addClass('disable');
+  $('.settings-container.settings-menu-container').addClass('selected');
 });
 
 $("#change-language-btn").on('click', function(){
+  $('.language-line').removeClass('selected');
+  $('.language-line .language-icon span').removeClass();
   if(language === 'pt'){
     language = 'en';
     setLabels(languageJson.en); 
+    $('.language-line.line-english').addClass('selected');
+    $('.language-line.line-portuguese .language-icon span').addClass('coup-radio-redondo-null');
+    $('.language-line.line-english .language-icon span').addClass('coup-radio-redondo-check');
   }else{
     language = 'pt';
     setLabels(languageJson.pt); 
+    $('.language-line.line-portuguese').addClass('selected');
+    $('.language-line.line-english .language-icon span').addClass('coup-radio-redondo-null');
+    $('.language-line.line-portuguese .language-icon span').addClass('coup-radio-redondo-check');
   }
 });
 

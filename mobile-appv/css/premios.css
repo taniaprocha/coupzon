@@ -26,6 +26,7 @@
 .body-container-big.awards .awards-list{
   height: 92%;
   width: 100%;
+  padding-top: 1rem;
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
