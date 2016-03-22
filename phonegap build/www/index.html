@@ -5,8 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi, user-scalable=0' name='viewport" />
-
+    <!--to browser -->
+    <!--<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi, user-scalable=0' name='viewport" />-->
+    <!--to apk -->
+    
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    
     <script src="cordova.js"></script>
     <link rel="stylesheet" href="font/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/loading.css" rel="stylesheet">
@@ -29,7 +33,7 @@
             <div class="icon-loading"></div>
             <div class="loading-code animation"></div>
           </div>
-          <div class="message-loading"></div>
+          <div class="message-loading">Um para todos!</div>
         </div>
       </div>
       <div class="container-view" id="login-phone">
@@ -39,17 +43,17 @@
                 <div class="logo"></div>
               </div>
             </div>
-            <div class="open-message"><span></span></div>
+            <div class="open-message"><span>BEM-VINDO!</span></div>
         </div>
         <div class="body-container-yellow" id="container-number">
           <div class="insert-number-container">
             <div class="table-cell">
-              <div class="insert-number-title title1"></div>
-              <div class="insert-number-title title2"></div>
+              <div class="insert-number-title title1">PARA COMEÇAR A COLECIONAR VANTAGENS</div>
+              <div class="insert-number-title title2">INSIRA O SEU NÚMERO DE TELEFONE</div>
               <div class="number-box">
                 <div class="insert-number-icon"><span class="coup-telefone"></span></div>
                 <div class="insert-number-input">
-                  <input id="input-number" type="number" placeholder="" name="number" value=""/>
+                  <input id="input-number" type="number" placeholder="Numero" name="number" value=""/>
                 </div>
               </div>
               <div class="terms-container">
@@ -57,15 +61,15 @@
                   <span class="coup-radio-null notchecked"></span>
                   <span class="coup-radio-check2 checked selected"></span>
                 </div>
-                <div class="check-title" id="check-terms-title"></div>
+                <div class="check-title" id="check-terms-title">ACEITO OS TERMOS E CONDIÇÕES</div>
               </div>
-              <div class="error"></div>
+              <div class="error">Não é possivel efectuar o registo. Por favor tente mais tarde</div>
             </div>
           </div>
           <div class="login-container">
-            <div class="login-box" id="login-number"><span></span></div>
+            <div class="login-box" id="login-number"><span>ENVIAR</span></div>
           </div>
-          <div class="change-language"></div>
+          <div class="change-language" id="change-language-btn">CHANGE LANGUAGE TO ENGLISH</div>
         </div>
       </div>
       <div class="container-view" id="login-password">
@@ -119,10 +123,9 @@
             </div>
           </div>
         </div>
-        <div class="qrcode-body-success selected">
+        <div class="qrcode-body-success">
           <div class="qrcode-message">
-            <div>O SEU CHECKIN FOI</div>
-            <div>EFECTUADO COM SUCESSO</div>
+            <div id='success-checkin'>CHECKIN FOI</div>
           </div>
         </div>
       </div>
@@ -204,7 +207,7 @@
             <div class="award-title" id="award-title"></div>
             <div class="award-qrcode" id="award-qrcode"></div>
             <div class="award-validity">
-              <div>Válido até <span id="award-validity"></span></div>
+              <div><span class="validity-title">Válido até </span><span id="award-validity"></span></div>
             </div>
             <div class="award-share" id="award-share">
               <div class="share">PARTILHAR PRÉMIO</div>
@@ -223,13 +226,12 @@
             <div class="share-title">
               <div class="blue-title">PARTILHAR PRÉMIO</div>
               <div class="grey-title">NÚMERO DE TELEFONE DA PESSOA</div>
-              <div class="grey-title">PARA QUEM QUER ENVIAR O SEU PRÉMIO</div>
             </div>
           </div>
           <div class="select-from-contacts" id="select-contact-awards">PROCURAR NOS MEUS CONTACTOS</div>
           <div class="share-input">
             <div class="title">INSERIR NÚMERO</div>
-            <input id="share-award-number" type="number" placeholder="Número de telefone" name="number" value=""/>
+            <input id="share-award-number" type="text" placeholder="Número de telefone" name="number" value=""/>
           </div>
           <div class="send-area">
             <div class="table-cell">
@@ -262,7 +264,72 @@
             <div class="icon"><span class="coup-termos"></span></div>
             <div class="name"><span>TERMOS E CONDIÇÕES</span></div>
           </div>
-          <div class="terms-container"><div class="terms"></div></div>
+          <div class="terms-container">
+            <div class="terms">
+              <div class="introduction"></div>
+              <div class="title 1"></div>
+              <div class="description 11"></div>
+              <div class="description 12"></div>
+              <div class="title 2"></div>
+              <div class="description 21"></div>
+              <div class="description 22"></div>
+              <div class="description 23"></div>
+              <div class="title 3"></div>
+              <div class="description 31"></div>
+              <div class="description 32"></div>
+              <div class="title 4"></div>
+              <div class="description 41"></div>
+              <div class="item 41"></div>
+              <div class="item 42"></div>
+              <div class="item 43"></div>
+              <div class="item 44"></div>
+              <div class="title 6"></div>
+              <div class="description 61"></div>
+              <div class="description 62"></div>
+              <div class="description 63"></div>
+              <div class="title 7"></div>
+              <div class="description 71"></div>
+              <div class="description 72"></div>
+              <div class="title 9"></div>
+              <div class="description 91"></div>
+              <div class="description 92"></div>
+              <div class="title 10"></div>
+              <div class="description 10"></div>
+              <div class="title 11"></div>
+              <div class="description 11"></div>
+              <div class="title 12"></div>
+              <div class="description 12"></div>
+              <div class="title 13"></div>
+              <div class="description 13"></div>
+              <div class="title 14"></div>
+              <div class="description 14"></div>
+              <div class="title 15"></div>
+              <div class="description 15"></div>
+              <div class="title 16"></div>
+              <div class="description 16"></div>
+              <div class="title 17"></div>
+              <div class="description 17"></div>
+              <div class="title 18"></div>
+              <div class="description 18"></div>
+              <div class="title 19"></div>
+              <div class="description 19"></div>
+              <div class="title 20"></div>
+              <div class="description 20"></div>
+              <div class="title 21"></div>
+              <div class="description 21"></div>
+              <div class="title 22"></div>
+              <div class="description 22"></div>
+              <div class="title 23"></div>
+              <div class="description 23"></div>
+              <div class="title 24"></div>
+              <div class="description 24"></div>
+              <div class="title 25"></div>
+              <div class="description 25"></div>
+              <div class="title 26"></div>
+              <div class="description 26"></div>
+              <div class="description 27"></div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="container-view" id="view-settings">
@@ -277,6 +344,11 @@
             <div class="settings-menu menu-profile">
               <div class="icon"><span class="coup-perfil"></span></div>
               <div class="title"><span>O MEU PERFIL</span></div>
+              <div class="arrow"><span class="coup-seta-drt"></span></div>
+            </div>
+            <div class="settings-menu menu-activity">
+              <div class="icon"><span class="coup-perfil"></span></div>
+              <div class="title"><span>A MINHA ATIVIDADE</span></div>
               <div class="arrow"><span class="coup-seta-drt"></span></div>
             </div>
             <div class="settings-menu menu-contacts">
@@ -306,29 +378,38 @@
               <div class="name"><span>O MEU PERFIL</span></div>
               <div class="logout" id="logout"><span>LOGOUT</span></div>
             </div>
-            <div class="profile-title">NOME</div>
+            <div class="profile-title name">NOME</div>
             <div class="profile-description">
               <input id='user-name' type="text" placeholder="Inserir nome" name="nome" value="">
             </div>
-            <div class="profile-title">NÚMERO DE TELEFONE</div>
+            <div class="profile-title phone">NÚMERO DE TELEFONE</div>
             <div class="profile-description" id='user-phone'></div>
-            <div class="profile-title">
+            <div class="profile-title password">
               <div class='title'>PASSWORD</div>
               <div class='change' id="change-password">ALTERAR</div>
             </div>
             <div class="profile-description" id='user-password'>******</div>
-            <div class="profile-title">EMAIL</div>
+            <div class="profile-title email">EMAIL</div>
             <div class="profile-description">
               <input id='user-email' type="text" placeholder="Inserir email" name="email" value="">
             </div>
-            <div class="profile-title">NIF</div>
+            <div class="profile-title nif">NIF</div>
             <div class="profile-description">
               <input id='user-nif' type="text" placeholder="Inserir NIF" name="email" value="">
             </div>
             <div class="profile-info-btn" id="send-profile-info">ATUALIZAR</div>
           </div>
+          <div class="settings-container activity-container">
+            <div class="title">
+              <div class="icon"><span class="coup-perfil"></span></div>
+              <div class="name"><span>A MINHA ACTIVIDADE</span></div>
+            </div>
+            <div class='list-container'>
+              <div id="list-ul" class='list-scroll'></div>
+            </div>
+          </div>
           <div class="settings-container change-password-container">
-            <div class="pass-line">
+            <div class="pass-line atual">
               <div class="pass-title">PASSWORD ATUAL</div>
               <div class="pass-alert">PREENCHA, POR FAVOR</div>
             </div>
@@ -357,11 +438,11 @@
               <div class="icon"><span class="coup-telefone"></span></div>
               <div class="name"><span>CONTACTOS COUPZON</span></div>
             </div>
-            <div class="contact-title">NÚMERO DE TELEFONE DE SUPORTE</div>
+            <div class="contact-title numero">NÚMERO DE TELEFONE DE SUPORTE</div>
             <div class="contact-description">919191919</div>
-            <div class="contact-title">EMAIL DE SUPORTE</div>
+            <div class="contact-title email">EMAIL DE SUPORTE</div>
             <div class="contact-description">suporte@coupzon.pt</div>
-            <div class="contact-title">MORADA</div>
+            <div class="contact-title address">MORADA</div>
             <div class="contact-description">
               <div>Rua Paulo Renato nº3 3ºD</div>
               <div>2795-147 Linda-a-Velha</div>
@@ -400,7 +481,70 @@
               <div class="icon"><span class="coup-termos"></span></div>
               <div class="name"><span>TERMOS E CONDIÇÕES</span></div>
             </div>
-            <div class="terms"></div>
+            <div class="terms">
+              <div class="introduction"></div>
+              <div class="title 1"></div>
+              <div class="description 11"></div>
+              <div class="description 12"></div>
+              <div class="title 2"></div>
+              <div class="description 21"></div>
+              <div class="description 22"></div>
+              <div class="description 23"></div>
+              <div class="title 3"></div>
+              <div class="description 31"></div>
+              <div class="description 32"></div>
+              <div class="title 4"></div>
+              <div class="description 41"></div>
+              <div class="item 41"></div>
+              <div class="item 42"></div>
+              <div class="item 43"></div>
+              <div class="item 44"></div>
+              <div class="title 6"></div>
+              <div class="description 61"></div>
+              <div class="description 62"></div>
+              <div class="description 63"></div>
+              <div class="title 7"></div>
+              <div class="description 71"></div>
+              <div class="description 72"></div>
+              <div class="title 9"></div>
+              <div class="description 91"></div>
+              <div class="description 92"></div>
+              <div class="title 10"></div>
+              <div class="description 10"></div>
+              <div class="title 11"></div>
+              <div class="description 11"></div>
+              <div class="title 12"></div>
+              <div class="description 12"></div>
+              <div class="title 13"></div>
+              <div class="description 13"></div>
+              <div class="title 14"></div>
+              <div class="description 14"></div>
+              <div class="title 15"></div>
+              <div class="description 15"></div>
+              <div class="title 16"></div>
+              <div class="description 16"></div>
+              <div class="title 17"></div>
+              <div class="description 17"></div>
+              <div class="title 18"></div>
+              <div class="description 18"></div>
+              <div class="title 19"></div>
+              <div class="description 19"></div>
+              <div class="title 20"></div>
+              <div class="description 20"></div>
+              <div class="title 21"></div>
+              <div class="description 21"></div>
+              <div class="title 22"></div>
+              <div class="description 22"></div>
+              <div class="title 23"></div>
+              <div class="description 23"></div>
+              <div class="title 24"></div>
+              <div class="description 24"></div>
+              <div class="title 25"></div>
+              <div class="description 25"></div>
+              <div class="title 26"></div>
+              <div class="description 26"></div>
+              <div class="description 27"></div>
+            </div>
           </div>
           <div class="settings-container language-container">
             <div class="title">
@@ -408,18 +552,22 @@
               <div class="name"><span>IDIOMA</span></div>
             </div>
             <div class="language-select">
-              <div class="language-line line-portuguese selected">
-                <div class="language-title">PORTUGUÊS</div>
-                <div class="language-icon"><span class="coup-radio-redondo-check"></span></div>
-              </div>
               <div class="language-line line-portuguese">
+                <div class="language-title">PORTUGUÊS</div>
+                <div class="language-icon">
+                  <span class="coup-radio-redondo-null"></span>
+                </div>
+              </div>
+              <div class="language-line line-english">
                 <div class="language-title">ENGLISH</div>
-                <div class="language-icon"><span class="coup-radio-redondo-null"></span></div>
+                <div class="language-icon">
+                  <span class="coup-radio-redondo-null"></span>
+                </div>
               </div>
             </div>
-            <div class="language-btn">
+            <!--<div class="language-btn">
               <div class="language-select">OK</div>
-            </div>
+            </div>-->
           </div>
         </div>
       </div>
@@ -436,8 +584,18 @@
           <div class="award-description" id="store-award-description"></div>
           <!--<div class="award-validity" id="store-award-validity"></div>-->
           <div class="store-description" id="store-description"></div>
-          <div class="available-check-ins"><div class="table-cell"><span>CHECK-INS ACUMULADOS: </span><span class="available-value" id="store-check-ins"></span></div></div>
-          <div class="available-awards"><div class="table-cell"><span>PRÉMIOS DISPONÍVEIS: </span><span class="available-value" id="store-available-awards"></span></div></div>
+          <div class="available-check-ins">
+            <div class="table-cell">
+              <span class="title">CHECK-INS ACUMULADOS: </span>
+              <span class="available-value" id="store-check-ins"></span>
+            </div>
+          </div>
+          <div class="available-awards">
+            <div class="table-cell">
+              <span class="title">PRÉMIOS DISPONÍVEIS: </span>
+              <span class="available-value" id="store-available-awards"></span>
+            </div>
+          </div>
           <div class="favorite-button" id="store-favorite">
             <div class="table-cell"><div class="table-container">
               <div class="title">FAVORITO</div>
@@ -476,8 +634,7 @@
             <div class="share-icon"><span class="coup-partilhar"></span></div>
             <div class="share-title">
               <div class="blue-title">PARTILHAR CHECK-INS</div>
-              <div class="grey-title">NÚMERO DE TELEFONE DA PESSOA</div>
-              <div class="grey-title">COM QUEM QUER PARTILHAR OS SEUS CHECK-INS</div>
+              <div class="grey-title">NÚMERO DE TELEFONE DA PESSOA<br>COM QUEM QUER PARTILHAR OS SEUS CHECK-INS</div>
             </div>          
           </div>
           <div class="select-from-contacts" id="select-contact-checkin">PROCURAR NOS MEUS CONTACTOS</div>
@@ -488,7 +645,7 @@
           <div class="share-checkins-number">
             <div class="title">
               <div class="check">TEM CHECK-IN ACUMULADOS.</div>
-              <div>QUANTOS QUER PARTILHAR?</div>
+              <div class='many'>QUANTOS QUER PARTILHAR?</div>
             </div>
             <div class="checkins-input">
               <input type="text" id='share-checkins-number' placeholder="Check-ins a partilhar" name="number" value=""/>
@@ -517,25 +674,30 @@
       <div class="footer-menu">
         <div class="selected-tab"><div id="tab"></div></div>
         <div class="menus-container">
-          <div class="menu-container" id="menu-qrcode">
+          <div class="menu-container qrcode" id="menu-qrcode">
             <div class="menu-name" id="qrcode-m"><span>ID</span></div>
             <div class="menu-icon"><span class="coup-id-38"></span></div>
           </div>
-          <div class="menu-container" id="menu-awards">
+          <div class="menu-container awards" id="menu-awards">
             <div class="menu-name" id="awards-m"><span>PRÉMIOS</span></div>
             <div class="menu-icon"><span class="coup-premio"></span></div>
           </div>
-          <div class="menu-container" id="menu-stores">
+          <div class="menu-container stores" id="menu-stores">
             <div class="menu-name" id="stores-m"><span>LOJAS</span></div>
             <div class="menu-icon"><span class="coup-loja"></span></div>
           </div>
-          <div class="menu-container" id="menu-favorites">
+          <div class="menu-container favorites" id="menu-favorites">
             <div class="menu-name" id="favorites-m"><span>FAVORITOS</span></div>
             <div class="menu-icon"><span class="coup-favorito"></span></div>
           </div>
-          <div class="menu-container" id="menu-settings">
+          <div class="menu-container settings" id="menu-settings">
             <div class="menu-name" id="settings-m"><span>GERIR</span></div>
             <div class="menu-icon"><span class="coup-gerir"></span></div>
+          </div>
+        </div>
+        <div id='notification' class='notification'>
+          <div class='notification-circle'>
+            <div class='number'>0</div>
           </div>
         </div>
       </div>
@@ -544,10 +706,14 @@
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/storesMethods.js"></script>
-    <!--<script src="js/data2.js"></script>-->
+    <script src="js/events.js"></script>
+    <script src="js/device.js"></script>
+    <script src="js/notification.js"></script>
     <script src="js/index.js"></script>
     <script src="js/apiCalls.js"></script>
-    <script src="js/jquery-barcode.min.js"></script>
+    <script src="libs/jquery-barcode.min.js"></script>
+    <script src="libs/iscroll-infinite.js"></script>
   </body>
 </html>

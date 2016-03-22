@@ -12,6 +12,7 @@
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
+  top:-5rem;
   opacity: 0;
   display: none;
 }
@@ -185,7 +186,8 @@
   list-style-type: none;
 }
 
-.body-container-big .stores-container .store-container.store1{
+.body-container-big .stores-container .store-container.store1,
+.body-container-big .stores-container .store-container.store3{
   display: none;
   background-color: #F1F6FC;
   margin-bottom: .2rem;
@@ -194,12 +196,16 @@
 
 .body-container-big .stores-container .store-container.store2{
   display: block;
+  -moz-border-bottom: solid .1rem #F2F2F2;
+  -webkit-border-bottom: solid .1rem #F2F2F2;
   border-bottom: solid .1rem #F2F2F2;
   height: 9rem;
 }
 
 .body-container-big .stores-container .brand-container .brand,
 .body-container-big .awards-container .brand-container .brand{
+  -moz-border-bottom: solid .1rem #F2F2F2;
+  -webkit-border-bottom: solid .1rem #F2F2F2;
   border-bottom: solid .1rem #F2F2F2;
   height: 7rem;
   width: 100%;

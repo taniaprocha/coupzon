@@ -57,13 +57,16 @@
   .qrcode-body-success,
   .body-container-big .view-menu-container,
   .body-container-big.awards,
+  .body-container-big.awards .awards-list,
   .body-store,
   .body-container-store,
   .body-container-big.favorites,
   .body-container-big.settings,
   .body-container-big.terms,
   .body-container-big .search-container,
-  .body-container-big.store.body-share{
+  .body-container-big-contacts .search-container,
+  .body-container-big.store.body-share,
+  .body-container-big-contacts .search-contacts{
     background-image: url('../assets/app/sombra@320.png');
   }
 }
@@ -74,13 +77,16 @@
   .qrcode-body-success,
   .body-container-big .view-menu-container,
   .body-container-big.awards,
+  .body-container-big.awards .awards-list,
   .body-store,
   .body-container-store,
   .body-container-big.favorites,
   .body-container-big.settings,
   .body-container-big.terms,
   .body-container-big .search-container,
-  .body-container-big.store.body-share{
+  .body-container-big.store.body-share,
+  .body-container-big-contacts .search-container,
+  .body-container-big-contacts .search-contacts{
     background-image: url('../assets/app/sombra@360.png');
   }
 }
@@ -91,13 +97,16 @@
   .qrcode-body-success,
   .body-container-big .view-menu-container,
   .body-container-big.awards,
+  .body-container-big.awards .awards-list,
   .body-store,
   .body-container-store,
   .body-container-big.favorites,
   .body-container-big.settings,
   .body-container-big.terms,
   .body-container-big .search-container,
-  .body-container-big.store.body-share{
+  .body-container-big.store.body-share,
+  .body-container-big-contacts .search-container,
+  .body-container-big-contacts .search-contacts{
     background-image: url('../assets/app/sombra@720.png');
   }
 }
@@ -108,13 +117,16 @@
   .qrcode-body-success,
   .body-container-big .view-menu-container,
   .body-container-big.awards,
+  .body-container-big.awards .awards-list,
   .body-store,
   .body-container-store,
   .body-container-big.favorites,
   .body-container-big.settings,
   .body-container-big.terms,
   .body-container-big .search-container,
-  .body-container-big.store.body-share{
+  .body-container-big.store.body-share,
+  .body-container-big-contacts .search-container,
+  .body-container-big-contacts .search-contacts{
     background-image: url('../assets/app/sombra@1080.png');
   }
 }
@@ -275,7 +287,6 @@
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
-  opacity: 0;
 }
 
 .body-container-yellow .message-not-received,
