@@ -134,32 +134,44 @@ $('.menu-container').on('click', function(){
 });
 
 $('.view-menu').on('click', function(){
-  if($(this).hasClass('selected') && $('.stores-container').hasClass('selected') === false ){ return; }
-  $('.view-menu').removeClass('selected');
-  $(this).addClass('selected'); $('#stores-filter').hide();
-  var filterArea = 0;  
-  $('.categories-container').css({marginLeft: -$('.categories-container').width(), opacity: 0}); $('.categories-container').removeClass('selected'); 
-  $('.locations-container').css({marginLeft: $('.locations-container').width(), opacity: 0}); $('.locations-container').removeClass('selected');
-  $('.stores-container').css({opacity: 0}); $('.stores-container').removeClass('selected');
+  if($(this).hasClass('selected') && $('.stores-container').hasClass('selected') === false ){ 
+    return; 
+  }
+  showStoresOptions($(this).attr('id'));
+});
 
-  switch($(this).attr('id')){
+function showStoresOptions(option){
+  $('.view-menu').removeClass('selected');
+  $(this).addClass('selected'); 
+  $('#stores-filter').hide();
+  var filterArea = 0;  
+  $('.categories-container').css({marginLeft: -$('.categories-container').width(), opacity: 0}); 
+  $('.categories-container').removeClass('selected'); 
+  $('.locations-container').css({marginLeft: $('.locations-container').width(), opacity: 0}); 
+  $('.locations-container').removeClass('selected');
+  $('.stores-container').css({opacity: 0}); 
+  $('.stores-container').removeClass('selected');
+  
+  switch(option){
     case 'stores-all':
       showAllStores('stores');
       break;
     case 'stores-categories':
-      $('.categories-container').addClass('selected'); $('.categories-container').animate({marginLeft: 0, opacity: 1}, 300);
+      $('.categories-container').addClass('selected'); 
+      $('.categories-container').animate({marginLeft: 0, opacity: 1}, 300);
       methods.showCategories($('.categories-container .list'));
       filterArea = $('.categories-container').height() - $('.categories-container .filter-container').height();
       $('.categories-container .list').css({height: filterArea+'px'});
       break;
     case 'stores-locations':
-      $('.locations-container').addClass('selected'); $('.locations-container').animate({marginLeft: 0, opacity: 1}, 300);
+      $('.locations-container').addClass('selected'); 
+      $('.locations-container').animate({marginLeft: 0, opacity: 1}, 300);
       methods.showLocations($('.locations-container .list'));
       filterArea = $('.locations-container').height() - $('.locations-container .filter-container').height();
       $('.locations-container .list').css({height: filterArea+'px'});
       break;
   }
-});
+}
 
 $('.share-checkin-button').on('click', function(){
   if(parseFloat($('.share-checkin-button').css('opacity')) === 1){
@@ -184,13 +196,17 @@ $('#back-store').on('click', function(){
   if($('#back-store').hasClass('share') === true){
     showAllStores('stores');
     $('#back-store').removeClass('share');
-    $('.body-container-store').show(); $('.body-container-big.store.body-share').hide(); return;
+    $('.body-container-store').show(); 
+    $('.body-container-big.store.body-share').hide(); 
+    return;
   }else if($('#back-store').hasClass('stores') === true){
     showAllStores('stores');
-    $('#view-store').removeClass('selected'); $('#view-stores').addClass('selected');
+    $('#view-store').removeClass('selected'); 
+    $('#view-stores').addClass('selected');
   }else if($('#back-store').hasClass('favorites') === true){
     showAllStores('favorites');
-    $('#view-store').removeClass('selected'); $('#view-favorites').addClass('selected');
+    $('#view-store').removeClass('selected'); 
+    $('#view-favorites').addClass('selected');
   }
 });
 
@@ -428,8 +444,8 @@ $(document).ready(function() {
   ];
   contactsList = fakeContacts;
   fillContacts(fakeContacts);*/
-  console.log(languageJson);
-  setLabels(languageJson.pt);
+  console.log(language, languageJson);
+  setLabels(languageJson[language]);
   $('.language-line.line-portuguese .language-icon span').removeClass();
   if(language === 'pt'){
     $('.language-line.line-portuguese').addClass('selected');

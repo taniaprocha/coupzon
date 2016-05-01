@@ -80,7 +80,7 @@ function stopLoader(){
 }
 
 window.onerror = function (errorMsg, url, lineNumber) {
-  alert('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber);
+  //alert('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber);
 }
 
 function setFotterMenu(id){
@@ -92,8 +92,12 @@ function setFotterMenu(id){
     case 'menu-stores':
       $('#view-stores').addClass('selected'); 
       $('#tab').animate({marginLeft: '40%'}, 100);
-      if($('#back-store').hasClass('stores') === false){ $('#back-store').addClass('stores'); } $('#back-store').removeClass('favorites');
+      if($('#back-store').hasClass('stores') === false){ 
+        $('#back-store').addClass('stores'); 
+      } 
+      $('#back-store').removeClass('favorites');
       $('.search-container.stores').css({height: $('.view-menu-container').height()+'px'});
+      showStoresOptions('stores-all');
       showAllStores('stores');
       actualMenu = 'stores';
       break;
@@ -147,9 +151,12 @@ function searchBrands(searchValue, container, type){
 }
 
 function showAllStores(menu){
-  $('.categorie-container').removeClass('selected'); $('.location-container').removeClass('selected'); 
-  $('#selected-place').text(''); $('#selected-categories').text('');
-  $('.view-menu').removeClass('selected'); $('.all-menu').addClass('selected');
+  $('.categorie-container').removeClass('selected'); 
+  $('.location-container').removeClass('selected'); 
+  $('#selected-place').text(''); 
+  $('#selected-categories').text('');
+  $('.view-menu').removeClass('selected'); 
+  $('.all-menu').addClass('selected');
   $('#search-input-stores').val(''); 
   methods.showAllBrands($('.stores-container'), menu);
 }
@@ -213,6 +220,11 @@ function showSuccessCheckin(brand, store){
 
 
 function setLabels(data){
+  methods.showCategories($('.categories-container .list'));
+  methods.showLocations($('.locations-container .list'));
+  methods.showAllBrands($('.stores-container'), 'stores');
+  methods.showAwards($('#view-awards .stores-container'), 'awards');
+
   $('#loading-view .message-loading').text(data.loader);
   $('#login-phone .open-message span').text(data.login1.title1);
   $('#login-phone .title1').text(data.login1.title2);
@@ -236,8 +248,11 @@ function setLabels(data){
   $('#view-qrcode .qrcode-text-1 span').html(data.qrcode.title1);
   $('#view-qrcode .qrcode-text-2 .title').html(data.qrcode.title2);
   if(userData !== null){
-    if(language === 'pt'){ $('#coupzon-points').text('TEM '+userData.coupzonpoints+' PONTOS COUPZON');
-    }else{ $('#coupzon-points').text('HAVE '+userData.coupzonpoints+' COUPZON POINTS'); }
+    if(language === 'pt'){ 
+      $('#coupzon-points').text('TEM '+userData.coupzonpoints+' PONTOS COUPZON');
+    }else{ 
+      $('#coupzon-points').text('HAVE '+userData.coupzonpoints+' COUPZON POINTS'); 
+    }
   }
   $("#view-awards .search-input-container input").attr('placeholder', data.prizes.search);
 
